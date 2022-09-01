@@ -27,7 +27,7 @@ export const ColumnList = ({ title, cardList }: IColumnList) => {
       >
         {title}
       </Text>
-      <VStack width="100%">
+      <VStack width="100%" spacing={2}>
         {cardList &&
           cardList.map((anime, index) => {
             return <DashboardCard anime={anime} key={index} />;
