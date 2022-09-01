@@ -1,5 +1,8 @@
-import { Heading } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Dashboard } from "./pages/Dashboard";
 
 export const App = () => {
-  return <Heading>App</Heading>;
+  return <ChakraProvider>
+    <Dashboard/>
+  </ChakraProvider>
 };
