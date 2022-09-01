@@ -69,14 +69,14 @@ export const DesktopViewCard = ({ anime }: IDashboardCardProps) => {
           <HStack w="100%" justifyContent="center" mt="1%">
             <Button
               justifyContent="space-evenly"
-              w="35%"
+              w="40%"
               mr="3%"
               bg="#5CC6DC"
               _hover={{ bg: "#0C6072" }}
               _active={{ bg: "#5CC6DC" }}
               color="#FFFFFF"
             >
-              <FaStar fill="#EFDB73" />
+              <FaStar fill="#EFDB73" size={20} />
               Favorite
             </Button>
             <Button
