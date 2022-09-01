@@ -13,6 +13,8 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
+import { DrawerStatics } from "./DrawerStatics";
+
 interface IDashboardDrawerProps {
   isOpen: boolean;
   onClose: () => void;
@@ -28,7 +30,7 @@ export const DashboardDrawer = ({ isOpen, onClose }: IDashboardDrawerProps) => {
         onEsc={onClose}
       >
         <DrawerOverlay />
-        <DrawerContent bg="#21212D">
+        <DrawerContent bg="#2C2C38">
           <DrawerCloseButton color="#fff" />
           <DrawerHeader>
             <Flex flexDir="row" align="center" justify="center">
@@ -38,7 +40,9 @@ export const DashboardDrawer = ({ isOpen, onClose }: IDashboardDrawerProps) => {
               </Text>
             </Flex>
           </DrawerHeader>
-          <DrawerBody></DrawerBody>
+          <DrawerBody>
+            <DrawerStatics />
+          </DrawerBody>
           <DrawerFooter></DrawerFooter>
         </DrawerContent>
       </Drawer>
