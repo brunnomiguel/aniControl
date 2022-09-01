@@ -1,6 +1,10 @@
-import { Heading } from "@chakra-ui/react";
-import { SignUp } from "./pages/SignUp";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Dashboard } from "./pages/Dashboard";
 
 export const App = () => {
-	return <SignUp></SignUp>;
+	return (
+		<ChakraProvider>
+			<Dashboard />
+		</ChakraProvider>
+	);
 };
