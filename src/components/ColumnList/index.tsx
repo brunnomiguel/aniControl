@@ -24,10 +24,29 @@ export const ColumnList = ({ title, cardList }: IColumnList) => {
         color="#ffffff"
         textAlign="center"
         fontWeight="bold"
+        padding="0.5rem"
+        fontSize="1.5rem"
       >
         {title}
       </Text>
-      <VStack width="100%">
+      <VStack
+        width="100%"
+        spacing={6}
+        overflow="scroll"
+        overflowX="hidden"
+        css={{
+          "&::-webkit-scrollbar": {
+            width: "4px",
+          },
+          "&::-webkit-scrollbar-track": {
+            width: "6px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "#5CC6DC",
+            borderRadius: "24px",
+          },
+        }}
+      >
         {cardList &&
           cardList.map((anime, index) => {
             return <DashboardCard anime={anime} key={index} />;

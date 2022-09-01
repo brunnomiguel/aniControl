@@ -1,4 +1,14 @@
-import { Box, Button, Flex, HStack, Image, Link, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Image,
+  Link,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+
 import { animeProps } from "./types";
 import { FaStar } from "react-icons/fa";
 
@@ -11,7 +21,7 @@ export const DesktopViewCard = ({ anime }: IDashboardCardProps) => {
     anime;
 
   return (
-    <Flex w="100%" flexDir="column" h="auto" bg="#2C2C38" paddingBottom="2%">
+    <VStack w="100%" h="auto" bg="#2C2C38" paddingBottom="2%">
       <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="25rem">
         <Link
           href={trailer.url}
@@ -91,6 +101,6 @@ export const DesktopViewCard = ({ anime }: IDashboardCardProps) => {
           </HStack>
         </Box>
       </Flex>
-    </Flex>
+    </VStack>
   );
 };
