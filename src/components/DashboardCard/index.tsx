@@ -24,7 +24,7 @@ export const DashboardCard = ({ anime }: IDashboardCardProps) => {
   }, []);
 
   return (
-    <Box width={["95vw", "95vw", "95vw", "35vw"]}>
+    <Box width={["95vw", "95vw", "95vw", "33vw"]}>
       {smallView ? (
         <MobileViewCard anime={anime} />
       ) : (
