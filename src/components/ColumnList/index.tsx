@@ -1,9 +1,9 @@
 import { Flex, Text, VStack } from "@chakra-ui/react";
 import { DashboardCard } from "../DashboardCard";
-import { animeProps } from "../DashboardCard/types";
+import { IanimelistItem } from "../../contexts/AnimeList";
 
 interface IColumnList {
-  cardList?: animeProps[];
+  cardList?: IanimelistItem[];
   title: string;
 }
 
@@ -13,7 +13,7 @@ export const ColumnList = ({ title, cardList }: IColumnList) => {
       flexFlow="column nowrap"
       width={["95vw", "95vw", "95vw", "35vw"]}
       height="93vh"
-      alignSelf="center"
+      align="center"
     >
       <Text
         as="h2"
@@ -26,30 +26,14 @@ export const ColumnList = ({ title, cardList }: IColumnList) => {
         fontWeight="bold"
         padding="0.5rem"
         fontSize="1.5rem"
+        width={["95vw", "95vw", "95vw", "35vw"]}
       >
         {title}
       </Text>
-      <VStack
-        width="100%"
-        spacing={6}
-        overflow="scroll"
-        overflowX="hidden"
-        css={{
-          "&::-webkit-scrollbar": {
-            width: "4px",
-          },
-          "&::-webkit-scrollbar-track": {
-            width: "6px",
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: "#5CC6DC",
-            borderRadius: "24px",
-          },
-        }}
-      >
+      <VStack width="90%" spacing={6}>
         {cardList &&
           cardList.map((anime, index) => {
-            return <DashboardCard anime={anime} key={index} />;
+            return <DashboardCard anime={anime.anime.data} key={index} />;
           })}
       </VStack>
     </Flex>

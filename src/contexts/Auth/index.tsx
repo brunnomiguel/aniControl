@@ -49,7 +49,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [data, setData] = useState<AuthState>(() => {
     const accessToken = localStorage.getItem("@AniControl:accessToken");
-    const user = localStorage.getItem("AniControl:user");
+    const user = localStorage.getItem("@AniControl:user");
 
     if (accessToken && user) {
       return { accessToken, user: JSON.parse(user) };
