@@ -22,9 +22,9 @@ export const DrawerStatics = () => {
           {meanScore}
         </Text>
       </Flex>
-      <Flex w="100%" paddingBottom="7%" paddingTop="8%">
+      <Flex w="100%" paddingBottom="5%" paddingTop="8%">
         <Box h="100%" width="10%" padding="2%">
-          <Progress bg="#fff" value={0} h="44vh" borderRadius="50px" />
+          <Progress bg="#fff" value={0} h="30vh" borderRadius="50px" />
         </Box>
         <VStack w="90%" bg="#2C2C38" padding="4%" borderRadius="2px">
           <Flex align="center" w="100%" flexDir="row">
@@ -67,7 +67,7 @@ export const DrawerStatics = () => {
             </Flex>
           </Flex>
 
-          <Center paddingTop="3vh">
+          <Center paddingTop="1%">
             <Flex flexDir="column" align="center">
               <Flex flexDir="column" align="center">
                 <Text color="#fff">Total Entries</Text>
@@ -75,7 +75,7 @@ export const DrawerStatics = () => {
                   {animeCount}
                 </Text>
               </Flex>
-              <Flex flexDir="column" align="center" mt="20%">
+              <Flex flexDir="column" align="center" mt="10%">
                 <Text color="#fff">Episodes</Text>
                 <Text color="#fff" fontWeight="bold">
                   {episodesCount}

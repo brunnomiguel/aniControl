@@ -9,7 +9,7 @@ interface IDashboardCardProps {
 }
 
 export const DashboardCard = ({ anime }: IDashboardCardProps) => {
-  const [smallView, setSmallView] = useState(false);
+  const [smallView, setSmallView] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
