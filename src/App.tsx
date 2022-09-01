@@ -1,5 +1,6 @@
 import { Heading } from "@chakra-ui/react";
+import { SignUp } from "./pages/SignUp";
 
 export const App = () => {
-  return <Heading>App</Heading>;
+	return <SignUp></SignUp>;
 };
