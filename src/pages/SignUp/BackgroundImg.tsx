@@ -7,7 +7,6 @@ export const BackgroundImg = () => {
 			alignItems="center"
 			flexDir="column"
 			w="70vw"
-			bg="grey"
 			justifyContent="flex-end"
 			borderLeft="0px solid green"
 		>
