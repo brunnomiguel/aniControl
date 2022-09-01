@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import { AuthProvider } from "./Auth";
+import { FullAnimesProvider } from "./FullAnimes";
 import { ChakraProvider } from "@chakra-ui/react";
 
 interface AppProviderProps {
@@ -9,8 +10,10 @@ interface AppProviderProps {
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   return (
-    <AuthProvider>
-      <ChakraProvider>{children}</ChakraProvider>
-    </AuthProvider>
+    <FullAnimesProvider>
+      <AuthProvider>
+        <ChakraProvider>{children}</ChakraProvider>
+      </AuthProvider>
+    </FullAnimesProvider>
   );
 };
