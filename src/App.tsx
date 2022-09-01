@@ -1,8 +1,5 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { Dashboard } from "./pages/Dashboard";
+import { Browse } from "./pages/Browse";
 
 export const App = () => {
-  return <ChakraProvider>
-    <Dashboard/>
-  </ChakraProvider>
+  return <Browse />;
 };
