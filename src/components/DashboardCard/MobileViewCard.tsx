@@ -1,4 +1,13 @@
-import { Box, Button, Flex, HStack, Image, Link, Text } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Image,
+  Link,
+  Text,
+} from "@chakra-ui/react";
 import { animeProps } from "./types";
 import { FaStar } from "react-icons/fa";
 
@@ -11,13 +20,13 @@ export const MobileViewCard = ({ anime }: IDashboardCardProps) => {
     anime;
 
   return (
-    <Flex w="100%" flexDir="column" h={["30%", "50%"]} bg="#2C2C38">
-      <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="70%">
+    <Flex w="100%" flexDir="column" h="auto" bg="#2C2C38" paddingBottom="5%">
+      <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="15rem">
         <Link
           href={trailer.url}
           target="_blank"
           rel="noreferrer"
-          h="96%"
+          h="100%"
           w={["50%", "50%"]}
         >
           <Image
@@ -38,6 +47,18 @@ export const MobileViewCard = ({ anime }: IDashboardCardProps) => {
             overflowY="auto"
             h="85%"
             mt="10%"
+            css={{
+              "&::-webkit-scrollbar": {
+                width: "4px",
+              },
+              "&::-webkit-scrollbar-track": {
+                width: "6px",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                background: "#5CC6DC",
+                borderRadius: "24px",
+              },
+            }}
           >
             {synopsis}
           </Text>
@@ -55,10 +76,16 @@ export const MobileViewCard = ({ anime }: IDashboardCardProps) => {
         <Text fontWeight="bold" ml="4%">
           {year}
         </Text>
-        <Text fontWeight="bold" ml="4%">
-          {rating}
-        </Text>
       </Flex>
+      <Badge
+        fontWeight="bold"
+        fontSize="0.5rem"
+        bg="#5CC6DC"
+        w="auto"
+        alignSelf="center"
+      >
+        {rating}
+      </Badge>
       <Flex justify="space-evenly">
         {genres &&
           genres.map((element) => {
