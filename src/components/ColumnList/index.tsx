@@ -11,7 +11,7 @@ export const ColumnList = ({ title, cardList }: IColumnList) => {
   return (
     <Flex
       flexFlow="column nowrap"
-      width={["95%", "95vw", "95vw", "35vw"]}
+      width={["95vw", "95vw", "95vw", "35vw"]}
       height="93vh"
       alignSelf="center"
     >
