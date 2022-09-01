@@ -8,6 +8,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+
 import { animeProps } from "./types";
 import { FaStar } from "react-icons/fa";
 
