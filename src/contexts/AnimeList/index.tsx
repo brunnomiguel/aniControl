@@ -21,6 +21,7 @@ export interface IanimelistItem {
   rating: number;
   episodes: number;
   userId: number;
+  id: number;
 }
 
 interface IanimeListContextData {
@@ -57,6 +58,7 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
       rating: 0,
       episodes: 1,
       userId: user.id,
+      favorite: false,
     };
 
     await jsonApi

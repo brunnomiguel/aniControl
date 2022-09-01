@@ -33,7 +33,13 @@ export const ColumnList = ({ title, cardList }: IColumnList) => {
       <VStack width="90%" spacing={6}>
         {cardList &&
           cardList.map((anime, index) => {
-            return <DashboardCard anime={anime.anime.data} key={index} />;
+            return (
+              <DashboardCard
+                anime={anime.anime.data}
+                id={anime.id}
+                key={index}
+              />
+            );
           })}
       </VStack>
     </Flex>
