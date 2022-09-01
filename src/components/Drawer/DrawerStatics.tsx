@@ -1,4 +1,4 @@
-import { Box, Center, Flex, Progress, Text, VStack } from "@chakra-ui/react";
+import { Box, Center, Flex, Text, VStack } from "@chakra-ui/react";
 
 import { GiPlainCircle } from "react-icons/gi";
 
@@ -7,6 +7,14 @@ export const DrawerStatics = () => {
   const meanScore = 8.07;
   const animeCount = 145;
   const episodesCount = 1871;
+
+  const animeStats = {
+    planToWatch: Math.round((23 / 145) * 100),
+    dropped: Math.round((25 / 145) * 100),
+    onHold: Math.round((9 / 145) * 100),
+    completed: Math.round((87 / 145) * 100),
+    watching: Math.round((1 / 145) * 100),
+  };
 
   return (
     <VStack bg="#21212D" borderRadius="8px" m="4% 4% 0% 4%">
@@ -22,11 +30,27 @@ export const DrawerStatics = () => {
           {meanScore}
         </Text>
       </Flex>
-      <Flex w="100%" paddingBottom="7%" paddingTop="8%">
+      <Flex w="100%" paddingBottom="5%" paddingTop="8%">
         <Box h="100%" width="10%" padding="2%">
-          <Progress bg="#fff" value={0} h="44vh" borderRadius="50px" />
+          <Box h="37vh" bg="#fff" borderRadius="16px">
+            <Box
+              h={`${animeStats.planToWatch}%`}
+              w="100%"
+              bg="#fff"
+              borderTopRadius="2px"
+            />
+            <Box h={`${animeStats.dropped}%`} w="100%" bg="#FF4940" />
+            <Box h={`${animeStats.onHold}%`} w="100%" bg="#FFF37E" />
+            <Box h={`${animeStats.completed}%`} w="100%" bg="#1B83EA" />
+            <Box
+              h={`${animeStats.watching}%`}
+              w="100%"
+              bg="#6AF06A"
+              borderBottomRadius="2px"
+            />
+          </Box>
         </Box>
-        <VStack w="90%" bg="#2C2C38" padding="4%" borderRadius="2px">
+        <VStack w="95%" bg="#2C2C38" padding="4%" borderRadius="2px">
           <Flex align="center" w="100%" flexDir="row">
             <GiPlainCircle size="1.5rem" fill="#fff" />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
@@ -67,7 +91,7 @@ export const DrawerStatics = () => {
             </Flex>
           </Flex>
 
-          <Center paddingTop="3vh">
+          <Center paddingTop="1%">
             <Flex flexDir="column" align="center">
               <Flex flexDir="column" align="center">
                 <Text color="#fff">Total Entries</Text>
@@ -75,7 +99,7 @@ export const DrawerStatics = () => {
                   {animeCount}
                 </Text>
               </Flex>
-              <Flex flexDir="column" align="center" mt="20%">
+              <Flex flexDir="column" align="center" mt="10%">
                 <Text color="#fff">Episodes</Text>
                 <Text color="#fff" fontWeight="bold">
                   {episodesCount}

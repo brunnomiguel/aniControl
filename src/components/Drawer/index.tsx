@@ -33,7 +33,7 @@ export const DashboardDrawer = ({ isOpen, onClose }: IDashboardDrawerProps) => {
         onEsc={onClose}
       >
         <DrawerOverlay />
-        <DrawerContent bg="#2C2C38">
+        <DrawerContent bg="#2C2C38" border="1px solid black">
           <DrawerCloseButton color="#fff" />
           <DrawerHeader>
             <Flex flexDir="row" align="center" justify="center">
