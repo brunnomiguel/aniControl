@@ -14,6 +14,8 @@ interface FullAnimesProviderProps {
 
 interface FullAnimesContextData {
   animeById: animeProps;
+  allAnimes: animeProps[];
+  getAllAnimes: () => void;
   getAnimeFullById: (id: number) => Promise<void>;
 }
 
@@ -32,7 +34,17 @@ export const useFullAnimes = () => {
 };
 
 export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
+  const [allAnimes, setAllAnimes] = useState<animeProps[]>([]);
   const [animeById, setAnimeById] = useState<animeProps>({} as animeProps);
+
+  const getAllAnimes = useCallback(async () => {
+    try {
+      const { data } = await jikanApi.get("/anime");
+      setAllAnimes(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   const getAnimeFullById = useCallback(async (id: number) => {
     try {
@@ -44,7 +56,9 @@ export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
   }, []);
 
   return (
-    <FullAnimesContext.Provider value={{ animeById, getAnimeFullById }}>
+    <FullAnimesContext.Provider
+      value={{ allAnimes, animeById, getAllAnimes, getAnimeFullById }}
+    >
       {children}
     </FullAnimesContext.Provider>
   );
