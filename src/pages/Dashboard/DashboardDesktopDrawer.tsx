@@ -4,8 +4,11 @@ import { FaPencilAlt, FaStar } from "react-icons/fa";
 import { FiNavigation } from "react-icons/fi";
 import { DrawerButton } from "../../components/Drawer/DrawerButton";
 import { DrawerStatics } from "../../components/Drawer/DrawerStatics";
+import { useAuth } from "../../contexts/Auth";
 
 export const DashboardDesktopDrawer = () => {
+  const { user } = useAuth();
+
   return (
     <Box
       w="50vw"
@@ -29,7 +32,7 @@ export const DashboardDesktopDrawer = () => {
       <Flex flexDir="row" align="center" justify="center" marginTop="5%">
         <Avatar bgColor="#5A2843" />
         <Text ml="1vw" fontSize="1.8rem" color="#fff">
-          UserName
+          {user.name}
         </Text>
       </Flex>
       <VStack spacing="8%" marginTop="5%" w="95%" align="flex-start">

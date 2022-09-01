@@ -17,6 +17,7 @@ import { DrawerStatics } from "./DrawerStatics";
 
 import { FaStar, FaPencilAlt } from "react-icons/fa";
 import { FiNavigation } from "react-icons/fi";
+import { useAuth } from "../../contexts/Auth";
 
 interface IDashboardDrawerProps {
   isOpen: boolean;
@@ -24,6 +25,8 @@ interface IDashboardDrawerProps {
 }
 
 export const DashboardDrawer = ({ isOpen, onClose }: IDashboardDrawerProps) => {
+  const { user } = useAuth();
+
   return (
     <>
       <Drawer
@@ -39,7 +42,7 @@ export const DashboardDrawer = ({ isOpen, onClose }: IDashboardDrawerProps) => {
             <Flex flexDir="row" align="center" justify="center">
               <Avatar bgColor="#5A2843" />
               <Text ml="2vw" fontSize="1.8rem" color="#fff">
-                UserName
+                {user.name}
               </Text>
             </Flex>
           </DrawerHeader>
