@@ -1,4 +1,4 @@
-import { animeProps } from "./types";
+import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { useEffect, useState } from "react";
 import { MobileViewCard } from "./MobileViewCard";
 import { DesktopViewCard } from "./DesktopViewCard";
@@ -6,9 +6,10 @@ import { Box } from "@chakra-ui/react";
 
 interface IDashboardCardProps {
   anime: animeProps;
+  id: number;
 }
 
-export const DashboardCard = ({ anime }: IDashboardCardProps) => {
+export const DashboardCard = ({ anime, id }: IDashboardCardProps) => {
   const [smallView, setSmallView] = useState(false);
 
   useEffect(() => {
@@ -26,9 +27,9 @@ export const DashboardCard = ({ anime }: IDashboardCardProps) => {
   return (
     <Box width={["95vw", "95vw", "95vw", "33vw"]}>
       {smallView ? (
-        <MobileViewCard anime={anime} />
+        <MobileViewCard anime={anime} id={id} />
       ) : (
-        <DesktopViewCard anime={anime} />
+        <DesktopViewCard anime={anime} id={id} />
       )}
     </Box>
   );

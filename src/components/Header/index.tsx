@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Image, Input } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Input, theme } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Logo from "../../assets/logo-dash.svg";

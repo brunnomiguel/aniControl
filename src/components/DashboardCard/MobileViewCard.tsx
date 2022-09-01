@@ -8,20 +8,32 @@ import {
   Link,
   Text,
 } from "@chakra-ui/react";
-import { animeProps } from "./types";
+import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
+import { useAnimeList } from "../../contexts/AnimeList";
 
 interface IDashboardCardProps {
   anime: animeProps;
+  id: number;
 }
 
-export const MobileViewCard = ({ anime }: IDashboardCardProps) => {
+export const MobileViewCard = ({ anime, id }: IDashboardCardProps) => {
   const { images, trailer, title, rating, score, synopsis, year, genres } =
     anime;
 
+  const { updateAnime, removeAnime } = useAnimeList();
+
+  const handleFavoriteAnime = () => {
+    updateAnime({ favorite: true }, id);
+  };
+
+  const handleDeleteAnime = () => {
+    removeAnime(id);
+  };
+
   return (
     <Flex w="100%" flexDir="column" h="auto" bg="#2C2C38" paddingBottom="5%">
-      <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="15rem">
+      <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="20rem">
         <Link
           href={trailer.url}
           target="_blank"
@@ -88,9 +100,9 @@ export const MobileViewCard = ({ anime }: IDashboardCardProps) => {
       </Badge>
       <Flex justify="space-evenly">
         {genres &&
-          genres.map((element) => {
+          genres.map((element, index) => {
             return (
-              <Text color="#FFFFFF" fontWeight="bold" fontSize={12}>
+              <Text color="#FFFFFF" fontWeight="bold" fontSize={12} key={index}>
                 {element.name}
               </Text>
             );
@@ -105,6 +117,7 @@ export const MobileViewCard = ({ anime }: IDashboardCardProps) => {
           _hover={{ bg: "#0C6072" }}
           _active={{ bg: "#5CC6DC" }}
           color="#FFFFFF"
+          onClick={handleFavoriteAnime}
         >
           <FaStar fill="#EFDB73" />
           Favorite
@@ -115,6 +128,7 @@ export const MobileViewCard = ({ anime }: IDashboardCardProps) => {
           _hover={{ bg: "#0C6072" }}
           _active={{ bg: "#5CC6DC" }}
           color="#FFFFFF"
+          onClick={handleDeleteAnime}
         >
           Remove
         </Button>

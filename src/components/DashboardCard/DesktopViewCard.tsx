@@ -10,16 +10,28 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import { animeProps } from "./types";
+import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
+import { useAnimeList } from "../../contexts/AnimeList";
 
 interface IDashboardCardProps {
   anime: animeProps;
+  id: number;
 }
 
-export const DesktopViewCard = ({ anime }: IDashboardCardProps) => {
+export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
   const { images, trailer, title, rating, score, synopsis, year, genres } =
     anime;
+
+  const { updateAnime, removeAnime } = useAnimeList();
+
+  const handleFavoriteAnime = () => {
+    updateAnime({ favorite: true }, id);
+  };
+
+  const handleDeleteAnime = () => {
+    removeAnime(id);
+  };
 
   return (
     <VStack w="100%" h="auto" bg="#2C2C38" paddingBottom="5%">
@@ -99,24 +111,26 @@ export const DesktopViewCard = ({ anime }: IDashboardCardProps) => {
           <HStack w="100%" justifyContent="center" mt="1%">
             <Button
               justifyContent="space-evenly"
-              w="45%"
+              w="50%"
               mr="3%"
               bg="#5CC6DC"
               _hover={{ bg: "#0C6072" }}
               _active={{ bg: "#5CC6DC" }}
               color="#FFFFFF"
               fontSize="0.75rem"
+              onClick={handleFavoriteAnime}
             >
               <FaStar fill="#EFDB73" />
               Favorite
             </Button>
             <Button
-              w="45%"
+              w="50%"
               bg="#5CC6DC"
               _hover={{ bg: "#0C6072" }}
               _active={{ bg: "#5CC6DC" }}
               color="#FFFFFF"
               fontSize="0.75rem"
+              onClick={handleDeleteAnime}
             >
               Remove
             </Button>
