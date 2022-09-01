@@ -10,7 +10,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import { animeProps } from "./types";
+import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
 
 interface IDashboardCardProps {

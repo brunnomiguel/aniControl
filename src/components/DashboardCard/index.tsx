@@ -1,4 +1,4 @@
-import { animeProps } from "./types";
+import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { useEffect, useState } from "react";
 import { MobileViewCard } from "./MobileViewCard";
 import { DesktopViewCard } from "./DesktopViewCard";

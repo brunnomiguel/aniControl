@@ -24,6 +24,7 @@ export interface genreProps {
 }
 
 export interface animeProps {
+  mal_id: number;
   images: imagesProps;
   trailer: {
     url: string;

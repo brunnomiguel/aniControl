@@ -8,7 +8,7 @@ import {
   Link,
   Text,
 } from "@chakra-ui/react";
-import { animeProps } from "./types";
+import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
 
 interface IDashboardCardProps {
@@ -88,9 +88,9 @@ export const MobileViewCard = ({ anime }: IDashboardCardProps) => {
       </Badge>
       <Flex justify="space-evenly">
         {genres &&
-          genres.map((element) => {
+          genres.map((element, index) => {
             return (
-              <Text color="#FFFFFF" fontWeight="bold" fontSize={12}>
+              <Text color="#FFFFFF" fontWeight="bold" fontSize={12} key={index}>
                 {element.name}
               </Text>
             );
