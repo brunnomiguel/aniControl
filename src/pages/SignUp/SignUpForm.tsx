@@ -19,6 +19,7 @@ export const SignUpForm = () => {
 		base: false,
 		md: true,
 	});
+
 	return (
 		<>
 			{isWideVersion ? (
@@ -67,7 +68,7 @@ export const SignUpForm = () => {
 										<Button h="25px" w="30%" bg="#155BCB">
 											<FaFacebookF fill="white" />
 										</Button>
-										<Button h="25px" w="30%" bg="black">
+										<Button h="25px" w="30%" background="grey.900">
 											<FaApple fill="white" />
 										</Button>
 									</Flex>
@@ -82,6 +83,7 @@ export const SignUpForm = () => {
 							>
 								Sign Up
 							</Button>
+
 							<Flex flexDir="column">
 								<Text mt="3vh" fontWeight="600" color="white">
 									Already have an account?{" "}
