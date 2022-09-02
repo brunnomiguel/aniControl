@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { useFullAnimes } from "../../contexts/FullAnimes";
 import { ImageCard } from "./ImageCard";
+import { TopAnimes } from "./TopAnimes";
+import { SeasonsAnimes } from "./SeasonsAnimes";
 
 export const Browse = () => {
   const { allAnimes, getAllAnimes } = useFullAnimes();
@@ -22,14 +24,22 @@ export const Browse = () => {
   return (
     <>
       <Header />
-      <Flex flexDirection="column" bgColor="grey.700">
-        <Flex>
+      <Flex
+        flexDirection="column"
+        bgColor="grey.700"
+        padding={["2", "2", "10"]}
+        w="100vw"
+        minH="100vh"
+      >
+        <Flex
+          w="100%"
+          justifyContent="space-between"
+          direction={["column-reverse", "column-reverse", "row", "row"]}
+        >
           <Grid
             w="100%"
             templateColumns="repeat(auto-fill, minmax(210px, 1fr))"
             gap="10"
-            paddingX="8"
-            mt="8"
           >
             {allAnimes?.map((anime) => {
               return (
@@ -42,6 +52,10 @@ export const Browse = () => {
                 />
               );
             })}
+          </Grid>
+          <Grid h="90vh" w={["100%", "100%", "500px"]}>
+            <TopAnimes />
+            <SeasonsAnimes />
           </Grid>
         </Flex>
         <Flex>
