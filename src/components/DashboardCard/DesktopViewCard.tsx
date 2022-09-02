@@ -7,6 +7,7 @@ import {
   Image,
   Link,
   Text,
+  theme,
   VStack,
 } from "@chakra-ui/react";
 
@@ -34,7 +35,7 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
   };
 
   return (
-    <VStack w="100%" h="auto" bg="#2C2C38" paddingBottom="5%">
+    <VStack w="100%" h="auto" bg="grey.600" paddingBottom="5%">
       <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="25rem">
         <Link
           href={trailer.url}
@@ -46,19 +47,19 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
           <Image
             src={images.jpg.large_image_url}
             border="0.3rem solid"
-            borderColor="#5CC6DC"
-            _hover={{ borderColor: "#0C6072" }}
+            borderColor="blue.50"
+            _hover={{ borderColor: "blue.400" }}
             h="100%"
             w="100%"
             transition={"0.2s all"}
           />
         </Link>
         <Box w="40%" h="100%">
-          <Text as="h2" fontWeight="bold" color="#FFFFFF">
+          <Text as="h2" fontWeight="bold" color="grey.0">
             {title}
           </Text>
           <Flex
-            color="#ffffff"
+            color="grey.0"
             align="center"
             justify="flex-start"
             mt="5%"
@@ -70,11 +71,11 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
               Launching Year: {year}
             </Text>
           </Flex>
-          <Badge fontWeight="bold" fontSize="0.5rem" bg="#5CC6DC">
+          <Badge fontWeight="bold" fontSize="0.5rem" bg="blue.50">
             {rating}
           </Badge>
           <Text
-            color="#FFFFFF"
+            color="grey.0"
             overflowX="hidden"
             overflowY="auto"
             h="15rem"
@@ -86,7 +87,7 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
                 width: "6px",
               },
               "&::-webkit-scrollbar-thumb": {
-                background: "#5CC6DC",
+                background: `${theme.colors.blue[50]}`,
                 borderRadius: "24px",
               },
             }}
@@ -98,7 +99,7 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
               genres.map((element, index) => {
                 return (
                   <Text
-                    color="#FFFFFF"
+                    color="grey.0"
                     fontWeight="bold"
                     fontSize={12}
                     marginLeft="5%"
@@ -114,10 +115,10 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
               justifyContent="space-evenly"
               w="50%"
               mr="3%"
-              bg="#5CC6DC"
-              _hover={{ bg: "#0C6072" }}
-              _active={{ bg: "#5CC6DC" }}
-              color="#FFFFFF"
+              bg="blue.50"
+              _hover={{ bg: "blue.400" }}
+              _active={{ bg: "blue.50" }}
+              color="grey.0"
               fontSize="0.75rem"
               onClick={handleFavoriteAnime}
             >
@@ -126,10 +127,10 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
             </Button>
             <Button
               w="50%"
-              bg="#5CC6DC"
-              _hover={{ bg: "#0C6072" }}
-              _active={{ bg: "#5CC6DC" }}
-              color="#FFFFFF"
+              bg="blue.50"
+              _hover={{ bg: "blue.400" }}
+              _active={{ bg: "blue.50" }}
+              color="grey.0"
               fontSize="0.75rem"
               onClick={handleDeleteAnime}
             >

@@ -18,9 +18,9 @@ export const Header = () => {
       h="7vh"
       align="center"
       justify="space-between"
-      backgroundColor="#2C2C38"
+      backgroundColor="grey.600"
       borderBottom={"0.2rem solid"}
-      borderBottomColor={"#5CC6DC"}
+      borderBottomColor={"blue.50"}
     >
       <Image h="70%" w={["35%", "35%", "10%", "10%"]} src={Logo} />
       <>
@@ -30,28 +30,28 @@ export const Header = () => {
             justify="center"
             w={["50%", "35%", "25%", "25%"]}
             h="70%"
-            bgColor="#D9D9D9"
+            bgColor="grey.0"
             borderRadius="8px"
             border="0.1rem solid"
-            borderColor="#141414"
+            borderColor="grey.900"
             mr="2vw"
           >
             <Input w="85%" h="100%" outline="none" variant="unstyled" ml="1%" />
             <Button
               w="10%"
               h="90%"
-              bgColor="#5A2843"
-              _hover={{ bg: "#28121E" }}
-              _active={{ bg: "#5A2843" }}
+              bgColor="red.600"
+              _hover={{ bg: "pink.800" }}
+              _active={{ bg: "red.600" }}
               onClick={handleOpenSearch}
               mr="2%"
             >
-              <FaSearch color="#fff" />
+              <FaSearch color="grey.0" />
             </Button>
           </Flex>
         ) : (
           <Box mr="3.5vw">
-            <FaSearch color="#fff" onClick={handleOpenSearch} />
+            <FaSearch color="grey.0" onClick={handleOpenSearch} />
           </Box>
         )}
       </>

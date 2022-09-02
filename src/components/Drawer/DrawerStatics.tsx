@@ -41,91 +41,91 @@ export const DrawerStatics = () => {
   };
 
   return (
-    <VStack bg="#21212D" borderRadius="8px" m="4% 4% 0% 4%">
-      <Text as="h2" color="#fff" fontWeight="bold" fontSize="1.5rem">
+    <VStack bg="grey.700" borderRadius="8px" m="4% 4% 0% 4%">
+      <Text as="h2" color="grey.0" fontWeight="bold" fontSize="1.5rem">
         Anime Stats
       </Text>
       <Flex align="center" justify="space-between" w="75%">
-        <Text color="#fff" fontSize="0.8rem">
+        <Text color="grey.0" fontSize="0.8rem">
           <b>Days: </b> {dayCount()}
         </Text>
-        <Text color="#fff" fontSize="0.8rem">
+        <Text color="grey.0" fontSize="0.8rem">
           <b>Mean Score: </b>
           {meanScore()}
         </Text>
       </Flex>
       <Flex w="100%" paddingBottom="5%" paddingTop="8%">
         <Box h="100%" width="10%" padding="2%">
-          <Box h="37vh" bg="#fff">
+          <Box h="37vh" bg="grey.0">
             <Flex
               h={`${animeStats.planToWatch}%`}
               w="100%"
-              bg="#fff"
+              bg="grey.0"
               borderTopRadius="2px"
             />
-            <Box h={`${animeStats.dropped}%`} w="100%" bg="#FF4940" />
-            <Box h={`${animeStats.onHold}%`} w="100%" bg="#FFF37E" />
-            <Box h={`${animeStats.completed}%`} w="100%" bg="#1B83EA" />
+            <Box h={`${animeStats.dropped}%`} w="100%" bg="red.50" />
+            <Box h={`${animeStats.onHold}%`} w="100%" bg="yellow.50" />
+            <Box h={`${animeStats.completed}%`} w="100%" bg="blue.100" />
             <Box
               h={`${animeStats.watching}%`}
               w="100%"
-              bg="#6AF06A"
+              bg="green.50"
               borderBottomRadius="2px"
             />
           </Box>
         </Box>
-        <VStack w="95%" bg="#2C2C38" padding="4%" borderRadius="2px">
+        <VStack w="95%" bg="grey.600" padding="4%" borderRadius="2px">
           <Flex align="center" w="100%" flexDir="row">
-            <GiPlainCircle size="1.5rem" fill="#fff" />
+            <GiPlainCircle size="1.5rem" fill="grey.0" />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
-              <Text color="#fff" w="90%">
+              <Text color="grey.0" w="90%">
                 Plan to Watch
               </Text>
-              <Text color={"#fff"}>{planToWatchList.length}</Text>
+              <Text color={"grey.0"}>{planToWatchList.length}</Text>
             </Flex>
           </Flex>
           <Flex align="center" w="100%" flexDir="row" justify="center">
-            <GiPlainCircle size="1.5rem" fill="#FF4940" />
+            <GiPlainCircle size="1.5rem" fill="red.50" />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
-              <Text color="#fff"> Dropped</Text>
-              <Text color={"#fff"}>{droppedList.length}</Text>
+              <Text color="grey.0"> Dropped</Text>
+              <Text color={"grey.0"}>{droppedList.length}</Text>
             </Flex>
           </Flex>
           <Flex align="center" w="100%" flexDir="row">
-            <GiPlainCircle size="1.5rem" fill="#FFF37E" />
+            <GiPlainCircle size="1.5rem" fill="#yellow.50" />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
-              <Text color="#fff"> On-Hold</Text>
-              <Text color={"#fff"}>{onHoldList.length}</Text>
+              <Text color="grey.0"> On-Hold</Text>
+              <Text color={"grey.0"}>{onHoldList.length}</Text>
             </Flex>
           </Flex>
           <Flex align="center" w="100%" flexDir="row">
-            <GiPlainCircle size="1.5rem" fill="#1B83EA" />
+            <GiPlainCircle size="1.5rem" fill="blue.100" />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
-              <Text color="#fff"> Completed</Text>
-              <Text color={"#fff"}>{completedList.length}</Text>
+              <Text color="grey.0"> Completed</Text>
+              <Text color={"grey.0"}>{completedList.length}</Text>
             </Flex>
           </Flex>
           <Flex align="center" w="100%" flexDir="row">
-            <GiPlainCircle size="1.5rem" fill="#6AF06A" />
+            <GiPlainCircle size="1.5rem" fill="green.50" />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
-              <Text color="#fff" w="100%">
+              <Text color="grey.0" w="100%">
                 Watching
               </Text>
-              <Text color="#fff">{watchingList.length}</Text>
+              <Text color="grey.0">{watchingList.length}</Text>
             </Flex>
           </Flex>
 
           <Center paddingTop="1%">
             <Flex flexDir="column" align="center">
               <Flex flexDir="column" align="center">
-                <Text color="#fff">Total Entries</Text>
-                <Text color="#fff" fontWeight="bold">
+                <Text color="grey.0">Total Entries</Text>
+                <Text color="grey.0" fontWeight="bold">
                   {animeCount}
                 </Text>
               </Flex>
               <Flex flexDir="column" align="center" mt="10%">
-                <Text color="#fff">Episodes</Text>
-                <Text color="#fff" fontWeight="bold">
+                <Text color="grey.0">Episodes</Text>
+                <Text color="grey.0" fontWeight="bold">
                   {episodesCount()}
                 </Text>
               </Flex>
