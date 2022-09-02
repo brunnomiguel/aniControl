@@ -43,7 +43,7 @@ export const Input = ({
 
       <InputGroup flexDirection="column">
         {Icon && (
-          <InputLeftElement mr="2">
+          <InputLeftElement mr="2" mt="1.5" >
             <Icon />
           </InputLeftElement>
         )}
@@ -55,7 +55,8 @@ export const Input = ({
           variant="outline"
         //   _hover={{ border = "solid 3px blue.50" }} rever este hover depois
         placeholder="grey.700"
-        size='md'
+        fontSize='3x1'
+        size='lg'
         h='50px'
         ></ChakraInput>
         {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
