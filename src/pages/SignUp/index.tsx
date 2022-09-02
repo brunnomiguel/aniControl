@@ -8,6 +8,7 @@ export const SignUp = () => {
 		base: false,
 		md: true,
 	});
+
 	return (
 		<>
 			{isWideVersion ? (
