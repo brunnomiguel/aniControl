@@ -21,10 +21,10 @@ export const DrawerStatics = () => {
   const animeCount = userAnimes.length;
 
   const planToWatchList = userAnimes.filter(
-    (anime) => anime.status === "plan to watch"
+    (anime) => anime.status === "planToWatch"
   );
   const droppedList = userAnimes.filter((anime) => anime.status === "dropped");
-  const onHoldList = userAnimes.filter((anime) => anime.status === "on-hold");
+  const onHoldList = userAnimes.filter((anime) => anime.status === "onHold");
   const completedList = userAnimes.filter(
     (anime) => anime.status === "completed"
   );
