@@ -1,13 +1,4 @@
-import {
-  Badge,
-  Box,
-  Flex,
-  Image,
-  Link,
-  Text,
-  VStack,
-  HStack,
-} from "@chakra-ui/react";
+import { Box, Flex, Image, Link, Text, VStack, HStack } from "@chakra-ui/react";
 
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
@@ -20,14 +11,14 @@ export const TopAnimeView = ({ anime }: IDashboardCardProps) => {
   const { images, trailer, title, score, synopsis, year, genres } = anime;
 
   return (
-    <VStack bg="#2C2C38" w={["350px", "350px", "100%", "100%"]} mr="2">
+    <VStack bg="grey.600" w={["350px", "350px", "100%", "100%"]} mr="2">
       <Flex justifyContent="space-around" padding="5%">
         <Link href={trailer.url} target="_blank" rel="noreferrer" mr="2">
           <Image
             src={images.jpg.image_url}
             border="0.3rem solid"
-            borderColor="#5CC6DC"
-            _hover={{ borderColor: "#0C6072" }}
+            borderColor="blue.50"
+            _hover={{ borderColor: "blue.400" }}
             maxW="170px"
             maxH="220px"
             h="100%"
@@ -36,11 +27,11 @@ export const TopAnimeView = ({ anime }: IDashboardCardProps) => {
           />
         </Link>
         <Box w="60%" h="100%">
-          <Text as="h2" fontWeight="bold" color="#FFFFFF">
+          <Text as="h2" fontWeight="bold" color="grey.0">
             {title}
           </Text>
           <Text
-            color="#FFFFFF"
+            color="grey.0"
             overflowX="hidden"
             overflowY="auto"
             h="5rem"
@@ -53,7 +44,7 @@ export const TopAnimeView = ({ anime }: IDashboardCardProps) => {
                 width: "6px",
               },
               "&::-webkit-scrollbar-thumb": {
-                background: "#5CC6DC",
+                background: "blue.50",
                 borderRadius: "24px",
               },
             }}
@@ -61,7 +52,7 @@ export const TopAnimeView = ({ anime }: IDashboardCardProps) => {
             {synopsis}
           </Text>
           <Flex
-            color="#ffffff"
+            color="grey.0"
             align="center"
             justify="flex-start"
             mt="5%"
@@ -77,11 +68,7 @@ export const TopAnimeView = ({ anime }: IDashboardCardProps) => {
             {genres &&
               genres.map((element, index) => {
                 return (
-                  <Text
-                    key={index}
-                    color="#FFFFFF"
-                    fontSize="xs"
-                  >
+                  <Text key={index} color="grey.0" fontSize="xs">
                     {element.name}
                   </Text>
                 );

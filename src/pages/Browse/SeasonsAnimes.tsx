@@ -2,6 +2,7 @@ import { Flex, Grid, Heading } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { BrowseCard } from "../../components/BrowseCard";
 import { useFullAnimes } from "../../contexts/FullAnimes";
+import { theme } from "../../styles/theme";
 
 export const SeasonsAnimes = () => {
   const { seasonsAnimes, getSeasonsAnimes } = useFullAnimes();
@@ -39,7 +40,7 @@ export const SeasonsAnimes = () => {
               height: "6px",
             },
             "&::-webkit-scrollbar-thumb": {
-              background: "#5CC6DC",
+              background: `${theme.colors.blue[50]}`,
               borderRadius: "24px",
             },
           },
@@ -51,7 +52,7 @@ export const SeasonsAnimes = () => {
               height: "6px",
             },
             "&::-webkit-scrollbar-thumb": {
-              background: "#5CC6DC",
+              background: `${theme.colors.blue[50]}`,
               borderRadius: "24px",
             },
           },
@@ -63,7 +64,7 @@ export const SeasonsAnimes = () => {
               width: "6px",
             },
             "&::-webkit-scrollbar-thumb": {
-              background: "#5CC6DC",
+              background: `${theme.colors.blue[50]}`,
               borderRadius: "24px",
             },
           },

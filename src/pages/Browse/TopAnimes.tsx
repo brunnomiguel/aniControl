@@ -2,6 +2,7 @@ import { Flex, Grid, Heading } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { BrowseCard } from "../../components/BrowseCard";
 import { useFullAnimes } from "../../contexts/FullAnimes";
+import { theme } from "../../styles/theme";
 
 export const TopAnimes = () => {
   const { topAnimes, getTopAnimes } = useFullAnimes();
@@ -13,7 +14,7 @@ export const TopAnimes = () => {
   return (
     <Grid
       bg="grey.600"
-      w={["100%", "100%", "500px"]}
+      w={["100%", "100%", "500px", "500px"]}
       h={["370px", "370px", "600px"]}
       mb="4"
     >
@@ -39,7 +40,7 @@ export const TopAnimes = () => {
               height: "6px",
             },
             "&::-webkit-scrollbar-thumb": {
-              background: "#5CC6DC",
+              background: `${theme.colors.blue[50]}`,
               borderRadius: "24px",
             },
           },
@@ -51,7 +52,7 @@ export const TopAnimes = () => {
               height: "6px",
             },
             "&::-webkit-scrollbar-thumb": {
-              background: "#5CC6DC",
+              background: `${theme.colors.blue[50]}`,
               borderRadius: "24px",
             },
           },
@@ -63,7 +64,7 @@ export const TopAnimes = () => {
               width: "6px",
             },
             "&::-webkit-scrollbar-thumb": {
-              background: "#5CC6DC",
+              background: `${theme.colors.blue[50]}`,
               borderRadius: "24px",
             },
           },
