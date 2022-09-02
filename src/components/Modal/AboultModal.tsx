@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import Ryu from "../../assets/Aboult/Ryuzaki.png";
 import Agata from "../../assets/Aboult/Agata.png";
+import Naruto from "../../assets/Aboult/Naruto.png";
 import DevBraz from "../../assets/Aboult/DevBraz.png";
 import DevWill from "../../assets/Aboult/DevWill.jpg";
 import DevBrunno from "../../assets/Aboult/DevBrunno.jpg";
@@ -30,8 +31,9 @@ export const AboultModal = ({ id }: AboultModalProps) => {
 			function: "Product Owner",
 			devimg: DevBraz,
 			animeimg: Ryu,
-			info: "Eu sou uma pesso aaaaswsdfssdfsd",
+			info: "Quando resolvi ser um dev? Após estágio de engenharia entrei na Crefaz, onde houve a oportunidade de desenvolver mais de minhas capacidades. Conversando e recebendo conselhos de diversas pessoas do trabalho, conheci e me interessei pelo setor de desenvolvimento e realmente aquela área era para mim. Não demorou muito para eu correr atrás e começar os estudos na área.",
 			linkedin: "https://www.linkedin.com/in/charlesbraz/",
+			github: "https://github.com/devbraz",
 			position: "9%",
 			id: 1,
 		},
@@ -42,6 +44,7 @@ export const AboultModal = ({ id }: AboultModalProps) => {
 			animeimg: Agata,
 			info: "Eu sou uma pesso aaaaswsdfssdfsd",
 			linkedin: "https://www.linkedin.com/in/charlesbraz/",
+			github: "https://github.com/devbraz",
 			position: "28.5%",
 			id: 2,
 		},
@@ -49,9 +52,10 @@ export const AboultModal = ({ id }: AboultModalProps) => {
 			name: "Brunno Miguel",
 			function: "Tech Leader",
 			devimg: DevBrunno,
-			animeimg: "",
+			animeimg: Naruto,
 			info: "Eu sou uma pesso aaaaswsdfssdfsd",
-			linkedin: "https://www.linkedin.com/in/charlesbraz/",
+			linkedin: "https://www.linkedin.com/in/brunno-miguel/",
+			github: "https://github.com/brunnomiguel",
 			position: "48%",
 			id: 3,
 		},
@@ -62,6 +66,7 @@ export const AboultModal = ({ id }: AboultModalProps) => {
 			animeimg: "",
 			info: "Eu sou uma pesso aaaaswsdfssdfsd",
 			linkedin: "https://www.linkedin.com/in/charlesbraz/",
+			github: "https://github.com/devbraz",
 			position: "68%",
 			id: 4,
 		},
@@ -72,10 +77,12 @@ export const AboultModal = ({ id }: AboultModalProps) => {
 			animeimg: "",
 			info: "Eu sou uma pesso aaaaswsdfssdfsd",
 			linkedin: "https://www.linkedin.com/in/charlesbraz/",
+			github: "https://github.com/devbraz",
 			position: "90%",
 			id: 5,
 		},
 	];
+	//CÓDIGO ABAIXO COMENTADO SERÁ APLICADO NA LANDING PAGE
 	//MAP DO COMPONENTE
 	/* <Flex w="100vw" justifyContent="space-around">
 		{devId.map((id) => {

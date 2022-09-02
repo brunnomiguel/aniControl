@@ -68,7 +68,14 @@ export const SignUpForm = () => {
 										<Button h="25px" w="30%" bg="#155BCB">
 											<FaFacebookF fill="white" />
 										</Button>
-										<Button h="25px" w="30%" background="grey.900">
+										<Button
+											h="25px"
+											w="30%"
+											background="grey.900"
+											_hover={{
+												bg: "grey.900",
+											}}
+										>
 											<FaApple fill="white" />
 										</Button>
 									</Flex>
