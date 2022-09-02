@@ -1,19 +1,43 @@
 import { Box, Center, Flex, Text, VStack } from "@chakra-ui/react";
 
 import { GiPlainCircle } from "react-icons/gi";
+import { useAnimeList } from "../../contexts/AnimeList";
 
 export const DrawerStatics = () => {
-  const dayCount = 31.3;
-  const meanScore = 8.07;
-  const animeCount = 145;
-  const episodesCount = 1871;
+  const { userAnimes } = useAnimeList();
+
+  const dayCount = () => {
+    const minutes = userAnimes.map((elem) => elem.episodes * 23);
+    return (minutes.reduce((a, b) => a + b, 0) / 1440).toFixed(2);
+  };
+  const meanScore = () => {
+    const rating = userAnimes.map((elem) => elem.rating);
+    return (rating.reduce((a, b) => a + b, 0) / rating.length).toFixed(2);
+  };
+  const episodesCount = () => {
+    const episodes = userAnimes.map((elem) => elem.episodes);
+    return episodes.reduce((a, b) => a + b, 0);
+  };
+  const animeCount = userAnimes.length;
+
+  const planToWatchList = userAnimes.filter(
+    (anime) => anime.status === "planToWatch"
+  );
+  const droppedList = userAnimes.filter((anime) => anime.status === "dropped");
+  const onHoldList = userAnimes.filter((anime) => anime.status === "onHold");
+  const completedList = userAnimes.filter(
+    (anime) => anime.status === "completed"
+  );
+  const watchingList = userAnimes.filter(
+    (anime) => anime.status === "watching"
+  );
 
   const animeStats = {
-    planToWatch: Math.round((23 / 145) * 100),
-    dropped: Math.round((25 / 145) * 100),
-    onHold: Math.round((9 / 145) * 100),
-    completed: Math.round((87 / 145) * 100),
-    watching: Math.round((1 / 145) * 100),
+    planToWatch: Math.round((planToWatchList.length / 145) * 100),
+    dropped: Math.round((droppedList.length / 145) * 100),
+    onHold: Math.round((onHoldList.length / 145) * 100),
+    completed: Math.round((completedList.length / 145) * 100),
+    watching: Math.round((watchingList.length / 145) * 100),
   };
 
   return (
@@ -23,17 +47,17 @@ export const DrawerStatics = () => {
       </Text>
       <Flex align="center" justify="space-between" w="75%">
         <Text color="#fff" fontSize="0.8rem">
-          <b>Days: </b> {dayCount}
+          <b>Days: </b> {dayCount()}
         </Text>
         <Text color="#fff" fontSize="0.8rem">
           <b>Mean Score: </b>
-          {meanScore}
+          {meanScore()}
         </Text>
       </Flex>
       <Flex w="100%" paddingBottom="5%" paddingTop="8%">
         <Box h="100%" width="10%" padding="2%">
-          <Box h="37vh" bg="#fff" borderRadius="16px">
-            <Box
+          <Box h="37vh" bg="#fff">
+            <Flex
               h={`${animeStats.planToWatch}%`}
               w="100%"
               bg="#fff"
@@ -57,28 +81,28 @@ export const DrawerStatics = () => {
               <Text color="#fff" w="90%">
                 Plan to Watch
               </Text>
-              <Text color={"#fff"}>23</Text>
+              <Text color={"#fff"}>{planToWatchList.length}</Text>
             </Flex>
           </Flex>
           <Flex align="center" w="100%" flexDir="row" justify="center">
             <GiPlainCircle size="1.5rem" fill="#FF4940" />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
               <Text color="#fff"> Dropped</Text>
-              <Text color={"#fff"}>25</Text>
+              <Text color={"#fff"}>{droppedList.length}</Text>
             </Flex>
           </Flex>
           <Flex align="center" w="100%" flexDir="row">
             <GiPlainCircle size="1.5rem" fill="#FFF37E" />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
               <Text color="#fff"> On-Hold</Text>
-              <Text color={"#fff"}>9</Text>
+              <Text color={"#fff"}>{onHoldList.length}</Text>
             </Flex>
           </Flex>
           <Flex align="center" w="100%" flexDir="row">
             <GiPlainCircle size="1.5rem" fill="#1B83EA" />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
               <Text color="#fff"> Completed</Text>
-              <Text color={"#fff"}>87</Text>
+              <Text color={"#fff"}>{completedList.length}</Text>
             </Flex>
           </Flex>
           <Flex align="center" w="100%" flexDir="row">
@@ -87,7 +111,7 @@ export const DrawerStatics = () => {
               <Text color="#fff" w="100%">
                 Watching
               </Text>
-              <Text color="#fff">1</Text>
+              <Text color="#fff">{watchingList.length}</Text>
             </Flex>
           </Flex>
 
@@ -102,7 +126,7 @@ export const DrawerStatics = () => {
               <Flex flexDir="column" align="center" mt="10%">
                 <Text color="#fff">Episodes</Text>
                 <Text color="#fff" fontWeight="bold">
-                  {episodesCount}
+                  {episodesCount()}
                 </Text>
               </Flex>
             </Flex>
