@@ -15,8 +15,10 @@ interface FullAnimesProviderProps {
 interface FullAnimesContextData {
   animeById: animeProps;
   allAnimes: animeProps[];
-  getAllAnimes: () => void;
+  topAnimes: animeProps[];
+  getAllAnimes: (page: number) => Promise<void>;
   getAnimeFullById: (id: number) => Promise<void>;
+  getTopAnimes: () => Promise<void>;
 }
 
 const FullAnimesContext = createContext<FullAnimesContextData>(
@@ -35,12 +37,13 @@ export const useFullAnimes = () => {
 
 export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
   const [allAnimes, setAllAnimes] = useState<animeProps[]>([]);
+  const [topAnimes, setTopAnimes] = useState<animeProps[]>([]);
   const [animeById, setAnimeById] = useState<animeProps>({} as animeProps);
 
-  const getAllAnimes = useCallback(async () => {
+  const getAllAnimes = useCallback(async (page: number) => {
     try {
-      const { data } = await jikanApi.get("/anime");
-      setAllAnimes(data);
+      const response = await jikanApi.get(`/anime?limit=15&page=${page}`);
+      setAllAnimes(response.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -55,9 +58,25 @@ export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
     }
   }, []);
 
+  const getTopAnimes = useCallback(async () => {
+    try {
+      const response = await jikanApi.get("/top/anime");
+      setTopAnimes(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <FullAnimesContext.Provider
-      value={{ allAnimes, animeById, getAllAnimes, getAnimeFullById }}
+      value={{
+        allAnimes,
+        animeById,
+        topAnimes,
+        getAllAnimes,
+        getTopAnimes,
+        getAnimeFullById,
+      }}
     >
       {children}
     </FullAnimesContext.Provider>

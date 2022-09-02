@@ -95,13 +95,14 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
           </Text>
           <Flex justify="flex-start" marginTop="2%">
             {genres &&
-              genres.map((element) => {
+              genres.map((element, index) => {
                 return (
                   <Text
                     color="#FFFFFF"
                     fontWeight="bold"
                     fontSize={12}
                     marginLeft="5%"
+                    key={index}
                   >
                     {element.name}
                   </Text>
