@@ -17,11 +17,11 @@ export const ColumnList = ({ title, cardList }: IColumnList) => {
     >
       <Text
         as="h2"
-        bg="#5A2843"
+        bg="red.600"
         marginTop="1rem"
         marginBottom="1rem"
         borderRadius="4px"
-        color="#ffffff"
+        color="grey.0"
         textAlign="center"
         fontWeight="bold"
         padding="0.5rem"

@@ -1,14 +1,15 @@
-import { HStack } from "@chakra-ui/react";
+import { HStack, theme } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 import { ColumnList } from "../../components/ColumnList";
 import { useAnimeList } from "../../contexts/AnimeList";
 
 export const DashboardList = () => {
-  const { userAnimes, getUserAnimes, addAnime } = useAnimeList();
+  const { userAnimes, getUserAnimes } = useAnimeList();
 
   useEffect(() => {
     getUserAnimes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -27,7 +28,7 @@ export const DashboardList = () => {
           height: "6px",
         },
         "&::-webkit-scrollbar-thumb": {
-          background: "#5CC6DC",
+          background: `${theme.colors.blue[50]}`,
           borderRadius: "24px",
         },
       }}

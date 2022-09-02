@@ -8,7 +8,7 @@ interface IHoveringButtonProps {
 export const HoveringButton = ({ onOpen }: IHoveringButtonProps) => {
   return (
     <Button
-      bg="#fff"
+      bg="grey.0"
       onClick={onOpen}
       position="fixed"
       w="15vw"
@@ -18,7 +18,7 @@ export const HoveringButton = ({ onOpen }: IHoveringButtonProps) => {
       left="2vw"
       zIndex={2}
       fontSize="10rem"
-      _active={{ bg: "#5A2843", color: "#fff" }}
+      _active={{ bg: "red.600", color: "grey.0" }}
     >
       <FiBarChart2 />
     </Button>
