@@ -38,7 +38,7 @@ export const Input = ({
 }: InputProps) => {
   // label deve ser opcional, pois o input tb será usado na barra de busca
   return (
-    <FormControl mt="10">
+    <FormControl mt="5">
       {label && <FormLabel>{label}</FormLabel>}
 
       <InputGroup flexDirection="column">
