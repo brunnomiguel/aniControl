@@ -32,7 +32,7 @@ export const DashboardDesktopDrawer = () => {
       <Flex flexDir="row" align="center" justify="center" marginTop="5%">
         <Avatar bgColor="#5A2843" />
         <Text ml="1vw" fontSize="1.8rem" color="#fff">
-          {user.name}
+          {/* {user.name} */}
         </Text>
       </Flex>
       <VStack spacing="8%" marginTop="5%" w="95%" align="flex-start">
