@@ -45,14 +45,15 @@ export const SignInForm = () => {
     resolver: yupResolver(signInSchema),
   });
 
-  const handleSignIn = (data: SignInDados) => {
+  const handleSignIn = ({ email, password }: SignInDados) => {
+    // const dataUser =
     console.log("teste");
   };
 
   return (
     <>
       <Flex
-        shadow="30px 0px 30px #000000, inset -100px 0px 30px rgba(255, 255, 255, 0.6);"
+        shadow="30px 0px 30px grey.900, inset -100px 0px 30px rgba(255, 255, 255, 0.6);"
         opacity="0.1"
         w="35vw"
         bg="rgba(217, 217, 217, 0.5);"
@@ -72,7 +73,7 @@ export const SignInForm = () => {
         >
           <Image w="320px" h="110px" src={Logo} />
           <Box>
-            <Text color="white" fontWeight="600"  fontSize="2xl" m="10">
+            <Text color="white" fontWeight="600" fontSize="2xl" m="10">
               Create Account
             </Text>
             <VStack mt="10" spacing="10">
@@ -95,12 +96,19 @@ export const SignInForm = () => {
               </Box>
             </VStack>
           </Box>
-          <Button mt="15vh" w="55%" bg="#6778B1" fontWeight="700" color="white">
+          <Button
+            type="submit"
+            mt="10vh"
+            w="55%"
+            bg="blue.600"
+            fontWeight="700"
+            color="white"
+          >
             Sign Up
           </Button>
           <Flex flexDir="column">
             <Text mt="3vh" fontWeight="600" color="white">
-              Already have an account?{" "}
+              Already have an account?
               <Link color="blue.600" fontWeight="extrabold">
                 click here.
               </Link>

@@ -38,12 +38,12 @@ export const Input = ({
 }: InputProps) => {
   // label deve ser opcional, pois o input tb será usado na barra de busca
   return (
-    <FormControl>
+    <FormControl mt="10">
       {label && <FormLabel>{label}</FormLabel>}
 
       <InputGroup flexDirection="column">
         {Icon && (
-          <InputLeftElement mr="2" mt="1.5" >
+          <InputLeftElement mr="2" mt="1.5" color="grey.900">
             <Icon />
           </InputLeftElement>
         )}
@@ -52,12 +52,11 @@ export const Input = ({
           name={name}
           {...rest}
           bg="grey.0"
+          borderRadius="2"
           variant="outline"
-        //   _hover={{ border = "solid 3px blue.50" }} rever este hover depois
-        placeholder="grey.700"
-        fontSize='3x1'
-        size='lg'
-        h='50px'
+          //   _hover={{ border = "solid 3px blue.50" }} rever este hover depois
+          size="4x1"
+          h="50px"
         ></ChakraInput>
         {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
       </InputGroup>

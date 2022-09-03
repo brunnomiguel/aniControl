@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { BackgroundAnimation } from "../../components/BackgroundAnimation";
 import { BackgroundImg } from "./BackgroundImg";
-import { SignInForm } from "./SignUpForm";
+import { SignInForm } from "./SignInForm";
 
 export const SignIn = () => {
   return (
