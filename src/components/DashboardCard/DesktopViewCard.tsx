@@ -1,15 +1,4 @@
-import {
-  Badge,
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Image,
-  Link,
-  Text,
-  theme,
-  VStack,
-} from "@chakra-ui/react";
+import { Badge, Box, Button, Flex, HStack, Image, Link, Text, theme, VStack } from "@chakra-ui/react";
 
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
@@ -18,16 +7,16 @@ import { useAnimeList } from "../../contexts/AnimeList";
 interface IDashboardCardProps {
   anime: animeProps;
   id: number;
+  favorite: boolean;
 }
 
-export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
-  const { images, trailer, title, rating, score, synopsis, year, genres } =
-    anime;
+export const DesktopViewCard = ({ anime, id, favorite }: IDashboardCardProps) => {
+  const { images, trailer, title, rating, score, synopsis, year, genres } = anime;
 
   const { updateAnime, removeAnime } = useAnimeList();
 
   const handleFavoriteAnime = () => {
-    updateAnime({ favorite: true }, id);
+    updateAnime({ favorite: !favorite }, id);
   };
 
   const handleDeleteAnime = () => {
@@ -37,13 +26,7 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
   return (
     <VStack w="100%" h="auto" bg="grey.600" paddingBottom="5%">
       <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="25rem">
-        <Link
-          href={trailer.url}
-          target="_blank"
-          rel="noreferrer"
-          h="96%"
-          w={["50%", "50%"]}
-        >
+        <Link href={trailer.url} target="_blank" rel="noreferrer" h="96%" w={["50%", "50%"]}>
           <Image
             src={images.jpg.large_image_url}
             border="0.3rem solid"
@@ -58,13 +41,7 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
           <Text as="h2" fontWeight="bold" color="grey.0">
             {title}
           </Text>
-          <Flex
-            color="grey.0"
-            align="center"
-            justify="flex-start"
-            mt="5%"
-            fontSize={12}
-          >
+          <Flex color="grey.0" align="center" justify="flex-start" mt="5%" fontSize={12}>
             <FaStar fill="#EFDB73" />
             <Text fontWeight="bold">{score}</Text>
             <Text fontWeight="bold" ml="4%">
@@ -98,13 +75,7 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
             {genres &&
               genres.map((element, index) => {
                 return (
-                  <Text
-                    color="grey.0"
-                    fontWeight="bold"
-                    fontSize={12}
-                    marginLeft="5%"
-                    key={index}
-                  >
+                  <Text color="grey.0" fontWeight="bold" fontSize={12} marginLeft="5%" key={index}>
                     {element.name}
                   </Text>
                 );

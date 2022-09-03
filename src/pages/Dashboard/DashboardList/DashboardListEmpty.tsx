@@ -5,7 +5,7 @@ export const DashboardListEmpty = () => {
   const navigate = useNavigate();
 
   return (
-    <Flex w="180vw">
+    <Flex w="225vw">
       <Center
         w="100%"
         h="85vh"

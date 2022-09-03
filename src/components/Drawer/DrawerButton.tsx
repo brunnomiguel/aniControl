@@ -1,8 +1,8 @@
 import { Button, Text } from "@chakra-ui/react";
-
+import { ButtonProps } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 
-interface IDrawerButtonProps {
+interface IDrawerButtonProps extends ButtonProps {
   Icon: IconType;
   Title: string;
   bgColor: string;
@@ -10,13 +10,7 @@ interface IDrawerButtonProps {
   activeColor: string;
 }
 
-export const DrawerButton = ({
-  Icon,
-  Title,
-  bgColor,
-  hoverColor,
-  activeColor,
-}: IDrawerButtonProps) => {
+export const DrawerButton = ({ Icon, Title, bgColor, hoverColor, activeColor, ...rest }: IDrawerButtonProps) => {
   return (
     <Button
       w="100%"
@@ -28,6 +22,7 @@ export const DrawerButton = ({
       _hover={{ bg: hoverColor }}
       _active={{ bg: activeColor }}
       alignItems="center"
+      onClick={rest.onClick}
     >
       <Icon />
       <Text>{Title}</Text>

@@ -1,12 +1,18 @@
 import { Avatar, Box, Flex, Text, theme, VStack } from "@chakra-ui/react";
 import { FaPencilAlt, FaStar } from "react-icons/fa";
 import { FiNavigation } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import { DrawerButton } from "../../components/Drawer/DrawerButton";
 import { DrawerStatics } from "../../components/Drawer/DrawerStatics";
 import { useAuth } from "../../contexts/Auth";
 
-export const DashboardDesktopDrawer = () => {
+interface IDashboardDesktopProps {
+  setFavoritesView: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const DashboardDesktopDrawer = ({ setFavoritesView }: IDashboardDesktopProps) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -42,6 +48,7 @@ export const DashboardDesktopDrawer = () => {
           activeColor="red.600"
           bgColor="red.600"
           hoverColor="pink.800"
+          onClick={() => setFavoritesView((oldState) => !oldState)}
         />
         <DrawerButton
           Icon={FaPencilAlt}
@@ -59,6 +66,7 @@ export const DashboardDesktopDrawer = () => {
           activeColor="blue.50"
           bgColor="blue.50"
           hoverColor="blue.400"
+          onClick={() => navigate("/browse")}
         />
       </VStack>
     </Box>
