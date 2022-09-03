@@ -23,19 +23,15 @@ import { useAuth } from "../../contexts/Auth";
 interface IDashboardDrawerProps {
   isOpen: boolean;
   onClose: () => void;
+  setFavoritesView: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const DashboardDrawer = ({ isOpen, onClose }: IDashboardDrawerProps) => {
+export const DashboardDrawer = ({ isOpen, onClose, setFavoritesView }: IDashboardDrawerProps) => {
   const { user } = useAuth();
 
   return (
     <>
-      <Drawer
-        isOpen={isOpen}
-        onClose={onClose}
-        placement="left"
-        onEsc={onClose}
-      >
+      <Drawer isOpen={isOpen} onClose={onClose} placement="left" onEsc={onClose}>
         <DrawerOverlay />
         <DrawerContent bg="grey.600" border="1px solid black">
           <DrawerCloseButton color="grey.0" />
@@ -69,6 +65,10 @@ export const DashboardDrawer = ({ isOpen, onClose }: IDashboardDrawerProps) => {
                 activeColor="red.600"
                 bgColor="red.600"
                 hoverColor="pink.800"
+                onClick={() => {
+                  onClose();
+                  setFavoritesView((oldState) => !oldState);
+                }}
               />
               <DrawerButton
                 Icon={FaPencilAlt}
@@ -79,13 +79,7 @@ export const DashboardDrawer = ({ isOpen, onClose }: IDashboardDrawerProps) => {
               />
             </VStack>
             <DrawerStatics />
-            <VStack
-              spacing="8%"
-              marginTop="10%"
-              marginBottom="10%"
-              w="95%"
-              align="flex-start"
-            >
+            <VStack spacing="8%" marginTop="10%" marginBottom="10%" w="95%" align="flex-start">
               <DrawerButton
                 Icon={FiNavigation}
                 Title={"Edit Profile"}

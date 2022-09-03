@@ -7,9 +7,10 @@ import { Box } from "@chakra-ui/react";
 interface IDashboardCardProps {
   anime: animeProps;
   id: number;
+  favorite: boolean;
 }
 
-export const DashboardCard = ({ anime, id }: IDashboardCardProps) => {
+export const DashboardCard = ({ anime, id, favorite }: IDashboardCardProps) => {
   const [smallView, setSmallView] = useState(false);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export const DashboardCard = ({ anime, id }: IDashboardCardProps) => {
       {smallView ? (
         <MobileViewCard anime={anime} id={id} />
       ) : (
-        <DesktopViewCard anime={anime} id={id} />
+        <DesktopViewCard anime={anime} id={id} favorite={favorite} />
       )}
     </Box>
   );

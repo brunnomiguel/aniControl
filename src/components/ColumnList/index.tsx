@@ -9,12 +9,7 @@ interface IColumnList {
 
 export const ColumnList = ({ title, cardList }: IColumnList) => {
   return (
-    <Flex
-      flexFlow="column nowrap"
-      width={["95vw", "95vw", "95vw", "35vw"]}
-      height="93vh"
-      align="center"
-    >
+    <Flex flexFlow="column nowrap" width={["95vw", "95vw", "95vw", "35vw"]} height="93vh" align="center">
       <Text
         as="h2"
         bg="red.600"
@@ -33,13 +28,7 @@ export const ColumnList = ({ title, cardList }: IColumnList) => {
       <VStack width="90%" spacing={6}>
         {cardList &&
           cardList.map((anime, index) => {
-            return (
-              <DashboardCard
-                anime={anime.anime.data}
-                id={anime.id}
-                key={index}
-              />
-            );
+            return <DashboardCard anime={anime.anime.data} id={anime.id} key={index} favorite={anime.favorite} />;
           })}
       </VStack>
     </Flex>
