@@ -1,5 +1,4 @@
-import { Avatar, Box, Flex, Text, VStack } from "@chakra-ui/react";
-import React from "react";
+import { Avatar, Box, Flex, Text, theme, VStack } from "@chakra-ui/react";
 import { FaPencilAlt, FaStar } from "react-icons/fa";
 import { FiNavigation } from "react-icons/fi";
 import { DrawerButton } from "../../components/Drawer/DrawerButton";
@@ -15,6 +14,7 @@ export const DashboardDesktopDrawer = () => {
       overflowY="scroll"
       overflowX="hidden"
       h="93vh"
+      borderRadius="20px"
       css={{
         "&::-webkit-scrollbar": {
           width: "4px",
@@ -23,14 +23,14 @@ export const DashboardDesktopDrawer = () => {
           width: "6px",
         },
         "&::-webkit-scrollbar-thumb": {
-          background: "#5A2843",
+          background: `${theme.colors.red[600]}`,
           borderRadius: "24px",
         },
       }}
-      bg="#2C2C38"
+      bg="grey.600"
     >
       <Flex flexDir="row" align="center" justify="center" marginTop="5%">
-        <Avatar bgColor="#5A2843" />
+        <Avatar bgColor="red.600" />
         <Text ml="1vw" fontSize="1.8rem" color="#fff">
           {/* {user.name} */}
         </Text>
@@ -39,16 +39,16 @@ export const DashboardDesktopDrawer = () => {
         <DrawerButton
           Icon={FaStar}
           Title={"Favorites"}
-          activeColor="#5A2843"
-          bgColor="#5A2843"
-          hoverColor="#28121E"
+          activeColor="red.600"
+          bgColor="red.600"
+          hoverColor="pink.800"
         />
         <DrawerButton
           Icon={FaPencilAlt}
           Title={"Edit Profile"}
-          activeColor="#5A2843"
-          bgColor="#5A2843"
-          hoverColor="#28121E"
+          activeColor="red.600"
+          bgColor="red.600"
+          hoverColor="pink.800"
         />
       </VStack>
       <DrawerStatics />
@@ -56,9 +56,9 @@ export const DashboardDesktopDrawer = () => {
         <DrawerButton
           Icon={FiNavigation}
           Title={"Browse"}
-          activeColor="#5CC6DC"
-          bgColor="#5CC6DC"
-          hoverColor="#0C6072"
+          activeColor="blue.50"
+          bgColor="blue.50"
+          hoverColor="blue.400"
         />
       </VStack>
     </Box>

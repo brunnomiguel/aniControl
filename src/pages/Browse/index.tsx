@@ -7,6 +7,8 @@ import { ImageCard } from "./ImageCard";
 import { TopAnimes } from "./TopAnimes";
 import { SeasonsAnimes } from "./SeasonsAnimes";
 
+import { useAuth } from "../../contexts/Auth";
+
 export const Browse = () => {
   const { allAnimes, getAllAnimes } = useFullAnimes();
   const [page, setPage] = useState(1);
@@ -17,7 +19,11 @@ export const Browse = () => {
     }
   };
 
+  const { signIn } = useAuth();
+
   useEffect(() => {
+    signIn({ email: "kenzinho@mail.com", password: "123456" });
+
     getAllAnimes(page);
   }, [page]);
 

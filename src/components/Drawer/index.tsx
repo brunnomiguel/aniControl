@@ -10,6 +10,7 @@ import {
   Text,
   Flex,
   VStack,
+  theme,
 } from "@chakra-ui/react";
 
 import { DrawerButton } from "./DrawerButton";
@@ -36,12 +37,12 @@ export const DashboardDrawer = ({ isOpen, onClose }: IDashboardDrawerProps) => {
         onEsc={onClose}
       >
         <DrawerOverlay />
-        <DrawerContent bg="#2C2C38" border="1px solid black">
-          <DrawerCloseButton color="#fff" />
+        <DrawerContent bg="grey.600" border="1px solid black">
+          <DrawerCloseButton color="grey.0" />
           <DrawerHeader>
             <Flex flexDir="row" align="center" justify="center">
-              <Avatar bgColor="#5A2843" />
-              <Text ml="2vw" fontSize="1.8rem" color="#fff">
+              <Avatar bgColor="red.600" />
+              <Text ml="2vw" fontSize="1.8rem" color="grey.0">
                 {user.name}
               </Text>
             </Flex>
@@ -56,7 +57,7 @@ export const DashboardDrawer = ({ isOpen, onClose }: IDashboardDrawerProps) => {
                 width: "6px",
               },
               "&::-webkit-scrollbar-thumb": {
-                background: "#5A2843",
+                background: `${theme.colors.red[600]}`,
                 borderRadius: "24px",
               },
             }}
@@ -65,16 +66,16 @@ export const DashboardDrawer = ({ isOpen, onClose }: IDashboardDrawerProps) => {
               <DrawerButton
                 Icon={FaStar}
                 Title={"Favorites"}
-                activeColor="#5A2843"
-                bgColor="#5A2843"
-                hoverColor="#28121E"
+                activeColor="red.600"
+                bgColor="red.600"
+                hoverColor="pink.800"
               />
               <DrawerButton
                 Icon={FaPencilAlt}
                 Title={"Edit Profile"}
-                activeColor="#5A2843"
-                bgColor="#5A2843"
-                hoverColor="#28121E"
+                activeColor="red.600"
+                bgColor="red.600"
+                hoverColor="pink.800"
               />
             </VStack>
             <DrawerStatics />
@@ -88,9 +89,9 @@ export const DashboardDrawer = ({ isOpen, onClose }: IDashboardDrawerProps) => {
               <DrawerButton
                 Icon={FiNavigation}
                 Title={"Edit Profile"}
-                activeColor="#5CC6DC"
-                bgColor="#5CC6DC"
-                hoverColor="#0C6072"
+                activeColor="blue.50"
+                bgColor="blue.50"
+                hoverColor="blue.400"
               />
             </VStack>
           </DrawerBody>

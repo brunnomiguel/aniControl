@@ -7,6 +7,7 @@ import {
   Image,
   Link,
   Text,
+  theme,
 } from "@chakra-ui/react";
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
@@ -32,7 +33,7 @@ export const MobileViewCard = ({ anime, id }: IDashboardCardProps) => {
   };
 
   return (
-    <Flex w="100%" flexDir="column" h="auto" bg="#2C2C38" paddingBottom="5%">
+    <Flex w="100%" flexDir="column" h="auto" bg="grey.600" paddingBottom="5%">
       <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="20rem">
         <Link
           href={trailer.url}
@@ -44,17 +45,17 @@ export const MobileViewCard = ({ anime, id }: IDashboardCardProps) => {
           <Image
             src={images.jpg.large_image_url}
             border="0.3rem solid"
-            borderColor="#5CC6DC"
+            borderColor="blue.50"
             h="100%"
             w="100%"
           />
         </Link>
         <Box w="40%" h="100%">
-          <Text as="h2" fontWeight="bold" color="#FFFFFF">
+          <Text as="h2" fontWeight="bold" color="grey.0">
             {title}
           </Text>
           <Text
-            color="#FFFFFF"
+            color="grey.0"
             overflowX="hidden"
             overflowY="auto"
             h="85%"
@@ -67,7 +68,7 @@ export const MobileViewCard = ({ anime, id }: IDashboardCardProps) => {
                 width: "6px",
               },
               "&::-webkit-scrollbar-thumb": {
-                background: "#5CC6DC",
+                background: `${theme.colors.blue[50]}`,
                 borderRadius: "24px",
               },
             }}
@@ -77,7 +78,7 @@ export const MobileViewCard = ({ anime, id }: IDashboardCardProps) => {
         </Box>
       </Flex>
       <Flex
-        color="#ffffff"
+        color="grey.0"
         align="center"
         justify="center"
         mt="5%"
@@ -92,7 +93,7 @@ export const MobileViewCard = ({ anime, id }: IDashboardCardProps) => {
       <Badge
         fontWeight="bold"
         fontSize="0.5rem"
-        bg="#5CC6DC"
+        bg="blue.50"
         w="auto"
         alignSelf="center"
       >
@@ -102,7 +103,7 @@ export const MobileViewCard = ({ anime, id }: IDashboardCardProps) => {
         {genres &&
           genres.map((element, index) => {
             return (
-              <Text color="#FFFFFF" fontWeight="bold" fontSize={12} key={index}>
+              <Text color="grey.0" fontWeight="bold" fontSize={12} key={index}>
                 {element.name}
               </Text>
             );
@@ -113,10 +114,10 @@ export const MobileViewCard = ({ anime, id }: IDashboardCardProps) => {
           justifyContent="space-evenly"
           w="35%"
           mr="3%"
-          bg="#5CC6DC"
-          _hover={{ bg: "#0C6072" }}
-          _active={{ bg: "#5CC6DC" }}
-          color="#FFFFFF"
+          bg="blue.50"
+          _hover={{ bg: "blue.400" }}
+          _active={{ bg: "blue.50" }}
+          color="grey.0"
           onClick={handleFavoriteAnime}
         >
           <FaStar fill="#EFDB73" />
@@ -124,10 +125,10 @@ export const MobileViewCard = ({ anime, id }: IDashboardCardProps) => {
         </Button>
         <Button
           w="35%"
-          bg="#5CC6DC"
-          _hover={{ bg: "#0C6072" }}
-          _active={{ bg: "#5CC6DC" }}
-          color="#FFFFFF"
+          bg="blue.50"
+          _hover={{ bg: "blue.400" }}
+          _active={{ bg: "blue.50" }}
+          color="grey.0"
           onClick={handleDeleteAnime}
         >
           Remove

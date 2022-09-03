@@ -14,7 +14,7 @@ const animate = keyframes`
   from {
     transform: translateY();
     opacity: 0;
-  },
+  };
   to {
     transform: translateY();
     opacity: 1;
