@@ -1,7 +1,7 @@
 import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-import { DashboardList } from "./DashboardList";
+import { DashboardList } from "./DashboardList/DashboardList";
 import { DashboardDrawer } from "../../components/Drawer";
 import { HoveringButton } from "../../components/Drawer/HoveringButton";
 import { Header } from "../../components/Header";
