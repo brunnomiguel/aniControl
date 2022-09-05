@@ -49,8 +49,8 @@ export const SignInForm = () => {
     resolver: yupResolver(signInSchema),
   });
 
-  const handleSignIn = (dataUser: SignInDados) => {
-    signIn(dataUser).catch((err) => ('Erro ao logar, tente novamente!'));
+  const handleSignIn = ({email, password}: SignInDados) => {
+    signIn({email, password}).catch((err) => ('Erro ao logar, tente novamente!'));
     console.log("teste");
   };
 
