@@ -58,7 +58,7 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
   const addAnime = useCallback(async (anime: object) => {
     const body = {
       anime: { data: anime },
-      status: "Plan to Watch",
+      status: "planToWatch",
       rating: 0,
       episodes: 1,
       userId: user.id,
