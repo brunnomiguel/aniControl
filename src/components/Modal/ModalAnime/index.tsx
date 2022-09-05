@@ -15,10 +15,11 @@ import {
 
 import { FaLink, FaPlus, FaStar, FaTimes } from "react-icons/fa";
 import { FiTv } from "react-icons/fi";
-import { useAnimeList } from "../../contexts/AnimeList";
-import { useFullAnimes } from "../../contexts/FullAnimes";
-import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
-import { theme } from "../../styles/theme";
+import { useAnimeList } from "../../../contexts/AnimeList";
+import { useFullAnimes } from "../../../contexts/FullAnimes";
+import { animeProps } from "../../../contexts/FullAnimes/fullAnimes.types";
+import { theme } from "../../../styles/theme";
+import { Links } from "./Links";
 
 interface ModalTaskDetailProps {
   isOpen: boolean;
@@ -190,21 +191,12 @@ export const ModalAnime = ({
                   {linksStreaming &&
                     linksStreaming.map((element, index) => {
                       return (
-                        <Link
+                        <Links
                           key={index}
-                          href={element.url}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {element.name !== "" && (
-                            <Flex alignItems="center">
-                              <FiTv />
-                              <Text fontSize="sm" ml="1">
-                                {element.name}
-                              </Text>
-                            </Flex>
-                          )}
-                        </Link>
+                          name={element.name}
+                          url={element.url}
+                          icon={FiTv}
+                        />
                       );
                     })}
                 </HStack>
@@ -231,21 +223,12 @@ export const ModalAnime = ({
                   {linksExternal &&
                     linksExternal.map((element, index) => {
                       return (
-                        <Link
+                        <Links
                           key={index}
-                          href={element.url}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {element.name !== "" && (
-                            <Flex alignItems="center">
-                              <FaLink />
-                              <Text fontSize="sm" ml="1">
-                                {element.name}
-                              </Text>
-                            </Flex>
-                          )}
-                        </Link>
+                          name={element.name}
+                          url={element.url}
+                          icon={FaLink}
+                        />
                       );
                     })}
                 </HStack>
