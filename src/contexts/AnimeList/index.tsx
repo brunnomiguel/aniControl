@@ -57,7 +57,7 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
 
   const addAnime = useCallback(async (anime: object) => {
     const body = {
-      anime: anime,
+      anime: { data: anime },
       status: "Plan to Watch",
       rating: 0,
       episodes: 1,
@@ -66,7 +66,7 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
     };
 
     await jsonApi
-      .post("animesList/", body, {
+      .post("/animesList/", body, {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((res) => {
