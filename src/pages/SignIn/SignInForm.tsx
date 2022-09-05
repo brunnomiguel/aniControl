@@ -22,6 +22,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { sign } from "crypto";
+import { useAuth } from "../../contexts/Auth";
 
 const signInSchema = yup.object().shape({
   email: yup
@@ -36,7 +37,10 @@ interface SignInDados {
   password: string;
 }
 
+
 export const SignInForm = () => {
+  const { signIn } = useAuth();
+
   const {
     formState: { errors },
     register,
@@ -45,21 +49,21 @@ export const SignInForm = () => {
     resolver: yupResolver(signInSchema),
   });
 
-  const handleSignIn = (data: SignInDados) => {
+  const handleSignIn = (dataUser: SignInDados) => {
+    signIn(dataUser).catch((err) => ('Erro ao logar, tente novamente!'));
     console.log("teste");
   };
 
   return (
     <>
       <Flex
-        shadow="30px 0px 30px #000000, inset -100px 0px 30px rgba(255, 255, 255, 0.6);"
+        shadow="30px 0px 30px grey.900, inset -100px 0px 30px rgba(255, 255, 255, 0.6);"
         opacity="0.1"
         w="35vw"
         bg="rgba(217, 217, 217, 0.5);"
         filter="blur(2px)"
       ></Flex>
-      <Flex position="revert" h="100vh" w="35vw">
-        {/* revert pra mudar o lado */}
+      <Flex position="revert" h="100vh" w="35vw" justifyContent="center">
         <Flex
           as="form"
           onSubmit={handleSubmit(handleSignIn)}
@@ -72,7 +76,7 @@ export const SignInForm = () => {
         >
           <Image w="320px" h="110px" src={Logo} />
           <Box>
-            <Text color="white" fontWeight="600"  fontSize="2xl" m="10">
+            <Text color="white" fontWeight="600" fontSize="2xl" m="10">
               Create Account
             </Text>
             <VStack mt="10" spacing="10">
@@ -95,12 +99,26 @@ export const SignInForm = () => {
               </Box>
             </VStack>
           </Box>
-          <Button mt="15vh" w="55%" bg="#6778B1" fontWeight="700" color="white">
+          <Button
+            type="submit"
+            mt="10vh"
+            w={["150px", "150px", "200px", "300px"]}
+            h="50px"
+            bg="blue.600"
+            fontWeight="700"
+            color="white"
+          >
             Sign Up
           </Button>
-          <Flex flexDir="column">
-            <Text mt="3vh" fontWeight="600" color="white">
-              Already have an account?{" "}
+          <Flex flexDir="column" justifyContent="center">
+            <Text
+              mt="3vh"
+              w="200px"
+              textAlign="justify"
+              fontWeight="600"
+              color="white"
+            >
+              Already have an account?
               <Link color="blue.600" fontWeight="extrabold">
                 click here.
               </Link>
