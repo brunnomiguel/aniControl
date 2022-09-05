@@ -6,9 +6,12 @@ import { SignInForm } from "./SignInForm";
 export const SignIn = () => {
   return (
     <Box>
-      <BackgroundAnimationUp />
+      <Hide below="800px">
+        <BackgroundAnimationUp />
+      </Hide>
+
       <Flex
-        position="fixed"
+        // position="fixed"
         top="0"
         left="0"
         flexDirection={["column", "column", "row", "row"]}
