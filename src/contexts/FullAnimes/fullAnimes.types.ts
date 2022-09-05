@@ -16,6 +16,11 @@ export interface streamingProps {
   url: string;
 }
 
+export interface externalProps {
+  name: string;
+  url: string;
+}
+
 export interface genreProps {
   mal_id: number;
   type: string;
@@ -34,7 +39,8 @@ export interface animeProps {
   status?: string;
   duration?: string;
   rating: string;
-  streaming?: streamingProps[];
+  streaming: streamingProps[];
+  external: externalProps[];
   score: number;
   rank?: number;
   favorites?: number;
