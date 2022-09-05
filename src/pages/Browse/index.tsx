@@ -1,4 +1,4 @@
-import { Center, Flex, Grid, Text } from "@chakra-ui/react";
+import { Center, filter, Flex, Grid, Text } from "@chakra-ui/react";
 import { BiFirstPage, BiLastPage } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
@@ -6,8 +6,6 @@ import { useFullAnimes } from "../../contexts/FullAnimes";
 import { ImageCard } from "./ImageCard";
 import { TopAnimes } from "./TopAnimes";
 import { SeasonsAnimes } from "./SeasonsAnimes";
-
-import { useAuth } from "../../contexts/Auth";
 
 export const Browse = () => {
   const { allAnimes, getAllAnimes } = useFullAnimes();
@@ -19,11 +17,7 @@ export const Browse = () => {
     }
   };
 
-  const { signIn } = useAuth();
-
   useEffect(() => {
-    signIn({ email: "kenzinho@mail.com", password: "123456" });
-
     getAllAnimes(page);
   }, [page]);
 
@@ -45,18 +39,11 @@ export const Browse = () => {
           <Grid
             w="100%"
             templateColumns="repeat(auto-fill, minmax(210px, 1fr))"
+            // justifyItems="center"
             gap="10"
           >
             {allAnimes?.map((anime) => {
-              return (
-                <ImageCard
-                  key={anime.mal_id}
-                  anime={{
-                    image: anime.images.jpg.image_url,
-                    title: anime.title,
-                  }}
-                />
-              );
+              return <ImageCard key={anime.mal_id} anime={anime} />;
             })}
           </Grid>
           <Grid h="90vh" w={["100%", "100%", "500px"]}>
