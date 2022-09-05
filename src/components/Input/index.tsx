@@ -29,13 +29,13 @@ interface InputProps extends ChakraInputProps {
   icon?: IconType;
 }
 
-export const Input = ({
+export const InputAni: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({
   name,
   error = null,
   icon: Icon,
   label,
   ...rest
-}: InputProps) => {
+}, ref) => {
   // label deve ser opcional, pois o input tb será usado na barra de busca
   return (
     <FormControl mt="5">
@@ -51,11 +51,13 @@ export const Input = ({
         <ChakraInput
           name={name}
           {...rest}
+          ref={ref}
           bg="grey.0"
           borderRadius="2"
           variant="outline"
           //   _hover={{ border = "solid 3px blue.50" }} rever este hover depois
           size="4x1"
+          w={['150px','150px', '200px', '300px']}
           h="50px"
         ></ChakraInput>
         {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
@@ -63,3 +65,5 @@ export const Input = ({
     </FormControl>
   );
 };
+
+export const Input = forwardRef(InputAni);

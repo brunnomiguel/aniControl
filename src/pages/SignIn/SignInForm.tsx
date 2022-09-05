@@ -22,6 +22,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { sign } from "crypto";
+import { useAuth } from "../../contexts/Auth";
 
 const signInSchema = yup.object().shape({
   email: yup
@@ -36,7 +37,10 @@ interface SignInDados {
   password: string;
 }
 
+
 export const SignInForm = () => {
+  const { signIn } = useAuth();
+
   const {
     formState: { errors },
     register,
@@ -45,8 +49,8 @@ export const SignInForm = () => {
     resolver: yupResolver(signInSchema),
   });
 
-  const handleSignIn = ({ email, password }: SignInDados) => {
-    // const dataUser =
+  const handleSignIn = (dataUser: SignInDados) => {
+    signIn(dataUser).catch((err) => ('Erro ao logar, tente novamente!'));
     console.log("teste");
   };
 
@@ -59,8 +63,7 @@ export const SignInForm = () => {
         bg="rgba(217, 217, 217, 0.5);"
         filter="blur(2px)"
       ></Flex>
-      <Flex position="revert" h="100vh" w="35vw">
-        {/* revert pra mudar o lado */}
+      <Flex position="revert" h="100vh" w="35vw" justifyContent="center">
         <Flex
           as="form"
           onSubmit={handleSubmit(handleSignIn)}
@@ -99,15 +102,22 @@ export const SignInForm = () => {
           <Button
             type="submit"
             mt="10vh"
-            w="55%"
+            w={["150px", "150px", "200px", "300px"]}
+            h="50px"
             bg="blue.600"
             fontWeight="700"
             color="white"
           >
             Sign Up
           </Button>
-          <Flex flexDir="column">
-            <Text mt="3vh" fontWeight="600" color="white">
+          <Flex flexDir="column" justifyContent="center">
+            <Text
+              mt="3vh"
+              w="200px"
+              textAlign="justify"
+              fontWeight="600"
+              color="white"
+            >
               Already have an account?
               <Link color="blue.600" fontWeight="extrabold">
                 click here.
