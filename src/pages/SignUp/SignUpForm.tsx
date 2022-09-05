@@ -4,7 +4,6 @@ import {
 	Flex,
 	FormLabel,
 	Image,
-	Input,
 	Link,
 	Text,
 	useBreakpointValue,
@@ -13,8 +12,47 @@ import Logo from "../../assets/logo-form.svg";
 import LogoMobile from "../../assets/logo-dash.svg";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple, FaFacebookF } from "react-icons/fa";
+import { Input } from "../../components/Input";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { jsonApi as api } from "../../services/api";
+import { Navigate } from "react-router-dom";
+
+const signUpSchema = yup.object().shape({
+	name: yup.string().required("Nome obrigatório"),
+	email: yup.string().required("Email obrigatório").email("Email inválido"),
+	password: yup.string().required("Senha obrigatória"),
+	confirm_password: yup
+		.string()
+		.required("Confirmação de senha obrigatória")
+		.oneOf([yup.ref("password")], "Senhas diferentes"),
+});
+
+interface SignUpData {
+	email: string;
+	password: string;
+	name: string;
+}
 
 export const SignUpForm = () => {
+	const {
+		formState: { errors },
+		register,
+		handleSubmit,
+	} = useForm({
+		resolver: yupResolver(signUpSchema),
+	});
+
+	const handleSignUp = ({ name, email, password }: SignUpData) => {
+		api
+			.post("/register", { name, email, password })
+			.then((res) => {
+				<Navigate to="/signin" replace={true} />;
+			})
+			.catch((err) => {});
+	};
+
 	const isWideVersion = useBreakpointValue({
 		base: false,
 		md: true,
@@ -30,42 +68,65 @@ export const SignUpForm = () => {
 						w="35vw"
 						bg="rgba(217, 217, 217, 0.5);"
 						filter="blur(2px)"
-					></Flex>
+					/>
 					<Flex position="fixed" h="100vh" w="35vw">
 						<Flex
+							onSubmit={handleSubmit(() => handleSignUp)}
+							as="form"
 							h="100vh"
 							w="35vw"
 							flexDir="column"
-							p="35px 150px 110px 110px"
+							p="10% 20% 10% 20%"
 							alignItems="center"
 						>
 							<Image w="320px" h="110px" src={Logo} />
 							<Box>
-								<Text color="white" fontWeight="600" fontSize="2xl" m="10">
+								<Text color="grey.0" fontWeight="600" fontSize="2xl" m="10">
 									Create Account
 								</Text>
 								<Flex flexDir="column">
-									<FormLabel color="white" fontWeight="400">
+									<FormLabel color="grey.0" fontWeight="400">
 										User name
+										<Input error={errors.name} {...register("name")} />
 									</FormLabel>
-									<Input bg="white" />
-									<FormLabel color="white" fontWeight="400">
+									<FormLabel color="grey.0" fontWeight="400">
 										Email
+										<Input
+											type="email"
+											error={errors.email}
+											{...register("email")}
+										/>
 									</FormLabel>
-									<Input bg="white" />
-									<FormLabel color="white" fontWeight="400">
+									<FormLabel color="grey.0" fontWeight="400">
 										Password
+										<Input error={errors.password} {...register("password")} />
 									</FormLabel>
-									<Input bg="white" />
-									<FormLabel color="white" fontWeight="400">
+									<FormLabel color="grey.0" fontWeight="400">
 										Password Confirm
+										<Input
+											error={errors.confirm_password}
+											{...register("confirm_password")}
+										/>
 									</FormLabel>
-									<Input bg="white" />
-									<Flex flexDir="row" gap="20px" w="100%" mt="15px">
-										<Button w="30%" h="25px" bg="white">
+									<Flex flexDir="row" gap="20px" w="95%">
+										<Button
+											w="30%"
+											h="25px"
+											bg="grey.0"
+											_hover={{
+												filter: "opacity(90%)",
+											}}
+										>
 											<FcGoogle />
 										</Button>
-										<Button h="25px" w="30%" bg="#155BCB">
+										<Button
+											h="25px"
+											w="30%"
+											bg="blue.300"
+											_hover={{
+												filter: "opacity(90%)",
+											}}
+										>
 											<FaFacebookF fill="white" />
 										</Button>
 										<Button
@@ -73,7 +134,7 @@ export const SignUpForm = () => {
 											w="30%"
 											background="grey.900"
 											_hover={{
-												bg: "grey.900",
+												filter: "opacity(90%)",
 											}}
 										>
 											<FaApple fill="white" />
@@ -82,19 +143,29 @@ export const SignUpForm = () => {
 								</Flex>
 							</Box>
 							<Button
-								mt="15vh"
+								mt="10vh"
 								w="50%"
-								bg="#6778B1"
+								bg="blue.600"
 								fontWeight="700"
-								color="white"
+								color="grey.0"
+								_hover={{
+									bg: "pink.100",
+								}}
+								type="submit"
 							>
 								Sign Up
 							</Button>
 
 							<Flex flexDir="column">
-								<Text mt="3vh" fontWeight="600" color="white">
+								<Text mt="3vh" fontWeight="600" color="grey.0">
 									Already have an account?{" "}
-									<Link color="#6778B1" fontWeight="extrabold">
+									<Link
+										color="blue.600"
+										fontWeight="extrabold"
+										_hover={{
+											color: "pink.100",
+										}}
+									>
 										click here.
 									</Link>
 								</Text>
@@ -106,6 +177,8 @@ export const SignUpForm = () => {
 				<>
 					<Flex h="100vh" w="80vw" alignItems="center">
 						<Flex
+							onSubmit={handleSubmit(() => handleSignUp)}
+							as="form"
 							h="100vh"
 							w="80vw"
 							flexDir="column"
@@ -125,28 +198,56 @@ export const SignUpForm = () => {
 								<Flex flexDir="column">
 									<FormLabel color="white" fontWeight="400">
 										User name
+										<Input error={errors.name} {...register("name")} />
 									</FormLabel>
-									<Input bg="white" />
 									<FormLabel color="white" fontWeight="400">
 										Email
+										<Input
+											type="email"
+											error={errors.email}
+											{...register("email")}
+										/>
 									</FormLabel>
-									<Input bg="white" />
 									<FormLabel color="white" fontWeight="400">
 										Password
+										<Input error={errors.password} {...register("password")} />
 									</FormLabel>
-									<Input bg="white" />
 									<FormLabel color="white" fontWeight="400">
 										Password Confirm
+										<Input
+											error={errors.confirm_password}
+											{...register("confirm_password")}
+										/>
 									</FormLabel>
-									<Input bg="white" />
 									<Flex flexDir="row" gap="10px" w="100%" mt="10px">
-										<Button w="30%" h="25px" bg="white">
+										<Button
+											w="30%"
+											h="25px"
+											bg="white"
+											_hover={{
+												filter: "opacity(90%)",
+											}}
+										>
 											<FcGoogle />
 										</Button>
-										<Button h="25px" w="30%" bg="#155BCB">
+										<Button
+											h="25px"
+											w="30%"
+											bg="#155BCB"
+											_hover={{
+												filter: "opacity(90%)",
+											}}
+										>
 											<FaFacebookF fill="white" />
 										</Button>
-										<Button h="25px" w="30%" bg="black">
+										<Button
+											h="25px"
+											w="30%"
+											bg="black"
+											_hover={{
+												filter: "opacity(90%)",
+											}}
+										>
 											<FaApple fill="white" />
 										</Button>
 									</Flex>
@@ -155,17 +256,27 @@ export const SignUpForm = () => {
 							<Button
 								w="220px"
 								h="35px"
-								bg="#5A2843"
+								bg="red.600"
 								fontWeight="700"
 								color="white"
 								mt="10vh"
+								_hover={{
+									bg: "pink.800",
+								}}
+								type="submit"
 							>
 								Sign Up
 							</Button>
 							<Flex flexDir="column">
 								<Text mt="3vh" fontWeight="400" color="white">
 									Already have an account?{" "}
-									<Link color="grey.0" fontWeight="extrabold">
+									<Link
+										color="grey.0"
+										fontWeight="extrabold"
+										_hover={{
+											color: "blue.50",
+										}}
+									>
 										click here.
 									</Link>
 								</Text>
