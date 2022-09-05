@@ -1,5 +1,5 @@
 import { Grid, Image, keyframes, Text, useDisclosure } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ModalAnime } from "../../components/Modal/ModalAnime";
 import { useFullAnimes } from "../../contexts/FullAnimes";
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
