@@ -5,6 +5,7 @@ import {
   ReactNode,
   useCallback,
 } from "react";
+import { Navigate } from "react-router-dom";
 import { jsonApi } from "../../services/api";
 
 interface AuthProviderProps {

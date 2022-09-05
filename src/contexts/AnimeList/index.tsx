@@ -1,9 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { createContext, ReactNode, useContext, useState, useCallback } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  useCallback,
+} from "react";
 
 import { animeProps } from "../FullAnimes/fullAnimes.types";
 import { jsonApi } from "../../services/api";
 import { useAuth } from "../Auth";
+import { useToast } from "@chakra-ui/react";
 
 interface IAnimeListProps {
   children: ReactNode;
@@ -27,7 +34,9 @@ interface IanimeListContextData {
   updateAnime: (newInfo: object, animeId: number) => Promise<void>;
 }
 
-const animeListContext = createContext<IanimeListContextData>({} as IanimeListContextData);
+const animeListContext = createContext<IanimeListContextData>(
+  {} as IanimeListContextData
+);
 
 export const useAnimeList = () => {
   const context = useContext(animeListContext);
@@ -43,6 +52,8 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
   const [userAnimes, setUserAnimes] = useState<IanimelistItem[]>([]);
 
   const { accessToken, user } = useAuth();
+
+  const toast = useToast();
 
   const addAnime = useCallback(async (anime: object) => {
     const body = {
@@ -60,6 +71,13 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
       })
       .then((res) => {
         setUserAnimes([...userAnimes, res.data]);
+        toast({
+          title: "Success!",
+          description: "Anime included with success",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
       })
       .catch((err) => console.log(err));
   }, []);
@@ -97,7 +115,9 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
   }, []);
 
   return (
-    <animeListContext.Provider value={{ userAnimes, addAnime, removeAnime, getUserAnimes, updateAnime }}>
+    <animeListContext.Provider
+      value={{ userAnimes, addAnime, removeAnime, getUserAnimes, updateAnime }}
+    >
       {children}
     </animeListContext.Provider>
   );
