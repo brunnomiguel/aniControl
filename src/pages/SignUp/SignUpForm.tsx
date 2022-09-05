@@ -33,6 +33,7 @@ interface SignUpData {
 	email: string;
 	password: string;
 	name: string;
+	confirm_password: string;
 }
 
 export const SignUpForm = () => {
@@ -40,7 +41,7 @@ export const SignUpForm = () => {
 		formState: { errors },
 		register,
 		handleSubmit,
-	} = useForm({
+	} = useForm<SignUpData>({
 		resolver: yupResolver(signUpSchema),
 	});
 
