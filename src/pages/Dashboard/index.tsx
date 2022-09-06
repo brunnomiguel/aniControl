@@ -27,8 +27,9 @@ export const Dashboard = () => {
   }, []);
 
   const handleFavorites = () => {
-    getUserAnimes();
-    setFavoritesView(!FavoritesView);
+    getUserAnimes().then((_) => {
+      setFavoritesView(!FavoritesView);
+    });
   };
 
   return (

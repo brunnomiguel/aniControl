@@ -5,7 +5,7 @@ import { IanimelistItem, useAnimeList } from "../../../contexts/AnimeList";
 
 import { DragDropContext, Draggable, Droppable, DropResult } from "react-beautiful-dnd";
 import { DashboardCard } from "../../../components/DashboardCard";
-import { useAuth } from "../../../contexts/Auth";
+
 import { DashboardListEmpty } from "./DashboardListEmpty";
 
 interface IDashboardListProps {
@@ -14,7 +14,7 @@ interface IDashboardListProps {
 
 export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
   const { userAnimes, getUserAnimes, updateAnime } = useAnimeList();
-  const { signIn } = useAuth();
+
   const [isLoading, setIsLoading] = useState(true);
   const [columns, setColumns] = useState({
     planToWatch: {
@@ -66,13 +66,13 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
   };
 
   useEffect(() => {
-    signIn({ email: "kenzinho@mail.com", password: "123456" });
     handleUpdate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, FavoritesView]);
 
   useEffect(() => {
     handleUpdate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reswitch]);
 
   const onDragEnd = (result: DropResult, columns: any, setColumns: React.Dispatch<React.SetStateAction<any>>) => {
@@ -202,7 +202,6 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
                         >
                           {column.name}
                         </Text>
-
                         <VStack
                           width="90%"
                           spacing={6}
@@ -210,6 +209,7 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
                           ref={provided.innerRef}
                           height="93vh"
                         >
+                          {provided.placeholder}
                           {column &&
                             column.items.map((anime, index) => {
                               return (
