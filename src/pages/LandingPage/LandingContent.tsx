@@ -1,8 +1,8 @@
 import { Box, Flex, Image, Text, Grid } from "@chakra-ui/react";
 
-import { theme } from "../../../styles/theme";
+import { theme } from "../../styles/theme";
 
-import BackgroundImg from "../../../assets/landLuffy.svg";
+import BackgroundImg from "../../assets/landLuffy.svg";
 import BgGrey from "../../../assets/background-landing-page.svg";
 import Heroes from "../../../assets/heroes2.svg";
 import Villains from "../../../assets/villains2.svg";
@@ -10,7 +10,7 @@ import Villains from "../../../assets/villains2.svg";
 export const LandingContent = () => {
   return (
     <>
-    {/* header */}
+      {/* header */}
       <Flex w="100vw" h={"100vh"}>
         <Box
           w="100vw"
