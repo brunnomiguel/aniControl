@@ -138,7 +138,7 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
       {userAnimes.length === 0 ? (
         <DashboardListEmpty />
       ) : FavoritesView ? (
-        <Flex w="225vw">
+        <Flex w="221.2vw">
           <Center w="100%" flexDir="column" alignItems="flex-start" justifyContent="center" borderRadius="10px">
             <Flex flexFlow="column nowrap" width={["95vw", "95vw", "95vw", "35vw"]} height="93vh" align="center">
               <Text
@@ -202,6 +202,7 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
                         >
                           {column.name}
                         </Text>
+
                         <VStack
                           width="90%"
                           spacing={6}
