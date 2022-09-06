@@ -3,14 +3,16 @@ import { useEffect, useState } from "react";
 import { MobileViewCard } from "./MobileViewCard";
 import { DesktopViewCard } from "./DesktopViewCard";
 import { Box } from "@chakra-ui/react";
+import { useAnimeList } from "../../contexts/AnimeList";
 
 interface IDashboardCardProps {
   anime: animeProps;
   id: number;
   favorite: boolean;
+  setReswitch: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const DashboardCard = ({ anime, id, favorite }: IDashboardCardProps) => {
+export const DashboardCard = ({ anime, id, favorite, setReswitch }: IDashboardCardProps) => {
   const [smallView, setSmallView] = useState(false);
 
   useEffect(() => {
@@ -25,12 +27,36 @@ export const DashboardCard = ({ anime, id, favorite }: IDashboardCardProps) => {
     window.addEventListener("resize", handleResize);
   }, []);
 
+  const { updateAnime, removeAnime } = useAnimeList();
+
+  const handleFavoriteAnime = () => {
+    updateAnime({ favorite: !favorite }, id);
+    setReswitch(true);
+
+    setTimeout(() => {
+      setReswitch(false);
+    }, 500);
+  };
+
+  const handleDeleteAnime = () => {
+    removeAnime(id);
+    setReswitch(true);
+
+    setTimeout(() => {
+      setReswitch(false);
+    }, 500);
+  };
+
   return (
     <Box width={["95vw", "95vw", "95vw", "33vw"]}>
       {smallView ? (
-        <MobileViewCard anime={anime} id={id} />
+        <MobileViewCard anime={anime} handleFavoriteAnime={handleFavoriteAnime} handleDeleteAnime={handleDeleteAnime} />
       ) : (
-        <DesktopViewCard anime={anime} id={id} favorite={favorite} />
+        <DesktopViewCard
+          anime={anime}
+          handleFavoriteAnime={handleFavoriteAnime}
+          handleDeleteAnime={handleDeleteAnime}
+        />
       )}
     </Box>
   );

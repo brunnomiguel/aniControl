@@ -1,54 +1,22 @@
-import {
-  Badge,
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Image,
-  Link,
-  Text,
-  theme,
-} from "@chakra-ui/react";
+import { Badge, Box, Button, Flex, HStack, Image, Link, Text, theme } from "@chakra-ui/react";
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
-import { useAnimeList } from "../../contexts/AnimeList";
 
 interface IDashboardCardProps {
   anime: animeProps;
-  id: number;
+
+  handleFavoriteAnime: () => void;
+  handleDeleteAnime: () => void;
 }
 
-export const MobileViewCard = ({ anime, id }: IDashboardCardProps) => {
-  const { images, trailer, title, rating, score, synopsis, year, genres } =
-    anime;
-
-  const { updateAnime, removeAnime } = useAnimeList();
-
-  const handleFavoriteAnime = () => {
-    updateAnime({ favorite: true }, id);
-  };
-
-  const handleDeleteAnime = () => {
-    removeAnime(id);
-  };
+export const MobileViewCard = ({ anime, handleDeleteAnime, handleFavoriteAnime }: IDashboardCardProps) => {
+  const { images, trailer, title, rating, score, synopsis, year, genres } = anime;
 
   return (
     <Flex w="100%" flexDir="column" h="auto" bg="grey.600" paddingBottom="5%">
       <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="20rem">
-        <Link
-          href={trailer.url}
-          target="_blank"
-          rel="noreferrer"
-          h="100%"
-          w={["50%", "50%"]}
-        >
-          <Image
-            src={images.jpg.large_image_url}
-            border="0.3rem solid"
-            borderColor="blue.50"
-            h="100%"
-            w="100%"
-          />
+        <Link href={trailer.url} target="_blank" rel="noreferrer" h="100%" w={["50%", "50%"]}>
+          <Image src={images.jpg.large_image_url} border="0.3rem solid" borderColor="blue.50" h="100%" w="100%" />
         </Link>
         <Box w="40%" h="100%">
           <Text as="h2" fontWeight="bold" color="grey.0">
@@ -77,26 +45,14 @@ export const MobileViewCard = ({ anime, id }: IDashboardCardProps) => {
           </Text>
         </Box>
       </Flex>
-      <Flex
-        color="grey.0"
-        align="center"
-        justify="center"
-        mt="5%"
-        fontSize={12}
-      >
+      <Flex color="grey.0" align="center" justify="center" mt="5%" fontSize={12}>
         <FaStar fill="#EFDB73" />
         <Text fontWeight="bold">{score}</Text>
         <Text fontWeight="bold" ml="4%">
           {year}
         </Text>
       </Flex>
-      <Badge
-        fontWeight="bold"
-        fontSize="0.5rem"
-        bg="blue.50"
-        w="auto"
-        alignSelf="center"
-      >
+      <Badge fontWeight="bold" fontSize="0.5rem" bg="blue.50" w="auto" alignSelf="center">
         {rating}
       </Badge>
       <Flex justify="space-evenly">

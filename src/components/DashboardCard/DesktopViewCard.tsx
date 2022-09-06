@@ -2,26 +2,15 @@ import { Badge, Box, Button, Flex, HStack, Image, Link, Text, theme, VStack } fr
 
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
-import { useAnimeList } from "../../contexts/AnimeList";
 
 interface IDashboardCardProps {
   anime: animeProps;
-  id: number;
-  favorite: boolean;
+  handleFavoriteAnime: () => void;
+  handleDeleteAnime: () => void;
 }
 
-export const DesktopViewCard = ({ anime, id, favorite }: IDashboardCardProps) => {
+export const DesktopViewCard = ({ anime, handleDeleteAnime, handleFavoriteAnime }: IDashboardCardProps) => {
   const { images, trailer, title, rating, score, synopsis, year, genres } = anime;
-
-  const { updateAnime, removeAnime } = useAnimeList();
-
-  const handleFavoriteAnime = () => {
-    updateAnime({ favorite: !favorite }, id);
-  };
-
-  const handleDeleteAnime = () => {
-    removeAnime(id);
-  };
 
   return (
     <VStack w="100%" h="auto" bg="grey.600" paddingBottom="5%">
@@ -71,11 +60,11 @@ export const DesktopViewCard = ({ anime, id, favorite }: IDashboardCardProps) =>
           >
             {synopsis}
           </Text>
-          <Flex justify="flex-start" marginTop="2%">
+          <Flex justify="flex-start" marginTop="2%" width={"100%"} flexWrap="wrap">
             {genres &&
               genres.map((element, index) => {
                 return (
-                  <Text color="grey.0" fontWeight="bold" fontSize={12} marginLeft="5%" key={index}>
+                  <Text color="grey.0" fontWeight="bold" fontSize={12} marginLeft="1%" key={index}>
                     {element.name}
                   </Text>
                 );
