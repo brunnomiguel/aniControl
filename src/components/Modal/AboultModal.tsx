@@ -94,7 +94,14 @@ export const AboultModal = ({ id }: AboultModalProps) => {
 						{dev.id === id ? (
 							<>
 								<Flex flexDir="column" alignItems="center">
-									<Text color="white" fontWeight="bold" fontSize="xl" p="10px">
+									<Text
+										color="white"
+										fontWeight="bold"
+										fontSize="xl"
+										p="10px"
+										w="125px"
+										textAlign="center"
+									>
 										{dev.function}
 									</Text>
 									<Button
