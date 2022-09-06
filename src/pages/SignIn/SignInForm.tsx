@@ -37,7 +37,6 @@ interface SignInDados {
   password: string;
 }
 
-
 export const SignInForm = () => {
   const { signIn } = useAuth();
 
@@ -49,8 +48,10 @@ export const SignInForm = () => {
     resolver: yupResolver(signInSchema),
   });
 
-  const handleSignIn = ({email, password}: SignInDados) => {
-    signIn({email, password}).catch((err) => ('Erro ao logar, tente novamente!'));
+  const handleSignIn = ({ email, password }: SignInDados) => {
+    signIn({ email, password }).catch(
+      (err) => "Erro ao logar, tente novamente!"
+    );
     console.log("teste");
   };
 
@@ -63,7 +64,13 @@ export const SignInForm = () => {
         bg="rgba(217, 217, 217, 0.5);"
         filter="blur(2px)"
       ></Flex>
-      <Flex position="revert" h="100vh" w="35vw" justifyContent="center">
+      <Flex
+        position="fixed"
+        right="3"
+        h="100vh"
+        w="35vw"
+        justifyContent="center"
+      >
         <Flex
           as="form"
           onSubmit={handleSubmit(handleSignIn)}
