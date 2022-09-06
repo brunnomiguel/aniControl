@@ -58,7 +58,7 @@ export const InputAni: ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
           color="grey.900"
           //   _hover={{ border = "solid 3px blue.50" }} rever este hover depois
           size="4x1"
-          w={['150px','150px', '200px', '300px']}
+          w='100%'
           h="50px"
         ></ChakraInput>
         {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
