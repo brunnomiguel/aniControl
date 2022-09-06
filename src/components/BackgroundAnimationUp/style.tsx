@@ -20,14 +20,14 @@ const animate = keyframes`
 export const Container = styled.div`
   background: #03001e;
   background: -webkit-linear-gradient(
-    to right,
+    to left,
 
     #cc7189,
     #69294b,
     #0b063a
   ); /*Old versions*/
   background: linear-gradient(
-    to right,
+    to left,
 
     #cc7189,
     #69294b,

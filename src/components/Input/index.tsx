@@ -38,12 +38,12 @@ export const InputAni: ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
 }, ref) => {
   // label deve ser opcional, pois o input tb será usado na barra de busca
   return (
-    <FormControl mt="5">
+    <FormControl mt="5" w='100%' >
       {label && <FormLabel>{label}</FormLabel>}
 
-      <InputGroup flexDirection="column">
+      <InputGroup flexDirection="column" w='100%' >
         {Icon && (
-          <InputLeftElement mr="2" mt="1.5" color="grey.900">
+          <InputLeftElement mr="2" mt="1.5" color="red.600">
             <Icon />
           </InputLeftElement>
         )}
@@ -53,12 +53,12 @@ export const InputAni: ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
           {...rest}
           ref={ref}
           bg="grey.0"
-          borderRadius="2"
+          borderRadius="10"
           variant="outline"
           color="grey.900"
           //   _hover={{ border = "solid 3px blue.50" }} rever este hover depois
-          size="4x1"
-          w={['150px','150px', '200px', '300px']}
+          w='100%'
+          size='lg'
           h="50px"
         ></ChakraInput>
         {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
