@@ -5,6 +5,7 @@ import {
   ReactNode,
   useCallback,
 } from "react";
+import { Navigate } from "react-router-dom";
 import { jsonApi } from "../../services/api";
 
 interface AuthProviderProps {
@@ -49,7 +50,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [data, setData] = useState<AuthState>(() => {
     const accessToken = localStorage.getItem("@AniControl:accessToken");
-    const user = localStorage.getItem("AniControl:user");
+    const user = localStorage.getItem("@AniControl:user");
 
     if (accessToken && user) {
       return { accessToken, user: JSON.parse(user) };
@@ -89,3 +90,5 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     </AuthContext.Provider>
   );
 };
+
+// img 1263

@@ -60,14 +60,14 @@ export const Contain = styled.div`
 		bottom: -150px;
 	}
 
-	div:nth-child(1) {
+	div:nth-of-type(1) {
 		left: 25%;
 		width: 80px;
 		height: 80px;
 		animation-delay: 0s;
 	}
 
-	div:nth-child(2) {
+	div:nth-of-type(2) {
 		left: 10%;
 		width: 20px;
 		height: 20px;
@@ -75,14 +75,14 @@ export const Contain = styled.div`
 		animation-duration: 3s;
 	}
 
-	div:nth-child(3) {
+	div:nth-of-type(3) {
 		left: 70%;
 		width: 20px;
 		height: 20px;
 		animation-delay: 1s;
 	}
 
-	div:nth-child(4) {
+	div:nth-of-type(4) {
 		left: 40%;
 		width: 60px;
 		height: 60px;
@@ -90,28 +90,28 @@ export const Contain = styled.div`
 		animation-duration: 4.5s;
 	}
 
-	div:nth-child(5) {
+	div:nth-of-type(5) {
 		left: 65%;
 		width: 20px;
 		height: 20px;
 		animation-delay: 0s;
 	}
 
-	div:nth-child(6) {
+	div:nth-of-type(6) {
 		left: 75%;
 		width: 110px;
 		height: 110px;
 		animation-delay: 0.75s;
 	}
 
-	div:nth-child(7) {
+	div:nth-of-type(7) {
 		left: 35%;
 		width: 150px;
 		height: 150px;
 		animation-delay: 1.75s;
 	}
 
-	div:nth-child(8) {
+	div:nth-of-type(8) {
 		left: 50%;
 		width: 25px;
 		height: 25px;
@@ -119,7 +119,7 @@ export const Contain = styled.div`
 		animation-duration: 11.25s;
 	}
 
-	div:nth-child(9) {
+	div:nth-of-type(9) {
 		left: 20%;
 		width: 15px;
 		height: 15px;
@@ -127,7 +127,7 @@ export const Contain = styled.div`
 		animation-duration: 8.25s;
 	}
 
-	div:nth-child(10) {
+	div:nth-of-type(10) {
 		left: 85%;
 		width: 150px;
 		height: 150px;
@@ -135,7 +135,7 @@ export const Contain = styled.div`
 		animation-duration: 4.75s;
 	}
 
-	div:nth-child(11) {
+	div:nth-of-type(11) {
 		left: 90%;
 		width: 75px;
 		height: 75px;
@@ -143,7 +143,7 @@ export const Contain = styled.div`
 		animation-duration: 7.75s;
 	}
 
-	div:nth-child(12) {
+	div:nth-of-type(12) {
 		left: 57.5%;
 		width: 75px;
 		height: 75px;
