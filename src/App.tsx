@@ -1,8 +1,10 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { Dashboard } from "./pages/Dashboard";
+import { LandingContent } from "./pages/LandingPage/LandingContent";
 
 export const App = () => {
-  return <ChakraProvider>
-    <Dashboard/>
-  </ChakraProvider>
+  return (
+    <ChakraProvider>
+      <LandingContent />
+    </ChakraProvider>
+  );
 };
