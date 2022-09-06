@@ -3,12 +3,7 @@ import { useEffect, useState } from "react";
 
 import { IanimelistItem, useAnimeList } from "../../../contexts/AnimeList";
 
-import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-  DropResult,
-} from "react-beautiful-dnd";
+import { DragDropContext, Draggable, Droppable, DropResult } from "react-beautiful-dnd";
 import { DashboardCard } from "../../../components/DashboardCard";
 import { useAuth } from "../../../contexts/Auth";
 import { DashboardListEmpty } from "./DashboardListEmpty";
@@ -20,7 +15,6 @@ interface IDashboardListProps {
 export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
   const { userAnimes, getUserAnimes, updateAnime } = useAnimeList();
   const { signIn } = useAuth();
-
   const [isLoading, setIsLoading] = useState(true);
   const [columns, setColumns] = useState({
     planToWatch: {
@@ -48,18 +42,15 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
       items: [] as IanimelistItem[],
     },
   });
+  const [reswitch, setReswitch] = useState(false);
 
-  const handleUpdate = () => {
-    getUserAnimes().then((_) => setIsLoading(false));
+  const handleUpdate = async () => {
+    await getUserAnimes().then((_) => setIsLoading(false));
 
-    const PlanToWatch = userAnimes.filter(
-      (anime) => anime.status === "planToWatch"
-    );
+    const PlanToWatch = userAnimes.filter((anime) => anime.status === "planToWatch");
     const Dropped = userAnimes.filter((anime) => anime.status === "dropped");
     const OnHold = userAnimes.filter((anime) => anime.status === "onHold");
-    const Completed = userAnimes.filter(
-      (anime) => anime.status === "completed"
-    );
+    const Completed = userAnimes.filter((anime) => anime.status === "completed");
     const Watching = userAnimes.filter((anime) => anime.status === "watching");
     const Favorites = userAnimes.filter((anime) => anime.favorite === true);
 
@@ -75,16 +66,16 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
   };
 
   useEffect(() => {
-    // signIn({ email: "kenzinho@mail.com", password: "123456" });
+    signIn({ email: "kenzinho@mail.com", password: "123456" });
     handleUpdate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, FavoritesView]);
 
-  const onDragEnd = (
-    result: DropResult,
-    columns: any,
-    setColumns: React.Dispatch<React.SetStateAction<any>>
-  ) => {
+  useEffect(() => {
+    handleUpdate();
+  }, [reswitch]);
+
+  const onDragEnd = (result: DropResult, columns: any, setColumns: React.Dispatch<React.SetStateAction<any>>) => {
     if (!result.destination) return;
 
     const { source, destination } = result;
@@ -148,19 +139,8 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
         <DashboardListEmpty />
       ) : FavoritesView ? (
         <Flex w="225vw">
-          <Center
-            w="100%"
-            flexDir="column"
-            alignItems="flex-start"
-            justifyContent="center"
-            borderRadius="10px"
-          >
-            <Flex
-              flexFlow="column nowrap"
-              width={["95vw", "95vw", "95vw", "35vw"]}
-              height="93vh"
-              align="center"
-            >
+          <Center w="100%" flexDir="column" alignItems="flex-start" justifyContent="center" borderRadius="10px">
+            <Flex flexFlow="column nowrap" width={["95vw", "95vw", "95vw", "35vw"]} height="93vh" align="center">
               <Text
                 as="h2"
                 bg="#5A2843"
@@ -185,6 +165,7 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
                         id={anime.id}
                         key={index}
                         favorite={anime.favorite}
+                        setReswitch={setReswitch}
                       />
                     );
                   })}
@@ -194,9 +175,7 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
         </Flex>
       ) : (
         <>
-          <DragDropContext
-            onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
-          >
+          <DragDropContext onDragEnd={(result) => onDragEnd(result, columns, setColumns)}>
             {Object.entries(columns).map(([columnId, column], index) => {
               return (
                 <Droppable droppableId={columnId} key={columnId}>
@@ -234,11 +213,7 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
                           {column &&
                             column.items.map((anime, index) => {
                               return (
-                                <Draggable
-                                  key={anime.id}
-                                  draggableId={`${anime.id}`}
-                                  index={index}
-                                >
+                                <Draggable key={anime.id} draggableId={`${anime.id}`} index={index}>
                                   {(provided) => {
                                     return (
                                       <div
@@ -251,6 +226,7 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
                                           id={anime.id}
                                           key={index}
                                           favorite={anime.favorite}
+                                          setReswitch={setReswitch}
                                         />
                                       </div>
                                     );
