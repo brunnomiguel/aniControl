@@ -1,32 +1,32 @@
 import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Input as ChakraInput,
-  InputProps as ChakraInputProps,
-  InputLeftElement,
-  InputGroup,
-  border,
+	FormControl,
+	FormLabel,
+	FormErrorMessage,
+	Input as ChakraInput,
+	InputProps as ChakraInputProps,
+	InputLeftElement,
+	InputGroup,
+	border,
 } from "@chakra-ui/react";
 
 import {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  ForwardRefRenderFunction,
-  forwardRef,
+	useState,
+	useEffect,
+	useCallback,
+	useRef,
+	ForwardRefRenderFunction,
+	forwardRef,
 } from "react";
 import { FieldError } from "react-hook-form";
 import { IconType } from "react-icons";
 import { FaExclamation } from "react-icons/fa";
 
 interface InputProps extends ChakraInputProps {
-  label?: string;
-  name: string;
-  //   name apenas, pois pode ser email, senha ou uma busca generica
-  error?: FieldError | null;
-  icon?: IconType;
+	label?: string;
+	name: string;
+	//   name apenas, pois pode ser email, senha ou uma busca generica
+	error?: FieldError | null;
+	icon?: IconType;
 }
 
 export const InputAni: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({

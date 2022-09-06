@@ -1,24 +1,34 @@
 import {
 	Box,
 	Button,
+	Center,
 	Flex,
-	FormLabel,
 	Image,
 	Link,
 	Text,
 	useBreakpointValue,
+	useToast,
 	VStack,
 } from "@chakra-ui/react";
 import Logo from "../../assets/logo-form.svg";
 import LogoMobile from "../../assets/logo-dash.svg";
 import { FcGoogle } from "react-icons/fc";
-import { FaApple, FaFacebookF } from "react-icons/fa";
+import {
+	FaApple,
+	FaEnvelope,
+	FaEye,
+	FaEyeSlash,
+	FaFacebookF,
+	FaLock,
+	FaUser,
+} from "react-icons/fa";
 import { Input } from "../../components/Input";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { jsonApi as api } from "../../services/api";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const signUpSchema = yup.object().shape({
 	name: yup.string().required("Nome obrigatório"),
@@ -38,6 +48,11 @@ interface SignUpData {
 }
 
 export const SignUpForm = () => {
+	const toast = useToast();
+	const navigate = useNavigate();
+	const [showPassword, setShowPassword] = useState(false);
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 	const {
 		formState: { errors },
 		register,
@@ -49,10 +64,26 @@ export const SignUpForm = () => {
 	const handleSignUp = ({ name, email, password }: SignUpData) => {
 		api
 			.post("/register", { name, email, password })
-			.then((res) => {
-				<Navigate to="/signin" replace={true} />;
+			.then((_) => {
+				toast({
+					title: "Success!",
+					description: "Registration created successfully!",
+					status: "success",
+					duration: 2000,
+					isClosable: true,
+				});
+				return navigate("../signin", { replace: true });
 			})
-			.catch((err) => {});
+			.catch((err) => {
+				toast({
+					title: "Error...",
+					description: "Something went wrong...",
+					status: "error",
+					duration: 2000,
+					isClosable: true,
+				});
+				console.log(err);
+			});
 	};
 
 	const isWideVersion = useBreakpointValue({
@@ -73,7 +104,7 @@ export const SignUpForm = () => {
 					/>
 					<Flex position="fixed" h="100vh" w="35vw">
 						<Flex
-							onSubmit={handleSubmit(() => handleSignUp)}
+							onSubmit={handleSubmit(handleSignUp)}
 							as="form"
 							h="100vh"
 							w="35vw"
@@ -88,26 +119,86 @@ export const SignUpForm = () => {
 								</Text>
 								<Flex flexDir="column">
 									<Input
+										icon={FaUser}
 										label="User name"
 										error={errors.name}
 										{...register("name")}
 									/>
 									<Input
+										icon={FaEnvelope}
 										label="Email"
 										type="email"
 										error={errors.email}
 										{...register("email")}
 									/>
-									<Input
-										label="Password"
-										error={errors.password}
-										{...register("password")}
-									/>
-									<Input
-										label="Password Confirm"
-										error={errors.confirm_password}
-										{...register("confirm_password")}
-									/>
+									<Box position="relative" w="100%" h="100%">
+										<Input
+											icon={FaLock}
+											type={showPassword ? "text" : "password"}
+											label="Password"
+											error={errors.password}
+											{...register("password")}
+										/>
+										{showPassword ? (
+											<Center
+												top="67%"
+												right="5%"
+												as="button"
+												onClick={() => setShowPassword(false)}
+												position="absolute"
+												zIndex="1"
+												color="red.600"
+											>
+												<FaEye />
+											</Center>
+										) : (
+											<Center
+												top="67%"
+												right="5%"
+												as="button"
+												position="absolute"
+												onClick={() => setShowPassword(true)}
+												zIndex="1"
+												color="red.600"
+											>
+												<FaEyeSlash />
+											</Center>
+										)}
+									</Box>
+									<Box position="relative" w="100%" h="100%">
+										<Input
+											icon={FaLock}
+											type={showConfirmPassword ? "text" : "password"}
+											label="Password Confirm"
+											error={errors.confirm_password}
+											{...register("confirm_password")}
+										/>
+										{showConfirmPassword ? (
+											<Center
+												top="67%"
+												right="5%"
+												as="button"
+												onClick={() => setShowConfirmPassword(false)}
+												position="absolute"
+												zIndex="1"
+												color="red.600"
+											>
+												<FaEye />
+											</Center>
+										) : (
+											<Center
+												top="67%"
+												right="5%"
+												as="button"
+												position="absolute"
+												onClick={() => setShowConfirmPassword(true)}
+												zIndex="1"
+												color="red.600"
+											>
+												<FaEyeSlash />
+											</Center>
+										)}
+									</Box>
 									<Flex flexDir="row" gap="20px" w="100%" mt="15px">
 										<Button
 											w="30%"
@@ -198,27 +289,87 @@ export const SignUpForm = () => {
 								</Text>
 								<Flex flexDir="column">
 									<Input
+										icon={FaUser}
 										w="100%"
 										label="User name"
 										error={errors.name}
 										{...register("name")}
 									/>
 									<Input
+										icon={FaEnvelope}
 										label="Email"
 										type="email"
 										error={errors.email}
 										{...register("email")}
 									/>
-									<Input
-										label="Password"
-										error={errors.password}
-										{...register("password")}
-									/>
-									<Input
-										label="Password Confirm"
-										error={errors.confirm_password}
-										{...register("confirm_password")}
-									/>
+									<Box position="relative" w="100%" h="100%">
+										<Input
+											icon={FaLock}
+											type={showPassword ? "text" : "password"}
+											label="Password"
+											error={errors.password}
+											{...register("password")}
+										/>
+										{showPassword ? (
+											<Center
+												top="67%"
+												right="5%"
+												as="button"
+												onClick={() => setShowPassword(false)}
+												position="absolute"
+												zIndex="1"
+												color="red.600"
+											>
+												<FaEye />
+											</Center>
+										) : (
+											<Center
+												top="67%"
+												right="5%"
+												as="button"
+												position="absolute"
+												onClick={() => setShowPassword(true)}
+												zIndex="1"
+												color="red.600"
+											>
+												<FaEyeSlash />
+											</Center>
+										)}
+									</Box>
+									<Box position="relative" w="100%" h="100%">
+										<Input
+											icon={FaLock}
+											type={showConfirmPassword ? "text" : "password"}
+											label="Password Confirm"
+											error={errors.confirm_password}
+											{...register("confirm_password")}
+										/>
+										{showConfirmPassword ? (
+											<Center
+												top="67%"
+												right="5%"
+												as="button"
+												onClick={() => setShowConfirmPassword(false)}
+												position="absolute"
+												zIndex="1"
+												color="red.600"
+											>
+												<FaEye />
+											</Center>
+										) : (
+											<Center
+												top="67%"
+												right="5%"
+												as="button"
+												position="absolute"
+												onClick={() => setShowConfirmPassword(true)}
+												zIndex="1"
+												color="red.600"
+											>
+												<FaEyeSlash />
+											</Center>
+										)}
+									</Box>
 									<Flex flexDir="row" gap="10px" w="100%" mt="10px">
 										<Button
 											w="30%"
