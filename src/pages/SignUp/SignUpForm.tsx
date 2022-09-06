@@ -7,6 +7,7 @@ import {
 	Link,
 	Text,
 	useBreakpointValue,
+	VStack,
 } from "@chakra-ui/react";
 import Logo from "../../assets/logo-form.svg";
 import LogoMobile from "../../assets/logo-dash.svg";
@@ -77,7 +78,7 @@ export const SignUpForm = () => {
 							h="100vh"
 							w="35vw"
 							flexDir="column"
-							p="10% 20% 10% 20%"
+							p="5% 20% 5% 20%"
 							alignItems="center"
 						>
 							<Image w="320px" h="110px" src={Logo} />
@@ -86,33 +87,31 @@ export const SignUpForm = () => {
 									Create Account
 								</Text>
 								<Flex flexDir="column">
-									<FormLabel color="grey.0" fontWeight="400">
-										User name
-										<Input error={errors.name} {...register("name")} />
-									</FormLabel>
-									<FormLabel color="grey.0" fontWeight="400">
-										Email
-										<Input
-											type="email"
-											error={errors.email}
-											{...register("email")}
-										/>
-									</FormLabel>
-									<FormLabel color="grey.0" fontWeight="400">
-										Password
-										<Input error={errors.password} {...register("password")} />
-									</FormLabel>
-									<FormLabel color="grey.0" fontWeight="400">
-										Password Confirm
-										<Input
-											error={errors.confirm_password}
-											{...register("confirm_password")}
-										/>
-									</FormLabel>
-									<Flex flexDir="row" gap="20px" w="95%">
+									<Input
+										label="User name"
+										error={errors.name}
+										{...register("name")}
+									/>
+									<Input
+										label="Email"
+										type="email"
+										error={errors.email}
+										{...register("email")}
+									/>
+									<Input
+										label="Password"
+										error={errors.password}
+										{...register("password")}
+									/>
+									<Input
+										label="Password Confirm"
+										error={errors.confirm_password}
+										{...register("confirm_password")}
+									/>
+									<Flex flexDir="row" gap="20px" w="100%" mt="15px">
 										<Button
 											w="30%"
-											h="25px"
+											h="30px"
 											bg="grey.0"
 											_hover={{
 												filter: "opacity(90%)",
@@ -121,7 +120,7 @@ export const SignUpForm = () => {
 											<FcGoogle />
 										</Button>
 										<Button
-											h="25px"
+											h="30px"
 											w="30%"
 											bg="blue.300"
 											_hover={{
@@ -131,7 +130,7 @@ export const SignUpForm = () => {
 											<FaFacebookF fill="white" />
 										</Button>
 										<Button
-											h="25px"
+											h="30px"
 											w="30%"
 											background="grey.900"
 											_hover={{
@@ -144,7 +143,7 @@ export const SignUpForm = () => {
 								</Flex>
 							</Box>
 							<Button
-								mt="10vh"
+								mt="8vh"
 								w="50%"
 								bg="blue.600"
 								fontWeight="700"
@@ -166,6 +165,7 @@ export const SignUpForm = () => {
 										_hover={{
 											color: "pink.100",
 										}}
+										href="/signin"
 									>
 										click here.
 									</Link>
@@ -187,7 +187,7 @@ export const SignUpForm = () => {
 							alignItems="center"
 						>
 							<Image w="250px" h="75px" src={LogoMobile} />
-							<Box textAlign="center">
+							<VStack textAlign="center">
 								<Text
 									color="white"
 									fontWeight="600"
@@ -197,29 +197,28 @@ export const SignUpForm = () => {
 									Create Account
 								</Text>
 								<Flex flexDir="column">
-									<FormLabel color="white" fontWeight="400">
-										User name
-										<Input error={errors.name} {...register("name")} />
-									</FormLabel>
-									<FormLabel color="white" fontWeight="400">
-										Email
-										<Input
-											type="email"
-											error={errors.email}
-											{...register("email")}
-										/>
-									</FormLabel>
-									<FormLabel color="white" fontWeight="400">
-										Password
-										<Input error={errors.password} {...register("password")} />
-									</FormLabel>
-									<FormLabel color="white" fontWeight="400">
-										Password Confirm
-										<Input
-											error={errors.confirm_password}
-											{...register("confirm_password")}
-										/>
-									</FormLabel>
+									<Input
+										w="100%"
+										label="User name"
+										error={errors.name}
+										{...register("name")}
+									/>
+									<Input
+										label="Email"
+										type="email"
+										error={errors.email}
+										{...register("email")}
+									/>
+									<Input
+										label="Password"
+										error={errors.password}
+										{...register("password")}
+									/>
+									<Input
+										label="Password Confirm"
+										error={errors.confirm_password}
+										{...register("confirm_password")}
+									/>
 									<Flex flexDir="row" gap="10px" w="100%" mt="10px">
 										<Button
 											w="30%"
@@ -253,7 +252,7 @@ export const SignUpForm = () => {
 										</Button>
 									</Flex>
 								</Flex>
-							</Box>
+							</VStack>
 							<Button
 								w="220px"
 								h="35px"
@@ -277,6 +276,7 @@ export const SignUpForm = () => {
 										_hover={{
 											color: "blue.50",
 										}}
+										href="/signin"
 									>
 										click here.
 									</Link>
