@@ -37,7 +37,6 @@ interface SignInDados {
   password: string;
 }
 
-
 export const SignInForm = () => {
   const { signIn } = useAuth();
 
@@ -49,8 +48,10 @@ export const SignInForm = () => {
     resolver: yupResolver(signInSchema),
   });
 
-  const handleSignIn = ({email, password}: SignInDados) => {
-    signIn({email, password}).catch((err) => ('Erro ao logar, tente novamente!'));
+  const handleSignIn = ({ email, password }: SignInDados) => {
+    signIn({ email, password }).catch(
+      (err) => "Erro ao logar, tente novamente!"
+    );
     console.log("teste");
   };
 
@@ -63,21 +64,34 @@ export const SignInForm = () => {
         bg="rgba(217, 217, 217, 0.5);"
         filter="blur(2px)"
       ></Flex>
-      <Flex position="revert" h="100vh" w="35vw" justifyContent="center">
+      <Flex
+        position="fixed"
+        right={["10%","10%",0,0]}
+        
+        h="100vh"
+        w={["80vw", "80vw", "35vw", "35vw"]}
+        justifyContent="center"
+      >
         <Flex
           as="form"
           onSubmit={handleSubmit(handleSignIn)}
           h="100vh"
-          w="35vw"
+          w="100%"
           flexDir="column"
-          p="35px 150px 110px 110px"
+          padding='10px'
           alignItems="center"
           justifyContent="center"
         >
-          <Image w="320px" h="110px" src={Logo} />
-          <Box>
-            <Text color="white" fontWeight="600" fontSize="2xl" m="10">
-              Create Account
+          <Image w={["200px", "200px", "320px"]} h="110px" src={Logo} />
+          <Box w="100%">
+            <Text
+              color="white"
+              fontWeight="600"
+              fontSize="2xl"
+              textAlign="center"
+              m="2"
+            >
+              Login
             </Text>
             <VStack mt="10" spacing="10">
               <Box w="100%">
@@ -102,19 +116,20 @@ export const SignInForm = () => {
           <Button
             type="submit"
             mt="10vh"
-            w={["150px", "150px", "200px", "300px"]}
+            w="100%"
             h="50px"
             bg="blue.600"
             fontWeight="700"
             color="white"
+            borderRadius="10px"
           >
-            Sign Up
+            SignIn
           </Button>
           <Flex flexDir="column" justifyContent="center">
             <Text
               mt="3vh"
               w="200px"
-              textAlign="justify"
+              textAlign="center"
               fontWeight="600"
               color="white"
             >
