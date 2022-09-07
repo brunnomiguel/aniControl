@@ -25,6 +25,7 @@ interface FullAnimesContextData {
   getSeasonsAnimes: () => Promise<void>;
   getLinksStreaming: (animeId: number) => Promise<void>;
   getLinksExternal: (animeId: number) => Promise<void>;
+  searchAnime: (animeName: string) => Promise<void>;
 }
 
 const FullAnimesContext = createContext<FullAnimesContextData>(
@@ -103,6 +104,15 @@ export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
     }
   }, []);
 
+  const searchAnime = useCallback(async (animeName: string) => {
+    try {
+      const response = await jikanApi.get(`/anime?letter=${animeName}`);
+      setAllAnimes(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <FullAnimesContext.Provider
       value={{
@@ -118,6 +128,7 @@ export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
         getAnimeFullById,
         getLinksExternal,
         getLinksStreaming,
+        searchAnime,
       }}
     >
       {children}

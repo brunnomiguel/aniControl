@@ -1,38 +1,20 @@
-import {
-  Box,
-  Button,
-  Flex,
-  FormLabel,
-  Image,
-  Link,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Link, Text, VStack } from "@chakra-ui/react";
+
 import Logo from "../../assets/logo-form.svg";
+
+import { FaApple, FaEnvelope, FaFacebookF, FaLock } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import {
-  FaApple,
-  FaEnvelope,
-  FaFacebookF,
-  FaKey,
-  FaLock,
-} from "react-icons/fa";
+
 import { Input } from "../../components/Input";
+
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { sign } from "crypto";
+
 import { useAuth } from "../../contexts/Auth";
 
-const signInSchema = yup.object().shape({
-  email: yup
-    .string()
-    .required("Por favor informe o email")
-    .email("Invalid email"),
-  password: yup.string().required("Por favor informe a senha"),
-});
+import { signInSchema } from "../../schemas";
 
-interface SignInDados {
+interface SignInData {
   email: string;
   password: string;
 }
@@ -44,11 +26,11 @@ export const SignInForm = () => {
     formState: { errors },
     register,
     handleSubmit,
-  } = useForm<SignInDados>({
+  } = useForm<SignInData>({
     resolver: yupResolver(signInSchema),
   });
 
-  const handleSignIn = ({ email, password }: SignInDados) => {
+  const handleSignIn = ({ email, password }: SignInData) => {
     signIn({ email, password }).catch(
       (err) => "Erro ao logar, tente novamente!"
     );
@@ -66,8 +48,7 @@ export const SignInForm = () => {
       ></Flex>
       <Flex
         position="fixed"
-        right={["10%","10%",0,0]}
-        
+        right={["10%", "10%", 0, 0]}
         h="100vh"
         w={["80vw", "80vw", "35vw", "35vw"]}
         justifyContent="center"
@@ -78,7 +59,7 @@ export const SignInForm = () => {
           h="100vh"
           w="100%"
           flexDir="column"
-          padding='10px'
+          padding={["0", "0", "10", "20"]}
           alignItems="center"
           justifyContent="center"
         >
@@ -93,24 +74,23 @@ export const SignInForm = () => {
             >
               Login
             </Text>
-            <VStack mt="10" spacing="10">
-              <Box w="100%">
-                <Input
-                  //   name="email" não é necessário name, pois ele será inserido no register
-                  label="Email"
-                  icon={FaEnvelope}
-                  type="email"
-                  placeholder="Your email"
-                  {...register("email")}
-                ></Input>
-                <Input
-                  label="Password"
-                  icon={FaKey}
-                  type="password"
-                  placeholder="Your password"
-                  {...register("password")}
-                ></Input>
-              </Box>
+            <VStack mt="10" spacing="6">
+              <Input
+                label="Email"
+                icon={FaEnvelope}
+                type="email"
+                placeholder="Your email"
+                {...register("email")}
+                error={errors.email}
+              />
+              <Input
+                label="Password"
+                icon={FaLock}
+                type="password"
+                placeholder="Your password"
+                {...register("password")}
+                error={errors.password}
+              />
             </VStack>
           </Box>
           <Button
@@ -123,7 +103,7 @@ export const SignInForm = () => {
             color="white"
             borderRadius="10px"
           >
-            SignIn
+            Sign In
           </Button>
           <Flex flexDir="column" justifyContent="center">
             <Text
@@ -135,7 +115,7 @@ export const SignInForm = () => {
             >
               Already have an account?
               <Link color="blue.600" fontWeight="extrabold">
-                click here.
+                Click here.
               </Link>
             </Text>
           </Flex>
