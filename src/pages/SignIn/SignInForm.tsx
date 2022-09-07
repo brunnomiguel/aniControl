@@ -66,26 +66,31 @@ export const SignInForm = () => {
       ></Flex>
       <Flex
         position="fixed"
+        right={["10%","10%",0,0]}
         
-        right="3"
         h="100vh"
-        w="35vw"
+        w={["80vw", "80vw", "35vw", "35vw"]}
         justifyContent="center"
       >
         <Flex
           as="form"
           onSubmit={handleSubmit(handleSignIn)}
           h="100vh"
-          w="35vw"
+          w="100%"
           flexDir="column"
-          // p="35px 150px 110px 110px"
-          
+          padding='10px'
           alignItems="center"
           justifyContent="center"
         >
-          <Image w="320px" h="110px" src={Logo} />
-          <Box w='100%' >
-            <Text color="white" fontWeight="600" fontSize="2xl" textAlign='center' m='2'> 
+          <Image w={["200px", "200px", "320px"]} h="110px" src={Logo} />
+          <Box w="100%">
+            <Text
+              color="white"
+              fontWeight="600"
+              fontSize="2xl"
+              textAlign="center"
+              m="2"
+            >
               Login
             </Text>
             <VStack mt="10" spacing="10">
@@ -116,10 +121,11 @@ export const SignInForm = () => {
             bg="blue.600"
             fontWeight="700"
             color="white"
+            borderRadius="10px"
           >
             SignIn
           </Button>
-          <Flex flexDir="column" justifyContent="center"  >
+          <Flex flexDir="column" justifyContent="center">
             <Text
               mt="3vh"
               w="200px"
