@@ -1,11 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useState,
-  useCallback,
-} from "react";
+import { createContext, ReactNode, useContext, useState, useCallback } from "react";
 
 import { animeProps } from "../FullAnimes/fullAnimes.types";
 import { jsonApi } from "../../services/api";
@@ -34,9 +28,7 @@ interface IanimeListContextData {
   updateAnime: (newInfo: object, animeId: number) => Promise<void>;
 }
 
-const animeListContext = createContext<IanimeListContextData>(
-  {} as IanimeListContextData
-);
+const animeListContext = createContext<IanimeListContextData>({} as IanimeListContextData);
 
 export const useAnimeList = () => {
   const context = useContext(animeListContext);
@@ -110,14 +102,14 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
       .patch(`animesList/${animeId}`, newInfo, {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        getUserAnimes();
+      })
       .catch((err) => console.log(err));
   }, []);
 
   return (
-    <animeListContext.Provider
-      value={{ userAnimes, addAnime, removeAnime, getUserAnimes, updateAnime }}
-    >
+    <animeListContext.Provider value={{ userAnimes, addAnime, removeAnime, getUserAnimes, updateAnime }}>
       {children}
     </animeListContext.Provider>
   );

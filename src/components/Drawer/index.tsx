@@ -39,7 +39,7 @@ export const DashboardDrawer = ({ isOpen, onClose, setFavoritesView }: IDashboar
             <Flex flexDir="row" align="center" justify="center">
               <Avatar bgColor="red.600" />
               <Text ml="2vw" fontSize="1.8rem" color="grey.0">
-                {user.name}
+                {user && user.name}
               </Text>
             </Flex>
           </DrawerHeader>
