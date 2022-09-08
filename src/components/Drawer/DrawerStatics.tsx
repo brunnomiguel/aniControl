@@ -12,7 +12,8 @@ export const DrawerStatics = () => {
   };
   const meanScore = () => {
     const rating = userAnimes.map((elem) => elem.rating);
-    return (rating.reduce((a, b) => a + b, 0) / rating.length).toFixed(2);
+
+    return rating.length === 0 ? "0.00" : (rating.reduce((a, b) => a + b, 0) / rating.length).toFixed(2);
   };
   const episodesCount = () => {
     const episodes = userAnimes.map((elem) => elem.episodes);
