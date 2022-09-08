@@ -132,7 +132,7 @@ export const ModalAnime = ({
                   w={["100%", "100%", "200px"]}
                   h="44px"
                   mt="2"
-                  onClick={() => addAnime(anime)}
+                  onClick={() => addAnime(anime, anime.mal_id)}
                 >
                   <FaPlus />
                   <Text ml="2">Adicionar</Text>
