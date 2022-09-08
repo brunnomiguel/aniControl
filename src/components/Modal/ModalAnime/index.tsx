@@ -27,44 +27,23 @@ interface ModalTaskDetailProps {
   anime: animeProps;
 }
 
-export const ModalAnime = ({
-  isOpen,
-  onClose,
-  anime,
-}: ModalTaskDetailProps) => {
+export const ModalAnime = ({ isOpen, onClose, anime }: ModalTaskDetailProps) => {
   const { addAnime } = useAnimeList();
   const { linksExternal, linksStreaming } = useFullAnimes();
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay bg="rgba(0, 0, 0, 0.8)" />
-      <ModalContent
-        bg="grey.700"
-        maxW="1200px"
-        w="100%"
-        m="2"
-        p={["2", "2", "4"]}
-        h={["80%", "80%", "500px", "500px"]}
-      >
+      <ModalContent bg="grey.700" maxW="1200px" w="100%" m="2" p={["2", "2", "4"]} h={["80%", "80%", "500px", "500px"]}>
         {anime && (
           <Flex
             flexDirection={["column", "column", "row", "row"]}
             alignItems="center"
-            justifyContent={[
-              "normal",
-              "normal",
-              "space-around",
-              "space-around",
-            ]}
+            justifyContent={["normal", "normal", "space-around", "space-around"]}
             h="100%"
             position="relative"
           >
-            <Link
-              href={anime.trailer.url}
-              target="_blank"
-              rel="noreferrer"
-              mr={["0", "0", "6"]}
-            >
+            <Link href={anime.trailer.url} target="_blank" rel="noreferrer" mr={["0", "0", "6"]}>
               <Image
                 src={anime.images.jpg.large_image_url}
                 border="0.3rem solid"
@@ -79,12 +58,7 @@ export const ModalAnime = ({
               />
             </Link>
             <Grid w={["100%", "100%", "70%"]} h="400px">
-              <Text
-                as="h2"
-                fontWeight="bold"
-                color="grey.0"
-                fontSize={["2xl", "2xl", "4xl"]}
-              >
+              <Text as="h2" fontWeight="bold" color="grey.0" fontSize={["2xl", "2xl", "4xl"]}>
                 {anime.title}
               </Text>
               <Center
@@ -132,7 +106,9 @@ export const ModalAnime = ({
                   w={["100%", "100%", "200px"]}
                   h="44px"
                   mt="2"
-                  onClick={() => addAnime(anime, anime.mal_id)}
+                  onClick={() => {
+                    addAnime(anime, anime.mal_id);
+                  }}
                 >
                   <FaPlus />
                   <Text ml="2">Adicionar</Text>
@@ -154,13 +130,7 @@ export const ModalAnime = ({
                     })}
                 </HStack>
               </Flex>
-              <Flex
-                color="grey.0"
-                align="center"
-                justify={["center", "center", "flex-start"]}
-                mt="2"
-                fontSize="lg"
-              >
+              <Flex color="grey.0" align="center" justify={["center", "center", "flex-start"]} mt="2" fontSize="lg">
                 <FaStar fill="#EFDB73" />
                 <Text fontWeight="bold" ml="2">
                   {anime.score}
@@ -169,11 +139,7 @@ export const ModalAnime = ({
                   Launching Year: {anime.year}
                 </Text>
               </Flex>
-              <Flex
-                mt="2"
-                alignItems="center"
-                flexDirection={["column", "column", "row"]}
-              >
+              <Flex mt="2" alignItems="center" flexDirection={["column", "column", "row"]}>
                 <Text
                   fontSize={["2xl", "2xl", "md", "xl"]}
                   fontWeight={["500", "500", "bold"]}
@@ -182,30 +148,14 @@ export const ModalAnime = ({
                 >
                   Watch on:
                 </Text>
-                <HStack
-                  spacing="2"
-                  ml="2"
-                  flexWrap="wrap"
-                  justifyContent="center"
-                >
+                <HStack spacing="2" ml="2" flexWrap="wrap" justifyContent="center">
                   {linksStreaming &&
                     linksStreaming.map((element, index) => {
-                      return (
-                        <Links
-                          key={index}
-                          name={element.name}
-                          url={element.url}
-                          icon={FiTv}
-                        />
-                      );
+                      return <Links key={index} name={element.name} url={element.url} icon={FiTv} />;
                     })}
                 </HStack>
               </Flex>
-              <Flex
-                mt="2"
-                alignItems="center"
-                flexDirection={["column", "column", "row"]}
-              >
+              <Flex mt="2" alignItems="center" flexDirection={["column", "column", "row"]}>
                 <Text
                   fontSize={["2xl", "2xl", "md", "xl"]}
                   fontWeight={["500", "500", "bold"]}
@@ -214,22 +164,10 @@ export const ModalAnime = ({
                 >
                   More info:
                 </Text>
-                <HStack
-                  spacing="2"
-                  ml="2"
-                  flexWrap="wrap"
-                  justifyContent="center"
-                >
+                <HStack spacing="2" ml="2" flexWrap="wrap" justifyContent="center">
                   {linksExternal &&
                     linksExternal.map((element, index) => {
-                      return (
-                        <Links
-                          key={index}
-                          name={element.name}
-                          url={element.url}
-                          icon={FaLink}
-                        />
-                      );
+                      return <Links key={index} name={element.name} url={element.url} icon={FaLink} />;
                     })}
                 </HStack>
               </Flex>

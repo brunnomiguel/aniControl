@@ -24,18 +24,8 @@ export const Browse = () => {
   return (
     <>
       <Header />
-      <Flex
-        flexDirection="column"
-        bgColor="grey.700"
-        padding={["2", "2", "10"]}
-        w="100vw"
-        minH="100vh"
-      >
-        <Flex
-          w="100%"
-          justifyContent="space-between"
-          direction={["column-reverse", "column-reverse", "row", "row"]}
-        >
+      <Flex flexDirection="column" bgColor="grey.700" padding={["2", "2", "10"]} w="100vw" minH="100vh">
+        <Flex w="100%" justifyContent="space-between" direction={["column-reverse", "column-reverse", "row", "row"]}>
           <Grid
             w="100%"
             templateColumns="repeat(auto-fill, minmax(210px, 1fr))"
