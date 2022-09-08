@@ -1,4 +1,4 @@
-import { Center, Flex, HStack, Text, VStack } from "@chakra-ui/react";
+import { Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 import { IanimelistItem, useAnimeList } from "../../../contexts/AnimeList";
@@ -7,6 +7,7 @@ import { DragDropContext, Draggable, Droppable, DropResult } from "react-beautif
 import { DashboardCard } from "../../../components/DashboardCard";
 
 import { DashboardListEmpty } from "./DashboardListEmpty";
+import { DashboardListFavorites } from "./DashboardListFavorites";
 
 interface IDashboardListProps {
   FavoritesView: boolean;
@@ -15,7 +16,6 @@ interface IDashboardListProps {
 export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
   const { userAnimes, getUserAnimes, updateAnime } = useAnimeList();
 
-  const [isLoading, setIsLoading] = useState(true);
   const [columns, setColumns] = useState({
     planToWatch: {
       name: "Plan to Watch",
@@ -37,11 +37,9 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
       name: "Watching",
       items: [] as IanimelistItem[],
     },
-    favorites: {
-      name: "Favorites",
-      items: [] as IanimelistItem[],
-    },
   });
+
+  const [isLoading, setIsLoading] = useState(true);
   const [reswitch, setReswitch] = useState(false);
 
   const handleUpdate = async () => {
@@ -52,7 +50,6 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
     const OnHold = userAnimes.filter((anime) => anime.status === "onHold");
     const Completed = userAnimes.filter((anime) => anime.status === "completed");
     const Watching = userAnimes.filter((anime) => anime.status === "watching");
-    const Favorites = userAnimes.filter((anime) => anime.favorite === true);
 
     setColumns({
       ...columns,
@@ -61,7 +58,6 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
       onHold: { ...columns.onHold, items: OnHold },
       completed: { ...columns.completed, items: Completed },
       watching: { ...columns.watching, items: Watching },
-      favorites: { ...columns.favorites, items: Favorites },
     });
   };
 
@@ -119,11 +115,13 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
       padding="1%"
       spacing={10}
       overflowX="scroll"
+      w="250vw"
       h="93vh"
       css={{
         "&::-webkit-scrollbar": {
           width: "6px",
           height: "4px",
+          border: "0",
         },
         "&::-webkit-scrollbar-track": {
           width: "6px",
@@ -138,41 +136,7 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
       {userAnimes.length === 0 ? (
         <DashboardListEmpty />
       ) : FavoritesView ? (
-        <Flex w="221.2vw">
-          <Center w="100%" flexDir="column" alignItems="flex-start" justifyContent="center" borderRadius="10px">
-            <Flex flexFlow="column nowrap" width={["95vw", "95vw", "95vw", "35vw"]} height="93vh" align="center">
-              <Text
-                as="h2"
-                bg="#5A2843"
-                marginTop="1rem"
-                marginBottom="1rem"
-                borderRadius="4px"
-                color="#ffffff"
-                textAlign="center"
-                fontWeight="bold"
-                padding="0.5rem"
-                fontSize="1.5rem"
-                width={["95vw", "95vw", "95vw", "35vw"]}
-              >
-                Favorites
-              </Text>
-              <VStack width="90%" spacing={6} height="93vh">
-                {columns &&
-                  columns.favorites.items.map((anime, index) => {
-                    return (
-                      <DashboardCard
-                        anime={anime.anime.data}
-                        id={anime.id}
-                        key={index}
-                        favorite={anime.favorite}
-                        setReswitch={setReswitch}
-                      />
-                    );
-                  })}
-              </VStack>
-            </Flex>
-          </Center>
-        </Flex>
+        <DashboardListFavorites setReswitch={setReswitch} />
       ) : (
         <>
           <DragDropContext onDragEnd={(result) => onDragEnd(result, columns, setColumns)}>
@@ -223,7 +187,7 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
                                         {...provided.dragHandleProps}
                                       >
                                         <DashboardCard
-                                          anime={anime.anime.data}
+                                          anime={anime}
                                           id={anime.id}
                                           key={index}
                                           favorite={anime.favorite}

@@ -1,20 +1,20 @@
-import { Badge, Box, Button, Flex, HStack, Image, Link, Text, theme } from "@chakra-ui/react";
+import { Badge, Box, Button, Center, Flex, HStack, Image, Link, Progress, Text, theme } from "@chakra-ui/react";
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
 
 interface IDashboardCardProps {
   anime: animeProps;
-
+  episode: number;
   handleFavoriteAnime: () => void;
   handleDeleteAnime: () => void;
 }
 
-export const MobileViewCard = ({ anime, handleDeleteAnime, handleFavoriteAnime }: IDashboardCardProps) => {
+export const MobileViewCard = ({ anime, episode, handleDeleteAnime, handleFavoriteAnime }: IDashboardCardProps) => {
   const { images, trailer, title, rating, score, synopsis, year, genres } = anime;
 
   return (
     <Flex w="100%" flexDir="column" h="auto" bg="grey.600" paddingBottom="5%">
-      <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="20rem">
+      <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="20rem" align="center">
         <Link href={trailer.url} target="_blank" rel="noreferrer" h="100%" w={["50%", "50%"]}>
           <Image src={images.jpg.large_image_url} border="0.3rem solid" borderColor="blue.50" h="100%" w="100%" />
         </Link>
@@ -55,6 +55,12 @@ export const MobileViewCard = ({ anime, handleDeleteAnime, handleFavoriteAnime }
       <Badge fontWeight="bold" fontSize="0.5rem" bg="blue.50" w="auto" alignSelf="center">
         {rating}
       </Badge>
+      <Center flexDir={"column"}>
+        <Text mt="5%" w={"75%"} textAlign="center">
+          Current Episode: {episode} / {anime.episodes}
+        </Text>
+        <Progress hasStripe value={episode} max={anime.episodes} mb="5%" colorScheme="red" w={"75%"} />
+      </Center>
       <Flex justify="space-evenly">
         {genres &&
           genres.map((element, index) => {

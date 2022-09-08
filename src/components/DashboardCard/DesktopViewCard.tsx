@@ -1,20 +1,21 @@
-import { Badge, Box, Button, Flex, HStack, Image, Link, Text, theme, VStack } from "@chakra-ui/react";
+import { Badge, Box, Button, Flex, HStack, Image, Link, Progress, Text, theme, VStack } from "@chakra-ui/react";
 
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
 
 interface IDashboardCardProps {
   anime: animeProps;
+  episode: number;
   handleFavoriteAnime: () => void;
   handleDeleteAnime: () => void;
 }
 
-export const DesktopViewCard = ({ anime, handleDeleteAnime, handleFavoriteAnime }: IDashboardCardProps) => {
+export const DesktopViewCard = ({ anime, episode, handleDeleteAnime, handleFavoriteAnime }: IDashboardCardProps) => {
   const { images, trailer, title, rating, score, synopsis, year, genres } = anime;
 
   return (
     <VStack w="100%" h="auto" bg="grey.600" paddingBottom="5%">
-      <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="25rem">
+      <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="25rem" align="center">
         <Link href={trailer.url} target="_blank" rel="noreferrer" h="96%" w={["50%", "50%"]}>
           <Image
             src={images.jpg.large_image_url}
@@ -44,7 +45,7 @@ export const DesktopViewCard = ({ anime, handleDeleteAnime, handleFavoriteAnime 
             color="grey.0"
             overflowX="hidden"
             overflowY="auto"
-            h="15rem"
+            h="10rem"
             css={{
               "&::-webkit-scrollbar": {
                 width: "4px",
@@ -60,11 +61,15 @@ export const DesktopViewCard = ({ anime, handleDeleteAnime, handleFavoriteAnime 
           >
             {synopsis}
           </Text>
+          <Text mt="5%">
+            Current Episode: {episode} / {anime.episodes}
+          </Text>
+          <Progress hasStripe value={episode} max={anime.episodes} mb="5%" colorScheme="red" />
           <Flex justify="flex-start" marginTop="2%" width={"100%"} flexWrap="wrap">
             {genres &&
               genres.map((element, index) => {
                 return (
-                  <Text color="grey.0" fontWeight="bold" fontSize={12} marginLeft="1%" key={index}>
+                  <Text color="grey.0" fontWeight="bold" fontSize={12} marginLeft="2%" key={index}>
                     {element.name}
                   </Text>
                 );

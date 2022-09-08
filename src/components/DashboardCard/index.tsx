@@ -5,8 +5,18 @@ import { DesktopViewCard } from "./DesktopViewCard";
 import { Box } from "@chakra-ui/react";
 import { useAnimeList } from "../../contexts/AnimeList";
 
+interface IAnimeInfo {
+  anime: { data: animeProps };
+  status: string;
+  rating: number;
+  episodes: number;
+  userId: number;
+  favorite: boolean;
+  id: number;
+}
+
 interface IDashboardCardProps {
-  anime: animeProps;
+  anime: IAnimeInfo;
   id: number;
   favorite: boolean;
   setReswitch: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,6 +24,9 @@ interface IDashboardCardProps {
 
 export const DashboardCard = ({ anime, id, favorite, setReswitch }: IDashboardCardProps) => {
   const [smallView, setSmallView] = useState(false);
+
+  const { episodes } = anime;
+  const { data } = anime.anime;
 
   useEffect(() => {
     const handleResize = () => {
@@ -50,10 +63,16 @@ export const DashboardCard = ({ anime, id, favorite, setReswitch }: IDashboardCa
   return (
     <Box width={["95vw", "95vw", "95vw", "33vw"]}>
       {smallView ? (
-        <MobileViewCard anime={anime} handleFavoriteAnime={handleFavoriteAnime} handleDeleteAnime={handleDeleteAnime} />
+        <MobileViewCard
+          anime={data}
+          episode={episodes}
+          handleFavoriteAnime={handleFavoriteAnime}
+          handleDeleteAnime={handleDeleteAnime}
+        />
       ) : (
         <DesktopViewCard
-          anime={anime}
+          anime={data}
+          episode={episodes}
           handleFavoriteAnime={handleFavoriteAnime}
           handleDeleteAnime={handleDeleteAnime}
         />

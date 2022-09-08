@@ -1,5 +1,5 @@
 import { Box, Center, Flex, Text, VStack } from "@chakra-ui/react";
-
+import { theme } from "../../styles/theme";
 import { GiPlainCircle } from "react-icons/gi";
 import { useAnimeList } from "../../contexts/AnimeList";
 
@@ -20,17 +20,11 @@ export const DrawerStatics = () => {
   };
   const animeCount = userAnimes.length;
 
-  const planToWatchList = userAnimes.filter(
-    (anime) => anime.status === "planToWatch"
-  );
+  const planToWatchList = userAnimes.filter((anime) => anime.status === "planToWatch");
   const droppedList = userAnimes.filter((anime) => anime.status === "dropped");
   const onHoldList = userAnimes.filter((anime) => anime.status === "onHold");
-  const completedList = userAnimes.filter(
-    (anime) => anime.status === "completed"
-  );
-  const watchingList = userAnimes.filter(
-    (anime) => anime.status === "watching"
-  );
+  const completedList = userAnimes.filter((anime) => anime.status === "completed");
+  const watchingList = userAnimes.filter((anime) => anime.status === "watching");
 
   const animeStats = {
     planToWatch: Math.round((planToWatchList.length / 145) * 100),
@@ -57,26 +51,16 @@ export const DrawerStatics = () => {
       <Flex w="100%" paddingBottom="5%" paddingTop="8%">
         <Box h="100%" width="10%" padding="2%">
           <Box h="37vh" bg="grey.0">
-            <Flex
-              h={`${animeStats.planToWatch}%`}
-              w="100%"
-              bg="grey.0"
-              borderTopRadius="2px"
-            />
-            <Box h={`${animeStats.dropped}%`} w="100%" bg="red.50" />
-            <Box h={`${animeStats.onHold}%`} w="100%" bg="yellow.50" />
-            <Box h={`${animeStats.completed}%`} w="100%" bg="blue.100" />
-            <Box
-              h={`${animeStats.watching}%`}
-              w="100%"
-              bg="green.50"
-              borderBottomRadius="2px"
-            />
+            <Flex h={`${animeStats.planToWatch}%`} w="100%" bg={theme.colors.grey[0]} borderTopRadius="2px" />
+            <Box h={`${animeStats.dropped}%`} w="100%" bg={theme.colors.red[50]} />
+            <Box h={`${animeStats.onHold}%`} w="100%" bg={theme.colors.yellow[50]} />
+            <Box h={`${animeStats.completed}%`} w="100%" bg={theme.colors.blue[100]} />
+            <Box h={`${animeStats.watching}%`} w="100%" bg={theme.colors.green[50]} borderBottomRadius="2px" />
           </Box>
         </Box>
         <VStack w="95%" bg="grey.600" padding="4%" borderRadius="2px">
           <Flex align="center" w="100%" flexDir="row">
-            <GiPlainCircle size="1.5rem" fill="grey.0" />
+            <GiPlainCircle size="1.5rem" fill={theme.colors.grey[0]} />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
               <Text color="grey.0" w="90%">
                 Plan to Watch
@@ -85,28 +69,28 @@ export const DrawerStatics = () => {
             </Flex>
           </Flex>
           <Flex align="center" w="100%" flexDir="row" justify="center">
-            <GiPlainCircle size="1.5rem" fill="red.50" />
+            <GiPlainCircle size="1.5rem" fill={theme.colors.red[50]} />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
               <Text color="grey.0"> Dropped</Text>
               <Text color={"grey.0"}>{droppedList.length}</Text>
             </Flex>
           </Flex>
           <Flex align="center" w="100%" flexDir="row">
-            <GiPlainCircle size="1.5rem" fill="#yellow.50" />
+            <GiPlainCircle size="1.5rem" fill={theme.colors.yellow[50]} />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
               <Text color="grey.0"> On-Hold</Text>
               <Text color={"grey.0"}>{onHoldList.length}</Text>
             </Flex>
           </Flex>
           <Flex align="center" w="100%" flexDir="row">
-            <GiPlainCircle size="1.5rem" fill="blue.100" />
+            <GiPlainCircle size="1.5rem" fill={theme.colors.blue[100]} />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
               <Text color="grey.0"> Completed</Text>
               <Text color={"grey.0"}>{completedList.length}</Text>
             </Flex>
           </Flex>
           <Flex align="center" w="100%" flexDir="row">
-            <GiPlainCircle size="1.5rem" fill="green.50" />
+            <GiPlainCircle size="1.5rem" fill={theme.colors.green[50]} />
             <Flex flexDir="row" justify={"space-between"} w="100%" ml="2%">
               <Text color="grey.0" w="100%">
                 Watching
