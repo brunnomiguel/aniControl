@@ -1,5 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { createContext, ReactNode, useContext, useState, useCallback } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  useCallback,
+} from "react";
 
 import { animeProps } from "../FullAnimes/fullAnimes.types";
 import { jsonApi } from "../../services/api";
@@ -22,13 +28,15 @@ export interface IanimelistItem {
 
 interface IanimeListContextData {
   userAnimes: IanimelistItem[];
-  addAnime: (anime: object) => Promise<void>;
+  addAnime: (anime: object, animeId: number) => Promise<void>;
   removeAnime: (animeId: number) => Promise<void>;
   getUserAnimes: () => Promise<void>;
   updateAnime: (newInfo: object, animeId: number) => Promise<void>;
 }
 
-const animeListContext = createContext<IanimeListContextData>({} as IanimeListContextData);
+const animeListContext = createContext<IanimeListContextData>(
+  {} as IanimeListContextData
+);
 
 export const useAnimeList = () => {
   const context = useContext(animeListContext);
@@ -47,7 +55,7 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
 
   const toast = useToast();
 
-  const addAnime = useCallback(async (anime: object) => {
+  const addAnime = useCallback(async (anime: object, animeId: number) => {
     const body = {
       anime: { data: anime },
       status: "planToWatch",
@@ -57,21 +65,38 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
       favorite: false,
     };
 
-    await jsonApi
-      .post("/animesList/", body, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
-      .then((res) => {
-        setUserAnimes([...userAnimes, res.data]);
-        toast({
-          title: "Success!",
-          description: "Anime included with success",
-          status: "success",
-          duration: 2000,
-          isClosable: true,
-        });
-      })
-      .catch((err) => console.log(err));
+    await getUserAnimes();
+
+    const verifyAnime = userAnimes.findIndex(
+      (anime) => anime.anime.data.mal_id === animeId
+    );
+
+    console.log(userAnimes);
+
+    if (verifyAnime === -1) {
+      await jsonApi
+        .post("/animesList/", body, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        })
+        .then((_) => {
+          toast({
+            title: "Success!",
+            description: "Anime included with success",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
+        })
+        .catch((err) => console.log(err));
+    } else {
+      toast({
+        title: "Oopss!",
+        description: "The anime has already been added",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
   }, []);
 
   const removeAnime = useCallback(async (animeId: number) => {
@@ -109,7 +134,9 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
   }, []);
 
   return (
-    <animeListContext.Provider value={{ userAnimes, addAnime, removeAnime, getUserAnimes, updateAnime }}>
+    <animeListContext.Provider
+      value={{ userAnimes, addAnime, removeAnime, getUserAnimes, updateAnime }}
+    >
       {children}
     </animeListContext.Provider>
   );
