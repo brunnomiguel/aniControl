@@ -1,5 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { createContext, ReactNode, useContext, useState, useCallback } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  useCallback,
+} from "react";
 import { useEffect } from "react";
 import { animeProps } from "../FullAnimes/fullAnimes.types";
 import { jsonApi } from "../../services/api";
@@ -26,9 +32,12 @@ interface IanimeListContextData {
   removeAnime: (animeId: number) => Promise<void>;
   getUserAnimes: () => Promise<void>;
   updateAnime: (newInfo: object, animeId: number) => Promise<void>;
+  searchAnimeList: (animeName: string) => void;
 }
 
-const animeListContext = createContext<IanimeListContextData>({} as IanimeListContextData);
+const animeListContext = createContext<IanimeListContextData>(
+  {} as IanimeListContextData
+);
 
 export const useAnimeList = () => {
   const context = useContext(animeListContext);
@@ -61,7 +70,9 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
       favorite: false,
     };
 
-    const verifyAnime = userAnimes.findIndex((anime) => anime.anime.data.mal_id === animeId);
+    const verifyAnime = userAnimes.findIndex(
+      (anime) => anime.anime.data.mal_id === animeId
+    );
 
     console.log(userAnimes);
 
@@ -126,8 +137,30 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
       .catch((err) => console.log(err));
   };
 
+  const searchAnimeList = (animeName: string) => {
+    animeName.toLocaleLowerCase();
+    if (animeName === "") {
+      getUserAnimes();
+    } else {
+      const filteredAnimes = userAnimes.filter((anime) =>
+        anime.anime.data.title.toLocaleLowerCase().includes(animeName)
+      );
+      console.log(filteredAnimes);
+      setUserAnimes(filteredAnimes);
+    }
+  };
+
   return (
-    <animeListContext.Provider value={{ userAnimes, addAnime, removeAnime, getUserAnimes, updateAnime }}>
+    <animeListContext.Provider
+      value={{
+        userAnimes,
+        addAnime,
+        removeAnime,
+        getUserAnimes,
+        updateAnime,
+        searchAnimeList,
+      }}
+    >
       {children}
     </animeListContext.Provider>
   );
