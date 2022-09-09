@@ -19,6 +19,7 @@ import { DrawerStatics } from "./DrawerStatics";
 import { FaStar, FaPencilAlt } from "react-icons/fa";
 import { FiNavigation } from "react-icons/fi";
 import { useAuth } from "../../contexts/Auth";
+import { useNavigate } from "react-router-dom";
 
 interface IDashboardDrawerProps {
   isOpen: boolean;
@@ -26,12 +27,22 @@ interface IDashboardDrawerProps {
   setFavoritesView: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const DashboardDrawer = ({ isOpen, onClose, setFavoritesView }: IDashboardDrawerProps) => {
+export const DashboardDrawer = ({
+  isOpen,
+  onClose,
+  setFavoritesView,
+}: IDashboardDrawerProps) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <>
-      <Drawer isOpen={isOpen} onClose={onClose} placement="left" onEsc={onClose}>
+      <Drawer
+        isOpen={isOpen}
+        onClose={onClose}
+        placement="left"
+        onEsc={onClose}
+      >
         <DrawerOverlay />
         <DrawerContent bg="grey.600" border="1px solid black">
           <DrawerCloseButton color="grey.0" />
@@ -79,10 +90,17 @@ export const DashboardDrawer = ({ isOpen, onClose, setFavoritesView }: IDashboar
               />
             </VStack>
             <DrawerStatics />
-            <VStack spacing="8%" marginTop="10%" marginBottom="10%" w="95%" align="flex-start">
+            <VStack
+              spacing="8%"
+              marginTop="10%"
+              marginBottom="10%"
+              w="95%"
+              align="flex-start"
+            >
               <DrawerButton
                 Icon={FiNavigation}
-                Title={"Edit Profile"}
+                Title={"Browse"}
+                onClick={() => navigate("/browse")}
                 activeColor="blue.50"
                 bgColor="blue.50"
                 hoverColor="blue.400"

@@ -9,6 +9,7 @@ export const HoveringButton = ({ onOpen }: IHoveringButtonProps) => {
   return (
     <Button
       bg="grey.0"
+      color="grey.900"
       onClick={onOpen}
       position="fixed"
       w="15vw"
