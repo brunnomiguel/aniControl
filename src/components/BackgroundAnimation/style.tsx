@@ -36,7 +36,6 @@ export const Container = styled.div`
 
 	width: 100%;
 	height: 100vh;
-	/* transform: rotate(180deg); */
 `;
 
 export const Contain = styled.div`

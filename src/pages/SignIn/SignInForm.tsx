@@ -1,6 +1,16 @@
-import { Box, Button, Flex, Image, Link, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  Link,
+  Text,
+  useBreakpointValue,
+  VStack,
+} from "@chakra-ui/react";
 
 import Logo from "../../assets/logo-form.svg";
+import LogoMobile from "../../assets/logo-dash.svg";
 
 import { FaApple, FaEnvelope, FaFacebookF, FaLock } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -13,6 +23,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../contexts/Auth";
 
 import { signInSchema } from "../../schemas";
+import { useNavigate } from "react-router-dom";
 
 interface SignInData {
   email: string;
@@ -21,6 +32,7 @@ interface SignInData {
 
 export const SignInForm = () => {
   const { signIn } = useAuth();
+  const navigate = useNavigate();
 
   const {
     formState: { errors },
@@ -31,11 +43,13 @@ export const SignInForm = () => {
   });
 
   const handleSignIn = ({ email, password }: SignInData) => {
-    signIn({ email, password }).catch(
-      (err) => "Erro ao logar, tente novamente!"
-    );
-    console.log("teste");
+    signIn({ email, password });
   };
+
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    md: true,
+  });
 
   return (
     <>
@@ -45,13 +59,12 @@ export const SignInForm = () => {
         w="35vw"
         bg="rgba(217, 217, 217, 0.5);"
         filter="blur(2px)"
-      ></Flex>
+      />
       <Flex
         position="fixed"
-        right={["10%", "10%", 0, 0]}
+        right={["none", "none", "0", "0"]}
         h="100vh"
-        w={["80vw", "80vw", "35vw", "35vw"]}
-        justifyContent="center"
+        w={["80vw", "60vw", "35vw", "35vw"]}
       >
         <Flex
           as="form"
@@ -59,11 +72,18 @@ export const SignInForm = () => {
           h="100vh"
           w="100%"
           flexDir="column"
-          padding={["0", "0", "10", "20"]}
+          pl={["0", "0", "8", "20"]}
+          pr={["0", "0", "8", "20"]}
+          pt={["0", "0", "8"]}
+          pb={["0", "0", "0", "8"]}
           alignItems="center"
           justifyContent="center"
         >
-          <Image w={["200px", "200px", "320px"]} h="110px" src={Logo} />
+          {isWideVersion ? (
+            <Image w={["200px", "200px", "320px"]} h="110px" src={Logo} />
+          ) : (
+            <Image w={["200px", "200px", "320px"]} h="110px" src={LogoMobile} />
+          )}
           <Box w="100%">
             <Text
               color="white"
@@ -98,10 +118,11 @@ export const SignInForm = () => {
             mt="10vh"
             w="100%"
             h="50px"
-            bg="blue.600"
+            bg={isWideVersion ? "blue.600" : "red.600"}
             fontWeight="700"
             color="white"
             borderRadius="10px"
+            _hover={isWideVersion ? { bg: "pink.100" } : { bg: "pink.800" }}
           >
             Sign In
           </Button>
@@ -114,7 +135,12 @@ export const SignInForm = () => {
               color="white"
             >
               Already have an account?
-              <Link color="blue.600" fontWeight="extrabold">
+              <Link
+                color="blue.600"
+                fontWeight="extrabold"
+                _hover={{ color: "pink.100" }}
+                onClick={() => navigate("/signup", { replace: true })}
+              >
                 Click here.
               </Link>
             </Text>
