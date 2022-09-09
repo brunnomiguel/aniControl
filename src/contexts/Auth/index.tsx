@@ -5,7 +5,7 @@ import {
   ReactNode,
   useCallback,
 } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { jsonApi } from "../../services/api";
 
 interface AuthProviderProps {
@@ -59,6 +59,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return {} as AuthState;
   });
 
+  const navigate = useNavigate();
+
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
     const response = await jsonApi.post("/signin/", { email, password });
 
@@ -68,6 +70,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.setItem("@AniControl:user", JSON.stringify(user));
 
     setData({ accessToken, user });
+
+    navigate("/dashboard", { replace: true });
   }, []);
 
   const signOut = useCallback(() => {
