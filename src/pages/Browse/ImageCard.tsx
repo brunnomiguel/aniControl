@@ -42,6 +42,7 @@ export const ImageCard = ({ anime }: ImageCardProps) => {
         onMouseLeave={hoverEventLeave}
         position="relative"
         onClick={handleClick}
+        height="270px"
       >
         <Image
           src={anime.images.jpg.image_url}

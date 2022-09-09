@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { useFullAnimes } from "../../contexts/FullAnimes";
 import { theme } from "../../styles/theme";
 import { DrawerLogout } from "./DrawerLogout";
+import { useLocation } from "react-router-dom";
+import { useAnimeList } from "../../contexts/AnimeList";
 
 interface SearchData {
   animeName: string;
@@ -16,11 +18,16 @@ interface SearchData {
 export const Header = () => {
   const { handleSubmit, register } = useForm<SearchData>();
   const { searchAnime } = useFullAnimes();
+  const { searchAnimeList } = useAnimeList();
+
+  const location = useLocation();
 
   const { isOpen, onClose, onToggle } = useDisclosure();
 
   const handleSearchAnime = ({ animeName }: SearchData) => {
-    searchAnime(animeName);
+    location.pathname === "/browse"
+      ? searchAnime(animeName)
+      : searchAnimeList(animeName);
   };
 
   return (

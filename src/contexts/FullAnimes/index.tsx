@@ -104,14 +104,14 @@ export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
     }
   }, []);
 
-  const searchAnime = useCallback(async (animeName: string) => {
+  const searchAnime = async (animeName: string) => {
     try {
       const response = await jikanApi.get(`/anime?letter=${animeName}`);
       setAllAnimes(response.data.data);
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  };
 
   return (
     <FullAnimesContext.Provider
