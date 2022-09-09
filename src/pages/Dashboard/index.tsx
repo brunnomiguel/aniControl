@@ -15,6 +15,12 @@ export const Dashboard = () => {
   const [FavoritesView, setFavoritesView] = useState(false);
 
   useEffect(() => {
+    if (window.innerWidth < 992) {
+      setSmallView(true);
+    } else {
+      setSmallView(false);
+    }
+
     const handleResize = () => {
       if (window.innerWidth < 992) {
         setSmallView(true);
@@ -38,7 +44,11 @@ export const Dashboard = () => {
       <Flex flexDir="row">
         {smallView ? (
           <>
-            <DashboardDrawer isOpen={isOpen} onClose={onClose} setFavoritesView={setFavoritesView} />
+            <DashboardDrawer
+              isOpen={isOpen}
+              onClose={onClose}
+              setFavoritesView={setFavoritesView}
+            />
             <HoveringButton onOpen={onOpen} />
           </>
         ) : (

@@ -24,7 +24,7 @@ export const DashboardListEmpty = () => {
           Just click on the the link bellow to be redirected.
         </Text>
         <Button
-          w="20%"
+          w="auto"
           bg="blue.50"
           _hover={{ bg: "blue.400" }}
           _active={{ bg: "blue.50" }}
