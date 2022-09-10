@@ -25,7 +25,7 @@ export const DrawerButton = ({ Icon, Title, bgColor, hoverColor, activeColor, ..
       onClick={rest.onClick}
     >
       <Icon />
-      <Text>{Title}</Text>
+      <Text ml="2">{Title}</Text>
     </Button>
   );
 };

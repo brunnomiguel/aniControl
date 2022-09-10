@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 
 import { IanimelistItem, useAnimeList } from "../../../contexts/AnimeList";
 
-import { DragDropContext, Draggable, Droppable, DropResult } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
 import { DashboardCard } from "../../../components/DashboardCard";
 
 import { DashboardListEmpty } from "./DashboardListEmpty";
@@ -42,13 +47,15 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [reswitch, setReswitch] = useState(false);
 
-  const handleUpdate = async () => {
-    await getUserAnimes().then((_) => setIsLoading(false));
-
-    const PlanToWatch = userAnimes.filter((anime) => anime.status === "planToWatch");
+  const handleUpdate = () => {
+    const PlanToWatch = userAnimes.filter(
+      (anime) => anime.status === "planToWatch"
+    );
     const Dropped = userAnimes.filter((anime) => anime.status === "dropped");
     const OnHold = userAnimes.filter((anime) => anime.status === "onHold");
-    const Completed = userAnimes.filter((anime) => anime.status === "completed");
+    const Completed = userAnimes.filter(
+      (anime) => anime.status === "completed"
+    );
     const Watching = userAnimes.filter((anime) => anime.status === "watching");
 
     setColumns({
@@ -63,15 +70,20 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
 
   useEffect(() => {
     handleUpdate();
+    getUserAnimes().then((_) => setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, FavoritesView]);
 
   useEffect(() => {
     handleUpdate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reswitch]);
+  }, [reswitch, userAnimes]);
 
-  const onDragEnd = (result: DropResult, columns: any, setColumns: React.Dispatch<React.SetStateAction<any>>) => {
+  const onDragEnd = (
+    result: DropResult,
+    columns: any,
+    setColumns: React.Dispatch<React.SetStateAction<any>>
+  ) => {
     if (!result.destination) return;
 
     const { source, destination } = result;
@@ -139,7 +151,9 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
         <DashboardListFavorites setReswitch={setReswitch} />
       ) : (
         <>
-          <DragDropContext onDragEnd={(result) => onDragEnd(result, columns, setColumns)}>
+          <DragDropContext
+            onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
+          >
             {Object.entries(columns).map(([columnId, column], index) => {
               return (
                 <Droppable droppableId={columnId} key={columnId}>
@@ -178,7 +192,11 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
                           {column &&
                             column.items.map((anime, index) => {
                               return (
-                                <Draggable key={anime.id} draggableId={`${anime.id}`} index={index}>
+                                <Draggable
+                                  key={anime.id}
+                                  draggableId={`${anime.id}`}
+                                  index={index}
+                                >
                                   {(provided) => {
                                     return (
                                       <div

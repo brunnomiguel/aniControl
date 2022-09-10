@@ -1,11 +1,15 @@
-import { Box, Center, Flex, Image } from "@chakra-ui/react";
+import { Box, Center, Flex, Image, useDisclosure } from "@chakra-ui/react";
 
 import { Input } from "../Input";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaTh } from "react-icons/fa";
 
 import Logo from "../../assets/logo-dash.svg";
 import { useForm } from "react-hook-form";
 import { useFullAnimes } from "../../contexts/FullAnimes";
+import { theme } from "../../styles/theme";
+import { DrawerLogout } from "./DrawerLogout";
+import { useLocation } from "react-router-dom";
+import { useAnimeList } from "../../contexts/AnimeList";
 
 interface SearchData {
   animeName: string;
@@ -14,9 +18,16 @@ interface SearchData {
 export const Header = () => {
   const { handleSubmit, register } = useForm<SearchData>();
   const { searchAnime } = useFullAnimes();
+  const { searchAnimeList } = useAnimeList();
+
+  const location = useLocation();
+
+  const { isOpen, onClose, onToggle } = useDisclosure();
 
   const handleSearchAnime = ({ animeName }: SearchData) => {
-    searchAnime(animeName);
+    location.pathname === "/browse"
+      ? searchAnime(animeName)
+      : searchAnimeList(animeName);
   };
 
   return (
@@ -36,11 +47,11 @@ export const Header = () => {
         src={Logo}
         ml={["2", "4", "4"]}
       />
-      <Box
+      <Flex
         as="form"
         onSubmit={handleSubmit(handleSearchAnime)}
         position="relative"
-        mr={["2", "4", "6"]}
+        mr={["2", "4", "4"]}
         w={["auto", "auto", "50%", "27%"]}
       >
         <Input {...register("animeName")} />
@@ -54,13 +65,17 @@ export const Header = () => {
           _active={{ bg: "red.600" }}
           position="absolute"
           top="1"
-          right="2"
+          right="12"
           type="submit"
           zIndex="1"
         >
           <FaSearch color="grey.0" />
         </Center>
-      </Box>
+        <Center ml="2" onClick={onToggle} as="button" fontSize="4xl">
+          <FaTh color={theme.colors.grey[300]} />
+        </Center>
+      </Flex>
+      <DrawerLogout isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
 };
