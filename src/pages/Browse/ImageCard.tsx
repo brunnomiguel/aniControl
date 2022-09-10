@@ -48,9 +48,10 @@ export const ImageCard = ({ anime }: ImageCardProps) => {
           src={anime.images.jpg.image_url}
           alt={anime.title}
           h="100%"
-          maxH="270px"
-          maxW="210px"
+          minH="270px"
+          minW="210px"
           w="100%"
+          borderRadius="10"
           cursor="pointer"
         />
         <Text

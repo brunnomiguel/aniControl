@@ -15,7 +15,7 @@ export const TopAnimes = () => {
     <Grid
       bg="grey.600"
       w={["100%", "100%", "500px", "500px"]}
-      h={["370px", "370px", "600px"]}
+      h={["370px", "370px", "87%"]}
       mb="4"
     >
       <Heading

@@ -5,6 +5,7 @@ import {
   Grid,
   Text,
   useBreakpointValue,
+  VStack,
 } from "@chakra-ui/react";
 import { BiFirstPage, BiLastPage } from "react-icons/bi";
 import { useEffect, useState } from "react";
@@ -50,21 +51,22 @@ export const Browse = () => {
           w="100%"
           justifyContent="space-between"
           direction={["column-reverse", "column-reverse", "row", "row"]}
+          pb="10"
         >
           <Grid
             w="100%"
             templateColumns="repeat(auto-fill, minmax(210px, 1fr))"
-            // justifyItems="center"
             gap="10"
+            justifyItems="center"
           >
             {allAnimes?.map((anime) => {
               return <ImageCard key={anime.mal_id} anime={anime} />;
             })}
           </Grid>
-          <Grid h="90vh" w={["100%", "100%", "500px"]}>
+          <VStack h="90vh" w={["100%", "100%", "500px"]}>
             <TopAnimes />
             <SeasonsAnimes />
-          </Grid>
+          </VStack>
         </Flex>
         <Flex>
           <Center onClick={previusPage}>

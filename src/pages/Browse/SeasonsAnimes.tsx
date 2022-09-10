@@ -15,7 +15,7 @@ export const SeasonsAnimes = () => {
     <Grid
       bg="grey.600"
       w={["100%", "100%", "500px"]}
-      h={["370px", "370px", "600px"]}
+      h={["370px", "370px", "87%"]}
       mb="6"
     >
       <Heading

@@ -23,6 +23,7 @@ export const TopAnimeView = ({ anime }: IDashboardCardProps) => {
             maxH="220px"
             h="100%"
             w="100%"
+            borderRadius="6"
             transition="0.2s all"
           />
         </Link>
