@@ -9,7 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { arrayVideo } from "./videos";
 import { useState, useRef, useEffect } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaBox, FaStar } from "react-icons/fa";
+import React from "react";
 
 interface videoItem {
 	name: string;
@@ -18,6 +19,7 @@ interface videoItem {
 	year: number;
 	genres: string[];
 	video: any;
+	time: string;
 	id: number;
 }
 
@@ -26,33 +28,89 @@ interface videoData {
 }
 
 const videoframe = keyframes`
-from {background: white;}
-to {background: black;}
+  from {
+		background: white;
+	}
+  to {
+		background: black;
+	}
 `;
 
+const timer = keyframes`
+  to {
+		--percentage: 100%;
+	}
+`;
+
+CSS?.registerProperty({
+	name: "--percentage",
+	syntax: "<percentage>",
+	initialValue: "0%",
+	inherits: false,
+});
+
 export const BrowseVideos = ({ arrayVideo }: videoData) => {
-	const refVideo: any = useRef();
+	const refVideo: any = React.useRef();
+	const [duration, setDuration] = useState(0);
+	const [randomArray, setRandomArray] = useState<any>([
+		arrayVideo[random(arrayVideo)],
+	]);
+	const videoRandomized = arrayVideo[random(arrayVideo)];
 
-	const [randomNumber, setRandomNumber] = useState(random(arrayVideo));
-
-	const selected = arrayVideo[randomNumber];
+	randomArray.map((video: object) => {
+		if (
+			video !== videoRandomized &&
+			randomArray[1] !== videoRandomized &&
+			randomArray.length <= 2
+		) {
+			return setRandomArray([...randomArray, videoRandomized]);
+		}
+	});
 
 	function random(arrayVideo: videoItem[]) {
 		let randomGenerated = Math.floor(Math.random() * arrayVideo.length);
 		return randomGenerated;
 	}
 
-	const ended = () => {
-		refVideo.load();
-		refVideo.play();
-	};
+	let videoObject = randomArray[0];
 
-	// useEffect(() => {
-	// 	ended();
-	// }, []);
+	const ended = (selectedVideo: object) => {
+		refVideo.current.load();
+		refVideo.current.play();
+		setDuration(refVideo.current.duration.toString());
+		setDuration(refVideo.current.duration.toString());
+		videoObject = selectedVideo;
+	};
 
 	return (
 		<Flex position="relative" justifyContent="center" pb="0" pt="50px" w="100%">
+			<Box>
+				{randomArray.map((item: object, index: number) => {
+					return (
+						<Box
+							key={index}
+							as="button"
+							position="absolute"
+							top={index === 0 ? "45%" : index === 1 ? "53%" : "61%"}
+							left="12%"
+							w="25px"
+							h="25px"
+							borderRadius="50%"
+							bg="conic-gradient(grey var(--percentage), rgba(0, 0, 0, 0.61) 0)"
+							animation={`${timer} ${duration.toString()}s infinite linear`}
+							boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
+							onClick={() => {
+								index === 0
+									? ended(randomArray[0])
+									: index === 1
+									? ended(randomArray[1])
+									: ended(randomArray[2]);
+							}}
+						/>
+					);
+				})}
+			</Box>
+
 			<Box
 				p="10"
 				w="800px"
@@ -63,7 +121,7 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
 				borderRadius="16px"
 				boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
 			>
-				<Heading as="h1">{selected.name}</Heading>
+				<Heading as="h1">{videoObject.name}</Heading>
 				<Text
 					color="grey.0"
 					overflowX="hidden"
@@ -84,17 +142,17 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
 						},
 					}}
 				>
-					{selected.synopsis}
+					{videoObject.synopsis}
 				</Text>
 				<Button w="200px" bg="red.600" mt="6">
 					Add
 				</Button>
 				<HStack spacing="4" mt="6" alignItems="center">
 					<FaStar fill="#EFDB73" />
-					<Text>{selected.rating}</Text>
-					<Text>Launching Year: {selected.year}</Text>
-					{selected.genres &&
-						selected.genres.map((element, index) => {
+					<Text>{videoObject.rating}</Text>
+					<Text>Launching Year: {videoObject.year}</Text>
+					{videoObject.genres &&
+						videoObject.genres.map((element: string, index: number) => {
 							return (
 								<Text key={index} color="grey.0" fontSize="sm">
 									{element}
@@ -108,13 +166,12 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
 				autoPlay
 				ref={refVideo}
 				muted={true}
-				onEnded={() => {
-					setRandomNumber(random(arrayVideo));
-					ended();
+				onPlay={() => {
+					setDuration(refVideo.current.duration.toString());
+					setDuration(refVideo.current.duration.toString());
 				}}
-				src={selected.video}
+				src={videoObject.video}
 				typeof="video/mp4"
-				// vjs-fluid
 				w="90vw"
 				h="80vh"
 				objectFit="cover"
