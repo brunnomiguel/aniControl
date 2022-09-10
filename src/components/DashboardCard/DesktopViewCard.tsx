@@ -1,4 +1,16 @@
-import { Badge, Box, Button, Flex, HStack, Image, Link, Progress, Text, theme, VStack } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Image,
+  Link,
+  Progress,
+  Text,
+  theme,
+  VStack,
+} from "@chakra-ui/react";
 
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
@@ -8,15 +20,43 @@ interface IDashboardCardProps {
   episode: number;
   handleFavoriteAnime: () => void;
   handleDeleteAnime: () => void;
+  onClick: () => void;
 }
 
-export const DesktopViewCard = ({ anime, episode, handleDeleteAnime, handleFavoriteAnime }: IDashboardCardProps) => {
-  const { images, trailer, title, rating, score, synopsis, year, genres } = anime;
+export const DesktopViewCard = ({
+  anime,
+  episode,
+  handleDeleteAnime,
+  handleFavoriteAnime,
+  onClick,
+}: IDashboardCardProps) => {
+  const { images, trailer, title, rating, score, synopsis, year, genres } =
+    anime;
+
+  const handleOnOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+
+    onClick();
+  };
 
   return (
     <VStack w="100%" h="auto" bg="grey.600" paddingBottom="5%">
-      <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="25rem" align="center">
-        <Link href={trailer.url} target="_blank" rel="noreferrer" h="96%" w={["50%", "50%"]}>
+      <Flex
+        w="100%"
+        justifyContent="space-evenly"
+        paddingTop="4%"
+        h="25rem"
+        align="center"
+      >
+        <Link
+          href={trailer.url}
+          target="_blank"
+          rel="noreferrer"
+          h="96%"
+          w={["50%", "50%"]}
+        >
           <Image
             src={images.jpg.large_image_url}
             border="0.3rem solid"
@@ -31,7 +71,13 @@ export const DesktopViewCard = ({ anime, episode, handleDeleteAnime, handleFavor
           <Text as="h2" fontWeight="bold" color="grey.0">
             {title}
           </Text>
-          <Flex color="grey.0" align="center" justify="flex-start" mt="5%" fontSize={12}>
+          <Flex
+            color="grey.0"
+            align="center"
+            justify="flex-start"
+            mt="5%"
+            fontSize={12}
+          >
             <FaStar fill="#EFDB73" />
             <Text fontWeight="bold">{score}</Text>
             <Text fontWeight="bold" ml="4%">
@@ -58,18 +104,36 @@ export const DesktopViewCard = ({ anime, episode, handleDeleteAnime, handleFavor
                 borderRadius: "24px",
               },
             }}
+            onClick={(e) => handleOnOpen(e)}
           >
             {synopsis}
           </Text>
           <Text mt="5%">
             Current Episode: {episode} / {anime.episodes}
           </Text>
-          <Progress hasStripe value={episode} max={anime.episodes} mb="5%" colorScheme="red" />
-          <Flex justify="flex-start" marginTop="2%" width={"100%"} flexWrap="wrap">
+          <Progress
+            hasStripe
+            value={episode}
+            max={anime.episodes}
+            mb="5%"
+            colorScheme="red"
+          />
+          <Flex
+            justify="flex-start"
+            marginTop="2%"
+            width={"100%"}
+            flexWrap="wrap"
+          >
             {genres &&
               genres.map((element, index) => {
                 return (
-                  <Text color="grey.0" fontWeight="bold" fontSize={12} marginLeft="2%" key={index}>
+                  <Text
+                    color="grey.0"
+                    fontWeight="bold"
+                    fontSize={12}
+                    marginLeft="2%"
+                    key={index}
+                  >
                     {element.name}
                   </Text>
                 );
