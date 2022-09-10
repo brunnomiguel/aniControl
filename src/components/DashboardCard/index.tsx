@@ -2,8 +2,9 @@ import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { useEffect, useState } from "react";
 import { MobileViewCard } from "./MobileViewCard";
 import { DesktopViewCard } from "./DesktopViewCard";
-import { Box } from "@chakra-ui/react";
+import { Box, useDisclosure } from "@chakra-ui/react";
 import { useAnimeList } from "../../contexts/AnimeList";
+import { ModalDashboard } from "../Modal/ModalDashboard";
 
 interface IAnimeInfo {
   anime: { data: animeProps };
@@ -22,7 +23,12 @@ interface IDashboardCardProps {
   setReswitch: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const DashboardCard = ({ anime, id, favorite, setReswitch }: IDashboardCardProps) => {
+export const DashboardCard = ({
+  anime,
+  id,
+  favorite,
+  setReswitch,
+}: IDashboardCardProps) => {
   const [smallView, setSmallView] = useState(false);
 
   const { episodes } = anime;
@@ -60,6 +66,8 @@ export const DashboardCard = ({ anime, id, favorite, setReswitch }: IDashboardCa
     }, 500);
   };
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Box width={["95vw", "95vw", "95vw", "33vw"]}>
       {smallView ? (
@@ -68,6 +76,7 @@ export const DashboardCard = ({ anime, id, favorite, setReswitch }: IDashboardCa
           episode={episodes}
           handleFavoriteAnime={handleFavoriteAnime}
           handleDeleteAnime={handleDeleteAnime}
+          onClick={onOpen}
         />
       ) : (
         <DesktopViewCard
@@ -75,8 +84,15 @@ export const DashboardCard = ({ anime, id, favorite, setReswitch }: IDashboardCa
           episode={episodes}
           handleFavoriteAnime={handleFavoriteAnime}
           handleDeleteAnime={handleDeleteAnime}
+          onClick={onOpen}
         />
       )}
+      <ModalDashboard
+        isOpen={isOpen}
+        onClose={onClose}
+        onOpen={onOpen}
+        anime={anime}
+      />
     </Box>
   );
 };
