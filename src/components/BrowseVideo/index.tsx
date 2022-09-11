@@ -100,8 +100,8 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
 										w="25px"
 										h="25px"
 										borderRadius="50%"
-										bg="conic-gradient(grey var(--percentage), rgba(0, 0, 0, 0.61) 0)"
-										animation={`${timer} ${duration.toString()}s infinite linear`}
+										bg="conic-gradient(rgba(105, 105, 105, 0.61) var(--percentage), rgba(0, 0, 0, 0.61) 0)"
+										animation={`${timer} ${duration.toString()}s linear`}
 										boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
 										onClick={() => {
 											index === 0
@@ -111,7 +111,7 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
 												: ended(randomArray[index], index);
 										}}
 										_hover={{
-											border: "2px solid white",
+											border: "2px solid rgba(255, 255, 255, 0.61)",
 										}}
 									/>
 								</>
@@ -137,7 +137,7 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
 												: ended(randomArray[index], index);
 										}}
 										_hover={{
-											border: "2px solid white",
+											border: "2px solid rgba(255, 255, 255, 0.61)",
 										}}
 									/>
 								</>
