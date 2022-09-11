@@ -11,6 +11,7 @@ import { arrayVideo } from "./videos";
 import { useState, useRef, useEffect } from "react";
 import { FaBox, FaStar } from "react-icons/fa";
 import React from "react";
+import { buffer } from "stream/consumers";
 
 interface videoItem {
 	name: string;
@@ -109,6 +110,9 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
 												? ended(randomArray[index], index)
 												: ended(randomArray[index], index);
 										}}
+										_hover={{
+											border: "2px solid white",
+										}}
 									/>
 								</>
 							) : (
@@ -122,7 +126,8 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
 										w="25px"
 										h="25px"
 										borderRadius="50%"
-										bg="conic-gradient(grey var(--percentage), rgba(0, 0, 0, 0.61) 0)"
+										bg="transparent"
+										border="2px solid rgba(0, 0, 0, 0.61)"
 										boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
 										onClick={() => {
 											index === 0
@@ -130,6 +135,9 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
 												: index === 1
 												? ended(randomArray[index], index)
 												: ended(randomArray[index], index);
+										}}
+										_hover={{
+											border: "2px solid white",
 										}}
 									/>
 								</>
