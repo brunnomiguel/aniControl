@@ -19,7 +19,6 @@ interface videoItem {
 	year: number;
 	genres: string[];
 	video: any;
-	time: string;
 	id: number;
 }
 
@@ -50,11 +49,13 @@ CSS?.registerProperty({
 });
 
 export const BrowseVideos = ({ arrayVideo }: videoData) => {
-	const refVideo: any = React.useRef();
+	const refVideo: any = useRef();
 	const [duration, setDuration] = useState(0);
 	const [randomArray, setRandomArray] = useState<any>([
 		arrayVideo[random(arrayVideo)],
 	]);
+	const [videoObject, setVideoObject] = useState(randomArray[0]);
+	const [indexRef, setIndexRef] = useState(0);
 	const videoRandomized = arrayVideo[random(arrayVideo)];
 
 	randomArray.map((video: object) => {
@@ -72,14 +73,13 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
 		return randomGenerated;
 	}
 
-	let videoObject = randomArray[0];
-
-	const ended = (selectedVideo: object) => {
+	const ended = (selectedVideo: object, indexRef: number) => {
+		setVideoObject(selectedVideo);
+		setIndexRef(indexRef);
 		refVideo.current.load();
 		refVideo.current.play();
 		setDuration(refVideo.current.duration.toString());
 		setDuration(refVideo.current.duration.toString());
-		videoObject = selectedVideo;
 	};
 
 	return (
@@ -87,26 +87,54 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
 			<Box>
 				{randomArray.map((item: object, index: number) => {
 					return (
-						<Box
-							key={index}
-							as="button"
-							position="absolute"
-							top={index === 0 ? "45%" : index === 1 ? "53%" : "61%"}
-							left="12%"
-							w="25px"
-							h="25px"
-							borderRadius="50%"
-							bg="conic-gradient(grey var(--percentage), rgba(0, 0, 0, 0.61) 0)"
-							animation={`${timer} ${duration.toString()}s infinite linear`}
-							boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
-							onClick={() => {
-								index === 0
-									? ended(randomArray[0])
-									: index === 1
-									? ended(randomArray[1])
-									: ended(randomArray[2]);
-							}}
-						/>
+						<>
+							{indexRef === index ? (
+								<>
+									<Box
+										key={index}
+										as="button"
+										position="absolute"
+										top={index === 0 ? "45%" : index === 1 ? "53%" : "61%"}
+										left="12%"
+										w="25px"
+										h="25px"
+										borderRadius="50%"
+										bg="conic-gradient(grey var(--percentage), rgba(0, 0, 0, 0.61) 0)"
+										animation={`${timer} ${duration.toString()}s infinite linear`}
+										boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
+										onClick={() => {
+											index === 0
+												? ended(randomArray[index], index)
+												: index === 1
+												? ended(randomArray[index], index)
+												: ended(randomArray[index], index);
+										}}
+									/>
+								</>
+							) : (
+								<>
+									<Box
+										key={index}
+										as="button"
+										position="absolute"
+										top={index === 0 ? "45%" : index === 1 ? "53%" : "61%"}
+										left="12%"
+										w="25px"
+										h="25px"
+										borderRadius="50%"
+										bg="conic-gradient(grey var(--percentage), rgba(0, 0, 0, 0.61) 0)"
+										boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
+										onClick={() => {
+											index === 0
+												? ended(randomArray[index], index)
+												: index === 1
+												? ended(randomArray[index], index)
+												: ended(randomArray[index], index);
+										}}
+									/>
+								</>
+							)}
+						</>
 					);
 				})}
 			</Box>
