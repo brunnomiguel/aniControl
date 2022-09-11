@@ -1,13 +1,4 @@
-import {
-  Center,
-  filter,
-  Flex,
-  Grid,
-  Text,
-  useBreakpointValue,
-  VStack,
-} from "@chakra-ui/react";
-import { BiFirstPage, BiLastPage } from "react-icons/bi";
+import { Flex, Grid, useBreakpointValue, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { useFullAnimes } from "../../contexts/FullAnimes";
@@ -16,6 +7,7 @@ import { TopAnimes } from "./TopAnimes";
 import { SeasonsAnimes } from "./SeasonsAnimes";
 import { BrowseVideos } from "../../components/BrowseVideo";
 import { arrayVideo } from "../../components/BrowseVideo/videos";
+import { Pagination } from "./Pagination";
 
 export const Browse = () => {
   const { allAnimes, getAllAnimes } = useFullAnimes();
@@ -44,7 +36,7 @@ export const Browse = () => {
         flexDirection="column"
         bgColor="grey.700"
         padding={["2", "2", "10"]}
-        w="100vw"
+        w="100%"
         minH="100vh"
       >
         <Flex
@@ -68,14 +60,8 @@ export const Browse = () => {
             <SeasonsAnimes />
           </VStack>
         </Flex>
-        <Flex>
-          <Center onClick={previusPage}>
-            <BiFirstPage />
-          </Center>
-          <Text>{page}</Text>
-          <Center onClick={() => setPage(page + 1)}>
-            <BiLastPage />
-          </Center>
+        <Flex w="100%" justifyContent="center" alignItems="center">
+          <Pagination page={page} previusPage={previusPage} setPage={setPage} />
         </Flex>
       </Flex>
     </>
