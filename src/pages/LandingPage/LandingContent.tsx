@@ -52,7 +52,7 @@ export const LandingContent = () => {
         {devId.map((id) => {
           return (
             <>
-              <AboultModal id={id} />
+              <AboultModal key={id} id={id} />
             </>
           );
         })}
