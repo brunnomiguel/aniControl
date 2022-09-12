@@ -2,6 +2,7 @@ import { Box, Center, Flex, Text, VStack } from "@chakra-ui/react";
 import { theme } from "../../styles/theme";
 import { GiPlainCircle } from "react-icons/gi";
 import { useAnimeList } from "../../contexts/AnimeList";
+import { useEffect } from "react";
 
 export const DrawerStatics = () => {
   const { userAnimes } = useAnimeList();
@@ -13,7 +14,9 @@ export const DrawerStatics = () => {
   const meanScore = () => {
     const rating = userAnimes.map((elem) => elem.rating);
 
-    return rating.length === 0 ? "0.00" : (rating.reduce((a, b) => a + b, 0) / rating.length).toFixed(2);
+    return rating.length === 0
+      ? "0.00"
+      : (rating.reduce((a, b) => a + b, 0) / rating.length).toFixed(2);
   };
   const episodesCount = () => {
     const episodes = userAnimes.map((elem) => elem.episodes);
@@ -21,19 +24,31 @@ export const DrawerStatics = () => {
   };
   const animeCount = userAnimes.length;
 
-  const planToWatchList = userAnimes.filter((anime) => anime.status === "planToWatch");
+  const planToWatchList = userAnimes.filter(
+    (anime) => anime.status === "planToWatch"
+  );
   const droppedList = userAnimes.filter((anime) => anime.status === "dropped");
   const onHoldList = userAnimes.filter((anime) => anime.status === "onHold");
-  const completedList = userAnimes.filter((anime) => anime.status === "completed");
-  const watchingList = userAnimes.filter((anime) => anime.status === "watching");
+  const completedList = userAnimes.filter(
+    (anime) => anime.status === "completed"
+  );
+  const watchingList = userAnimes.filter(
+    (anime) => anime.status === "watching"
+  );
 
   const animeStats = {
-    planToWatch: Math.round((planToWatchList.length / 145) * 100),
-    dropped: Math.round((droppedList.length / 145) * 100),
-    onHold: Math.round((onHoldList.length / 145) * 100),
-    completed: Math.round((completedList.length / 145) * 100),
-    watching: Math.round((watchingList.length / 145) * 100),
+    planToWatch: Math.round((planToWatchList.length / animeCount) * 100),
+    dropped: Math.round((droppedList.length / animeCount) * 100),
+    onHold: Math.round((onHoldList.length / animeCount) * 100),
+    completed: Math.round((completedList.length / animeCount) * 100),
+    watching: Math.round((watchingList.length / animeCount) * 100),
   };
+
+  useEffect(() => {
+    dayCount();
+    meanScore();
+    episodesCount();
+  }, [userAnimes]);
 
   return (
     <VStack bg="grey.700" borderRadius="8px" m="4% 4% 0% 4%">
@@ -51,12 +66,32 @@ export const DrawerStatics = () => {
       </Flex>
       <Flex w="100%" paddingBottom="5%" paddingTop="8%">
         <Box h="100%" width="10%" padding="2%">
-          <Box h="37vh" bg="grey.0">
-            <Flex h={`${animeStats.planToWatch}%`} w="100%" bg={theme.colors.grey[0]} borderTopRadius="2px" />
-            <Box h={`${animeStats.dropped}%`} w="100%" bg={theme.colors.red[50]} />
-            <Box h={`${animeStats.onHold}%`} w="100%" bg={theme.colors.yellow[50]} />
-            <Box h={`${animeStats.completed}%`} w="100%" bg={theme.colors.blue[100]} />
-            <Box h={`${animeStats.watching}%`} w="100%" bg={theme.colors.green[50]} borderBottomRadius="2px" />
+          <Box h="37vh" bg="tranparent" borderRadius="10px" overflow="hidden">
+            <Box
+              h={`${animeStats.planToWatch}%`}
+              w="100%"
+              bg={theme.colors.grey[0]}
+            />
+            <Box
+              h={`${animeStats.dropped}%`}
+              w="100%"
+              bg={theme.colors.red[50]}
+            />
+            <Box
+              h={`${animeStats.onHold}%`}
+              w="100%"
+              bg={theme.colors.yellow[50]}
+            />
+            <Box
+              h={`${animeStats.completed}%`}
+              w="100%"
+              bg={theme.colors.blue[100]}
+            />
+            <Box
+              h={`${animeStats.watching}%`}
+              w="100%"
+              bg={theme.colors.green[50]}
+            />
           </Box>
         </Box>
         <VStack w="95%" bg="grey.600" padding="4%" borderRadius="2px">

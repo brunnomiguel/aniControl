@@ -44,6 +44,7 @@ export const DashboardCard = ({
     };
 
     window.addEventListener("resize", handleResize);
+    handleResize();
   }, []);
 
   const { updateAnime, removeAnime } = useAnimeList();
@@ -77,6 +78,7 @@ export const DashboardCard = ({
           handleFavoriteAnime={handleFavoriteAnime}
           handleDeleteAnime={handleDeleteAnime}
           onClick={onOpen}
+          status={anime.status}
         />
       ) : (
         <DesktopViewCard
@@ -85,6 +87,7 @@ export const DashboardCard = ({
           handleFavoriteAnime={handleFavoriteAnime}
           handleDeleteAnime={handleDeleteAnime}
           onClick={onOpen}
+          status={anime.status}
         />
       )}
       <ModalDashboard

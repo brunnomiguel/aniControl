@@ -9,17 +9,17 @@ import {
   Link,
   Progress,
   Text,
-  theme,
 } from "@chakra-ui/react";
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
-
+import { theme } from "../../styles/theme";
 interface IDashboardCardProps {
   anime: animeProps;
   episode: number;
   handleFavoriteAnime: () => void;
   handleDeleteAnime: () => void;
   onClick: () => void;
+  status: string;
 }
 
 export const MobileViewCard = ({
@@ -28,6 +28,7 @@ export const MobileViewCard = ({
   handleDeleteAnime,
   handleFavoriteAnime,
   onClick,
+  status,
 }: IDashboardCardProps) => {
   const { images, trailer, title, rating, score, synopsis, year, genres } =
     anime;
@@ -40,8 +41,30 @@ export const MobileViewCard = ({
     onClick();
   };
 
+  const handleBorderColor = (status: string) => {
+    switch (status) {
+      case "planToWatch":
+        return theme.colors.grey[0];
+      case "dropped":
+        return theme.colors.red[50];
+      case "onHold":
+        return theme.colors.yellow[50];
+      case "completed":
+        return theme.colors.blue[100];
+      case "watching":
+        return theme.colors.green[50];
+    }
+  };
+
   return (
-    <Flex w="100%" flexDir="column" h="auto" bg="grey.600" paddingBottom="5%">
+    <Flex
+      w="100%"
+      flexDir="column"
+      h="auto"
+      bg="grey.600"
+      paddingBottom="5%"
+      borderRight={`0.3rem solid ${handleBorderColor(status)}`}
+    >
       <Flex
         w="100%"
         justifyContent="space-evenly"
@@ -116,7 +139,8 @@ export const MobileViewCard = ({
       </Badge>
       <Center flexDir={"column"}>
         <Text mt="5%" w={"75%"} textAlign="center">
-          Current Episode: {episode} / {anime.episodes}
+          Current Episode: {episode} /
+          {anime.episodes === null ? "Still Airing" : anime.episodes}
         </Text>
         <Progress
           hasStripe

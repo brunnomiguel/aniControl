@@ -1,4 +1,4 @@
-import { Flex, HStack, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 import { IanimelistItem, useAnimeList } from "../../../contexts/AnimeList";
@@ -14,6 +14,8 @@ import { DashboardCard } from "../../../components/DashboardCard";
 import { DashboardListEmpty } from "./DashboardListEmpty";
 import { DashboardListFavorites } from "./DashboardListFavorites";
 import { DashboardSkeleton } from "../../../components/Skeleton/DashboardSkeleton";
+import { GiPlainCircle } from "react-icons/gi";
+import { theme } from "../../../styles/theme";
 
 interface IDashboardListProps {
   FavoritesView: boolean;
@@ -123,6 +125,21 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
     }
   };
 
+  const handleBorderColor = (status: string) => {
+    switch (status) {
+      case "planToWatch":
+        return theme.colors.grey[0];
+      case "dropped":
+        return theme.colors.red[50];
+      case "onHold":
+        return theme.colors.yellow[50];
+      case "completed":
+        return theme.colors.blue[100];
+      case "watching":
+        return theme.colors.green[50];
+    }
+  };
+
   return (
     <HStack
       padding="1%"
@@ -170,22 +187,27 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
                             height="93vh"
                             align="center"
                           >
-                            <Text
-                              as="h2"
+                            <Flex
                               bg="#5A2843"
                               marginTop="1rem"
                               marginBottom="1rem"
                               borderRadius="4px"
-                              color="#ffffff"
                               textAlign="center"
                               fontWeight="bold"
                               padding="0.5rem"
                               fontSize="1.5rem"
                               width={["95vw", "95vw", "95vw", "35vw"]}
+                              alignItems="center"
+                              justifyContent="center"
                             >
-                              {column.name}
-                            </Text>
-
+                              <GiPlainCircle
+                                size="1.5rem"
+                                fill={handleBorderColor(columnId)}
+                              />
+                              <Text as="h2" color="#ffffff" ml="1%">
+                                {column.name}
+                              </Text>
+                            </Flex>
                             <VStack
                               width="90%"
                               spacing={6}
