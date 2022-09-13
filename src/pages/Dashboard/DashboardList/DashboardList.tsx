@@ -13,6 +13,7 @@ import { DashboardCard } from "../../../components/DashboardCard";
 
 import { DashboardListEmpty } from "./DashboardListEmpty";
 import { DashboardListFavorites } from "./DashboardListFavorites";
+import { DashboardSkeleton } from "../../../components/Skeleton/DashboardSkeleton";
 
 interface IDashboardListProps {
   FavoritesView: boolean;
@@ -145,86 +146,92 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
         },
       }}
     >
-      {userAnimes.length === 0 ? (
-        <DashboardListEmpty />
-      ) : FavoritesView ? (
-        <DashboardListFavorites setReswitch={setReswitch} />
+      {isLoading ? (
+        <DashboardSkeleton />
       ) : (
         <>
-          <DragDropContext
-            onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
-          >
-            {Object.entries(columns).map(([columnId, column], index) => {
-              return (
-                <Droppable droppableId={columnId} key={columnId}>
-                  {(provided) => {
-                    return (
-                      <Flex
-                        flexFlow="column nowrap"
-                        width={["95vw", "95vw", "95vw", "35vw"]}
-                        height="93vh"
-                        align="center"
-                      >
-                        <Text
-                          as="h2"
-                          bg="#5A2843"
-                          marginTop="1rem"
-                          marginBottom="1rem"
-                          borderRadius="4px"
-                          color="#ffffff"
-                          textAlign="center"
-                          fontWeight="bold"
-                          padding="0.5rem"
-                          fontSize="1.5rem"
-                          width={["95vw", "95vw", "95vw", "35vw"]}
-                        >
-                          {column.name}
-                        </Text>
+          {userAnimes.length === 0 ? (
+            <DashboardListEmpty />
+          ) : FavoritesView ? (
+            <DashboardListFavorites setReswitch={setReswitch} />
+          ) : (
+            <>
+              <DragDropContext
+                onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
+              >
+                {Object.entries(columns).map(([columnId, column], index) => {
+                  return (
+                    <Droppable droppableId={columnId} key={columnId}>
+                      {(provided) => {
+                        return (
+                          <Flex
+                            flexFlow="column nowrap"
+                            width={["95vw", "95vw", "95vw", "35vw"]}
+                            height="93vh"
+                            align="center"
+                          >
+                            <Text
+                              as="h2"
+                              bg="#5A2843"
+                              marginTop="1rem"
+                              marginBottom="1rem"
+                              borderRadius="4px"
+                              color="#ffffff"
+                              textAlign="center"
+                              fontWeight="bold"
+                              padding="0.5rem"
+                              fontSize="1.5rem"
+                              width={["95vw", "95vw", "95vw", "35vw"]}
+                            >
+                              {column.name}
+                            </Text>
 
-                        <VStack
-                          width="90%"
-                          spacing={6}
-                          {...provided.droppableProps}
-                          ref={provided.innerRef}
-                          height="93vh"
-                        >
-                          {provided.placeholder}
-                          {column &&
-                            column.items.map((anime, index) => {
-                              return (
-                                <Draggable
-                                  key={anime.id}
-                                  draggableId={`${anime.id}`}
-                                  index={index}
-                                >
-                                  {(provided) => {
-                                    return (
-                                      <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                      >
-                                        <DashboardCard
-                                          anime={anime}
-                                          id={anime.id}
-                                          key={index}
-                                          favorite={anime.favorite}
-                                          setReswitch={setReswitch}
-                                        />
-                                      </div>
-                                    );
-                                  }}
-                                </Draggable>
-                              );
-                            })}
-                        </VStack>
-                      </Flex>
-                    );
-                  }}
-                </Droppable>
-              );
-            })}
-          </DragDropContext>
+                            <VStack
+                              width="90%"
+                              spacing={6}
+                              {...provided.droppableProps}
+                              ref={provided.innerRef}
+                              height="93vh"
+                            >
+                              {provided.placeholder}
+                              {column &&
+                                column.items.map((anime, index) => {
+                                  return (
+                                    <Draggable
+                                      key={anime.id}
+                                      draggableId={`${anime.id}`}
+                                      index={index}
+                                    >
+                                      {(provided) => {
+                                        return (
+                                          <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                          >
+                                            <DashboardCard
+                                              anime={anime}
+                                              id={anime.id}
+                                              key={index}
+                                              favorite={anime.favorite}
+                                              setReswitch={setReswitch}
+                                            />
+                                          </div>
+                                        );
+                                      }}
+                                    </Draggable>
+                                  );
+                                })}
+                            </VStack>
+                          </Flex>
+                        );
+                      }}
+                    </Droppable>
+                  );
+                })}
+              </DragDropContext>
+            </>
+          )}
         </>
       )}
     </HStack>
