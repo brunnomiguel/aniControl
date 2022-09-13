@@ -1,17 +1,23 @@
 import { Flex, Grid, useBreakpointValue, VStack } from "@chakra-ui/react";
+
 import { useEffect, useState } from "react";
-import { Header } from "../../components/Header";
 import { useFullAnimes } from "../../contexts/FullAnimes";
-import { ImageCard } from "./ImageCard";
-import { TopAnimes } from "./TopAnimes";
-import { SeasonsAnimes } from "./SeasonsAnimes";
+
+import { Header } from "../../components/Header";
 import { BrowseVideos } from "../../components/BrowseVideo";
 import { arrayVideo } from "../../components/BrowseVideo/videos";
+import { ImageCardSkeleton } from "../../components/Skeleton/ImageCardSkeleton";
+
+import { ImageCard } from "./ImageCard";
+import { TopAnimes } from "./TopAnimes";
 import { Pagination } from "./Pagination";
+import { SeasonsAnimes } from "./SeasonsAnimes";
 
 export const Browse = () => {
-  const { allAnimes, getAllAnimes } = useFullAnimes();
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+
+  const { allAnimes, getAllAnimes } = useFullAnimes();
 
   const previusPage = () => {
     if (page > 1) {
@@ -20,7 +26,7 @@ export const Browse = () => {
   };
 
   useEffect(() => {
-    getAllAnimes(page);
+    getAllAnimes(page).then((_) => setLoading(false));
   }, [page]);
 
   const isWideVersion = useBreakpointValue({
@@ -51,9 +57,13 @@ export const Browse = () => {
             gap="10"
             justifyItems="center"
           >
-            {allAnimes?.map((anime) => {
-              return <ImageCard key={anime.mal_id} anime={anime} />;
-            })}
+            {loading ? (
+              <ImageCardSkeleton repeatCount={25} />
+            ) : (
+              allAnimes?.map((anime) => {
+                return <ImageCard key={anime.mal_id} anime={anime} />;
+              })
+            )}
           </Grid>
           <VStack h="90vh" w={["100%", "100%", "500px"]}>
             <TopAnimes />
