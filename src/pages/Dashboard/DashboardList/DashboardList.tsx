@@ -14,6 +14,7 @@ import { DashboardCard } from "../../../components/DashboardCard";
 import { DashboardListEmpty } from "./DashboardListEmpty";
 import { DashboardListFavorites } from "./DashboardListFavorites";
 import { DashboardSkeleton } from "../../../components/Skeleton/DashboardSkeleton";
+
 import { GiPlainCircle } from "react-icons/gi";
 import { theme } from "../../../styles/theme";
 
@@ -188,10 +189,13 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
                             align="center"
                           >
                             <Flex
+                            <Text
+                              as="h2"
                               bg="#5A2843"
                               marginTop="1rem"
                               marginBottom="1rem"
                               borderRadius="4px"
+                              color="#ffffff"
                               textAlign="center"
                               fontWeight="bold"
                               padding="0.5rem"
