@@ -189,8 +189,6 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
                             align="center"
                           >
                             <Flex
-                            <Text
-                              as="h2"
                               bg="#5A2843"
                               marginTop="1rem"
                               marginBottom="1rem"
