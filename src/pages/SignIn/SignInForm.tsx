@@ -90,7 +90,7 @@ export const SignInForm = () => {
               fontWeight="600"
               fontSize="2xl"
               textAlign="center"
-              m="2"
+              mt="30px"
             >
               Login
             </Text>
@@ -126,6 +126,17 @@ export const SignInForm = () => {
           >
             Sign In
           </Button>
+          <Flex flexDir="row" gap="20px" w="100%" mt="8">
+										<Button w="30%" h="25px" bg="white">
+											<FcGoogle />
+										</Button>
+										<Button h="25px" w="30%" bg="#155BCB">
+											<FaFacebookF fill="white" />
+										</Button>
+										<Button h="25px" w="30%" bg="black">
+											<FaApple fill="white" />
+										</Button>
+									</Flex>
           <Flex flexDir="column" justifyContent="center">
             <Text
               mt="3vh"
