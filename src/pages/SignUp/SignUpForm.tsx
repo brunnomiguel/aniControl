@@ -10,8 +10,8 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import Logo from "../../assets/logo-form.svg";
-import LogoMobile from "../../assets/logo-dash.svg";
+import Logo from "../../assets/imgs/logo-form.svg";
+import LogoMobile from "../../assets/imgs/logo-dash.svg";
 import { FcGoogle } from "react-icons/fc";
 import {
   FaApple,

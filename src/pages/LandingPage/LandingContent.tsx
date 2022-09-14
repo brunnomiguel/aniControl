@@ -2,11 +2,11 @@ import { Box, Flex, Image, Text, Grid } from "@chakra-ui/react";
 
 import { theme } from "../../styles/theme";
 
-import BackgroundImg from "../../assets/landLuffy.svg";
+import BackgroundImg from "../../assets/imgs/landLuffy.svg";
 import BgGrey from "../../../assets/background-landing-page.svg";
 import Heroes from "../../../assets/heroes2.svg";
 import Villains from "../../../assets/villains2.svg";
-import { AboultModal } from "../../components/Modal/AboultModal";
+import { AboutModal } from "../../components/Modal/AboutModal";
 import React from "react";
 
 export const LandingContent = () => {
@@ -50,11 +50,7 @@ export const LandingContent = () => {
       </Flex>
       <Flex w="100vw" justifyContent="space-around">
         {devId.map((id) => {
-          return (
-            <>
-              <AboultModal key={id} id={id} />
-            </>
-          );
+          return <AboutModal key={id} id={id} />;
         })}
       </Flex>
     </>
