@@ -1,5 +1,5 @@
-import { Box, Flex, Show, Hide, useBreakpointValue } from "@chakra-ui/react";
-import { BackgroundAnimationUp } from "../../components/BackgroundAnimationUp";
+import { Box, Flex, useBreakpointValue } from "@chakra-ui/react";
+import { BackgroundAnimation } from "../../components/BackgroundAnimation";
 import { BackgroundImg } from "./BackgroundImg";
 import { SignInForm } from "./SignInForm";
 
@@ -13,7 +13,9 @@ export const SignIn = () => {
     <>
       {isWideVersion ? (
         <Box>
-          <BackgroundAnimationUp />
+          <Box transform="rotate(180deg)">
+            <BackgroundAnimation />
+          </Box>
           <Flex
             position="fixed"
             top="0"
@@ -27,7 +29,7 @@ export const SignIn = () => {
           </Flex>
         </Box>
       ) : (
-        <Flex bg="#21212D" flexDir='row' justifyContent="center" w='100vw' >
+        <Flex bg="#21212D" flexDir="row" justifyContent="center" w="100vw">
           <SignInForm />
         </Flex>
       )}

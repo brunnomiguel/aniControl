@@ -1,7 +1,8 @@
-import { Box, Flex, Image, Link, Text, VStack, HStack } from "@chakra-ui/react";
+import { FaStar } from "react-icons/fa";
 
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
-import { FaStar } from "react-icons/fa";
+
+import { Box, Flex, Image, Link, Text, VStack, HStack } from "@chakra-ui/react";
 
 interface IDashboardCardProps {
   anime: animeProps;
@@ -23,6 +24,7 @@ export const TopAnimeView = ({ anime }: IDashboardCardProps) => {
             maxH="220px"
             h="100%"
             w="100%"
+            borderRadius="6"
             transition="0.2s all"
           />
         </Link>

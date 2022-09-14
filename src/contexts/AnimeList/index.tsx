@@ -4,12 +4,15 @@ import {
   ReactNode,
   useContext,
   useState,
-  useCallback,
+  useEffect,
 } from "react";
 
 import { animeProps } from "../FullAnimes/fullAnimes.types";
-import { jsonApi } from "../../services/api";
+
 import { useAuth } from "../Auth";
+
+import { jsonApi } from "../../services/api";
+import { useToast } from "@chakra-ui/react";
 
 interface IAnimeListProps {
   children: ReactNode;
@@ -22,14 +25,16 @@ export interface IanimelistItem {
   episodes: number;
   userId: number;
   id: number;
+  favorite: boolean;
 }
 
 interface IanimeListContextData {
   userAnimes: IanimelistItem[];
-  addAnime: (anime: object) => Promise<void>;
+  addAnime: (anime: object, animeId: number) => Promise<void>;
   removeAnime: (animeId: number) => Promise<void>;
   getUserAnimes: () => Promise<void>;
   updateAnime: (newInfo: object, animeId: number) => Promise<void>;
+  searchAnimeList: (animeName: string) => void;
 }
 
 const animeListContext = createContext<IanimeListContextData>(
@@ -51,27 +56,56 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
 
   const { accessToken, user } = useAuth();
 
-  const addAnime = useCallback(async (anime: object) => {
+  const toast = useToast();
+
+  useEffect(() => {
+    getUserAnimes();
+  }, []);
+
+  const addAnime = async (anime: object, animeId: number) => {
     const body = {
-      anime: anime,
-      status: "Plan to Watch",
+      anime: { data: anime },
+      status: "planToWatch",
       rating: 0,
       episodes: 1,
       userId: user.id,
       favorite: false,
     };
 
-    await jsonApi
-      .post("animesList/", body, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
-      .then((res) => {
-        setUserAnimes([...userAnimes, res.data]);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    const verifyAnime = userAnimes.findIndex(
+      (anime) => anime.anime.data.mal_id === animeId
+    );
 
-  const removeAnime = useCallback(async (animeId: number) => {
+    console.log(userAnimes);
+
+    if (verifyAnime === -1) {
+      await jsonApi
+        .post("/animesList/", body, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        })
+        .then((_) => {
+          getUserAnimes();
+          toast({
+            title: "Success!",
+            description: "Anime included with success",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
+        })
+        .catch((err) => console.log(err));
+    } else {
+      toast({
+        title: "Oopss!",
+        description: "The anime has already been added",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const removeAnime = async (animeId: number) => {
     await jsonApi
       .delete(`animesList/${animeId}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -81,9 +115,9 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
         console.log(res);
       })
       .catch((err) => console.log(err));
-  }, []);
+  };
 
-  const getUserAnimes = useCallback(async () => {
+  const getUserAnimes = async () => {
     await jsonApi
       .get(`animesList?user_id=${user.id}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -92,20 +126,42 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
         setUserAnimes(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  };
 
-  const updateAnime = useCallback(async (newInfo: object, animeId: number) => {
+  const updateAnime = async (newInfo: object, animeId: number) => {
     await jsonApi
       .patch(`animesList/${animeId}`, newInfo, {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
-      .then((res) => console.log(res))
+      .then((_) => {
+        getUserAnimes();
+      })
       .catch((err) => console.log(err));
-  }, []);
+  };
+
+  const searchAnimeList = (animeName: string) => {
+    animeName.toLocaleLowerCase();
+    if (animeName === "") {
+      getUserAnimes();
+    } else {
+      const filteredAnimes = userAnimes.filter((anime) =>
+        anime.anime.data.title.toLocaleLowerCase().includes(animeName)
+      );
+      console.log(filteredAnimes);
+      setUserAnimes(filteredAnimes);
+    }
+  };
 
   return (
     <animeListContext.Provider
-      value={{ userAnimes, addAnime, removeAnime, getUserAnimes, updateAnime }}
+      value={{
+        userAnimes,
+        addAnime,
+        removeAnime,
+        getUserAnimes,
+        updateAnime,
+        searchAnimeList,
+      }}
     >
       {children}
     </animeListContext.Provider>

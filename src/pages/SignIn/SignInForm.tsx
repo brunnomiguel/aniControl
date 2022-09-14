@@ -2,58 +2,54 @@ import {
   Box,
   Button,
   Flex,
-  FormLabel,
   Image,
   Link,
   Text,
+  useBreakpointValue,
   VStack,
 } from "@chakra-ui/react";
-import Logo from "../../assets/logo-form.svg";
+
+import Logo from "../../assets/imgs/logo-form.svg";
+import LogoMobile from "../../assets/imgs/logo-dash.svg";
+
+import { FaApple, FaEnvelope, FaFacebookF, FaLock } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import {
-  FaApple,
-  FaEnvelope,
-  FaFacebookF,
-  FaKey,
-  FaLock,
-} from "react-icons/fa";
+
 import { Input } from "../../components/Input";
+
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { sign } from "crypto";
+
 import { useAuth } from "../../contexts/Auth";
 
-const signInSchema = yup.object().shape({
-  email: yup
-    .string()
-    .required("Por favor informe o email")
-    .email("Invalid email"),
-  password: yup.string().required("Por favor informe a senha"),
-});
+import { signInSchema } from "../../schemas";
+import { useNavigate } from "react-router-dom";
 
-interface SignInDados {
+interface SignInData {
   email: string;
   password: string;
 }
 
 export const SignInForm = () => {
   const { signIn } = useAuth();
+  const navigate = useNavigate();
 
   const {
     formState: { errors },
     register,
     handleSubmit,
-  } = useForm<SignInDados>({
+  } = useForm<SignInData>({
     resolver: yupResolver(signInSchema),
   });
 
-  const handleSignIn = ({ email, password }: SignInDados) => {
-    signIn({ email, password }).catch(
-      (err) => "Erro ao logar, tente novamente!"
-    );
-    console.log("teste");
+  const handleSignIn = ({ email, password }: SignInData) => {
+    signIn({ email, password });
   };
+
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    md: true,
+  });
 
   return (
     <>
@@ -63,14 +59,12 @@ export const SignInForm = () => {
         w="35vw"
         bg="rgba(217, 217, 217, 0.5);"
         filter="blur(2px)"
-      ></Flex>
+      />
       <Flex
         position="fixed"
-        right={["10%","10%",0,0]}
-        
+        right={["none", "none", "0", "0"]}
         h="100vh"
-        w={["80vw", "80vw", "35vw", "35vw"]}
-        justifyContent="center"
+        w={["80vw", "60vw", "35vw", "35vw"]}
       >
         <Flex
           as="form"
@@ -78,11 +72,18 @@ export const SignInForm = () => {
           h="100vh"
           w="100%"
           flexDir="column"
-          padding='50px'
+          pl={["0", "0", "8", "20"]}
+          pr={["0", "0", "8", "20"]}
+          pt={["0", "0", "8"]}
+          pb={["0", "0", "0", "8"]}
           alignItems="center"
           justifyContent="center"
         >
-          <Image w={["200px", "200px", "320px"]} h="110px" src={Logo} />
+          {isWideVersion ? (
+            <Image w={["200px", "200px", "320px"]} h="110px" src={Logo} />
+          ) : (
+            <Image w={["200px", "200px", "320px"]} h="110px" src={LogoMobile} />
+          )}
           <Box w="100%">
             <Text
               color="white"
@@ -93,37 +94,37 @@ export const SignInForm = () => {
             >
               Login
             </Text>
-            <VStack mt="10" spacing="10">
-              <Box w="100%">
-                <Input
-                  //   name="email" não é necessário name, pois ele será inserido no register
-                  label="Email"
-                  icon={FaEnvelope}
-                  type="email"
-                  placeholder="Your email"
-                  {...register("email")}
-                ></Input>
-                <Input
-                  label="Password"
-                  icon={FaKey}
-                  type="password"
-                  placeholder="Your password"
-                  {...register("password")}
-                ></Input>
-              </Box>
+            <VStack mt="10" spacing="6">
+              <Input
+                label="Email"
+                icon={FaEnvelope}
+                type="email"
+                placeholder="Your email"
+                {...register("email")}
+                error={errors.email}
+              />
+              <Input
+                label="Password"
+                icon={FaLock}
+                type="password"
+                placeholder="Your password"
+                {...register("password")}
+                error={errors.password}
+              />
             </VStack>
           </Box>
           <Button
             type="submit"
             mt="10vh"
             w="100%"
-            h="50px"  
-            bg="blue.600"
+            h="50px"
+            bg={isWideVersion ? "blue.600" : "red.600"}
             fontWeight="700"
             color="white"
             borderRadius="10px"
+            _hover={isWideVersion ? { bg: "pink.100" } : { bg: "pink.800" }}
           >
-            SignIn
+            Sign In
           </Button>
           <Flex flexDir="row" gap="20px" w="100%" mt="8">
 										<Button w="30%" h="25px" bg="white">
@@ -145,8 +146,13 @@ export const SignInForm = () => {
               color="white"
             >
               Already have an account?
-              <Link color="blue.600" fontWeight="extrabold">
-                click here.
+              <Link
+                color="blue.600"
+                fontWeight="extrabold"
+                _hover={{ color: "pink.100" }}
+                onClick={() => navigate("/signup", { replace: true })}
+              >
+                Click here.
               </Link>
             </Text>
           </Flex>

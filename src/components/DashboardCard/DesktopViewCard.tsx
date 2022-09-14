@@ -6,36 +6,73 @@ import {
   HStack,
   Image,
   Link,
+  Progress,
   Text,
   VStack,
 } from "@chakra-ui/react";
 
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { FaStar } from "react-icons/fa";
-import { useAnimeList } from "../../contexts/AnimeList";
+import { theme } from "../../styles/theme";
 
 interface IDashboardCardProps {
   anime: animeProps;
-  id: number;
+  episode: number;
+  handleFavoriteAnime: () => void;
+  handleDeleteAnime: () => void;
+  onClick: () => void;
+  status: string;
 }
 
-export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
+export const DesktopViewCard = ({
+  anime,
+  episode,
+  handleDeleteAnime,
+  handleFavoriteAnime,
+  onClick,
+  status,
+}: IDashboardCardProps) => {
   const { images, trailer, title, rating, score, synopsis, year, genres } =
     anime;
 
-  const { updateAnime, removeAnime } = useAnimeList();
+  const handleOnOpen = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
 
-  const handleFavoriteAnime = () => {
-    updateAnime({ favorite: true }, id);
+    onClick();
   };
 
-  const handleDeleteAnime = () => {
-    removeAnime(id);
+  const handleBorderColor = (status: string) => {
+    switch (status) {
+      case "planToWatch":
+        return theme.colors.grey[0];
+      case "dropped":
+        return theme.colors.red[50];
+      case "onHold":
+        return theme.colors.yellow[50];
+      case "completed":
+        return theme.colors.blue[100];
+      case "watching":
+        return theme.colors.green[50];
+    }
   };
 
   return (
-    <VStack w="100%" h="auto" bg="#2C2C38" paddingBottom="5%">
-      <Flex w="100%" justifyContent="space-evenly" paddingTop="4%" h="25rem">
+    <VStack
+      w="100%"
+      h="auto"
+      bg="grey.600"
+      paddingBottom="5%"
+      borderRight={`0.3rem solid ${handleBorderColor(status)}`}
+    >
+      <Flex
+        w="100%"
+        justifyContent="space-evenly"
+        paddingTop="4%"
+        h="25rem"
+        align="center"
+      >
         <Link
           href={trailer.url}
           target="_blank"
@@ -46,19 +83,19 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
           <Image
             src={images.jpg.large_image_url}
             border="0.3rem solid"
-            borderColor="#5CC6DC"
-            _hover={{ borderColor: "#0C6072" }}
+            borderColor="blue.50"
+            _hover={{ borderColor: "blue.400" }}
             h="100%"
             w="100%"
             transition={"0.2s all"}
           />
         </Link>
         <Box w="40%" h="100%">
-          <Text as="h2" fontWeight="bold" color="#FFFFFF">
+          <Text as="h2" fontWeight="bold" color="grey.0">
             {title}
           </Text>
           <Flex
-            color="#ffffff"
+            color="grey.0"
             align="center"
             justify="flex-start"
             mt="5%"
@@ -70,14 +107,14 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
               Launching Year: {year}
             </Text>
           </Flex>
-          <Badge fontWeight="bold" fontSize="0.5rem" bg="#5CC6DC">
+          <Badge fontWeight="bold" fontSize="0.5rem" bg="blue.50">
             {rating}
           </Badge>
           <Text
-            color="#FFFFFF"
+            color="grey.0"
             overflowX="hidden"
             overflowY="auto"
-            h="15rem"
+            h="10rem"
             css={{
               "&::-webkit-scrollbar": {
                 width: "4px",
@@ -86,22 +123,39 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
                 width: "6px",
               },
               "&::-webkit-scrollbar-thumb": {
-                background: "#5CC6DC",
+                background: `${theme.colors.blue[50]}`,
                 borderRadius: "24px",
               },
             }}
+            onClick={(e) => handleOnOpen(e)}
           >
             {synopsis}
           </Text>
-          <Flex justify="flex-start" marginTop="2%">
+          <Text mt="5%">
+            Current Episode: {episode} /{" "}
+            {anime.episodes === null ? "Still Airing" : anime.episodes}
+          </Text>
+          <Progress
+            hasStripe
+            value={episode}
+            max={anime.episodes}
+            mb="5%"
+            colorScheme="red"
+          />
+          <Flex
+            justify="flex-start"
+            marginTop="2%"
+            width={"100%"}
+            flexWrap="wrap"
+          >
             {genres &&
               genres.map((element, index) => {
                 return (
                   <Text
-                    color="#FFFFFF"
+                    color="grey.0"
                     fontWeight="bold"
                     fontSize={12}
-                    marginLeft="5%"
+                    marginLeft="2%"
                     key={index}
                   >
                     {element.name}
@@ -114,10 +168,10 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
               justifyContent="space-evenly"
               w="50%"
               mr="3%"
-              bg="#5CC6DC"
-              _hover={{ bg: "#0C6072" }}
-              _active={{ bg: "#5CC6DC" }}
-              color="#FFFFFF"
+              bg="blue.50"
+              _hover={{ bg: "blue.400" }}
+              _active={{ bg: "blue.50" }}
+              color="grey.0"
               fontSize="0.75rem"
               onClick={handleFavoriteAnime}
             >
@@ -126,10 +180,10 @@ export const DesktopViewCard = ({ anime, id }: IDashboardCardProps) => {
             </Button>
             <Button
               w="50%"
-              bg="#5CC6DC"
-              _hover={{ bg: "#0C6072" }}
-              _active={{ bg: "#5CC6DC" }}
-              color="#FFFFFF"
+              bg="blue.50"
+              _hover={{ bg: "blue.400" }}
+              _active={{ bg: "blue.50" }}
+              color="grey.0"
               fontSize="0.75rem"
               onClick={handleDeleteAnime}
             >
