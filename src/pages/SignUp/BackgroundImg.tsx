@@ -1,5 +1,5 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
-import ImgRegister from "../../assets/sign-up-image.svg";
+import ImgRegister from "../../assets/imgs/sign-up-image.svg";
 
 export const BackgroundImg = () => {
   return (

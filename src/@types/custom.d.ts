@@ -1,5 +1,6 @@
 declare module "*.mp4" {
-  export const src: string;
+  const src: string;
+  export default src;
 }
 
 declare namespace CSS {

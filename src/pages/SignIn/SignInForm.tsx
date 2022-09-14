@@ -9,8 +9,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import Logo from "../../assets/logo-form.svg";
-import LogoMobile from "../../assets/logo-dash.svg";
+import Logo from "../../assets/imgs/logo-form.svg";
+import LogoMobile from "../../assets/imgs/logo-dash.svg";
 
 import { FaApple, FaEnvelope, FaFacebookF, FaLock } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
