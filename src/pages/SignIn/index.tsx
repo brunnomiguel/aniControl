@@ -21,7 +21,7 @@ export const SignIn = () => {
             flexDir="row"
             h="100vh"
             w="100vw"
-          >
+          > 
             <BackgroundImg />
             <SignInForm />
           </Flex>
@@ -34,38 +34,3 @@ export const SignIn = () => {
     </>
   );
 };
-
-// BKP
-// return (
-//   <Box>
-//     <BackgroundAnimationUp />
-//     <Flex
-//       position="fixed"
-//       top="0"
-//       left="0"
-//       flexDirection={["column", "column", "row", "row"]}
-//       h="100vh"
-//       w="100vw"
-//     >
-//       <BackgroundImg />
-//       <SignInForm />
-//     </Flex>
-//     {/* <Show breakpoint="(max-width: 700px)">
-//       <BackgroundAnimationUp />
-//       <Flex
-//         position="fixed"
-//         top="0"
-//         left="0"
-//         flexDirection={["column", "column", "row", "row"]}
-//         h="100vh"
-//         w="100vw"
-//       >
-//         <BackgroundImg />
-//         <SignInForm />
-//       </Flex>{" "}
-//     </Show>
-//     <Show breakpoint="(max-width: 400px)">
-//       <SignInForm />{" "}
-//     </Show> */}
-//   </Box>
-// );
