@@ -72,14 +72,10 @@ export const SignInForm = () => {
           h="100vh"
           w="100%"
           flexDir="column"
-<<<<<<< HEAD
-          padding='50px'
-=======
           pl={["0", "0", "8", "20"]}
           pr={["0", "0", "8", "20"]}
           pt={["0", "0", "8"]}
           pb={["0", "0", "0", "8"]}
->>>>>>> 61b233036889fee45391717d804d6774450a8593
           alignItems="center"
           justifyContent="center"
         >
@@ -121,13 +117,8 @@ export const SignInForm = () => {
             type="submit"
             mt="10vh"
             w="100%"
-<<<<<<< HEAD
-            h="50px"  
-            bg="blue.600"
-=======
             h="50px"
             bg={isWideVersion ? "blue.600" : "red.600"}
->>>>>>> 61b233036889fee45391717d804d6774450a8593
             fontWeight="700"
             color="white"
             borderRadius="10px"
