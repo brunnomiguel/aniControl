@@ -119,7 +119,7 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
 
   const getUserAnimes = async () => {
     await jsonApi
-      .get(`animesList?user_id=${user.id}`, {
+      .get(`animesList?userId=${user.id}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((res) => {
