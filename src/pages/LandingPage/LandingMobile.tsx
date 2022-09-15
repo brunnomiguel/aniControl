@@ -1,12 +1,14 @@
 import { Box, Flex, Image, Text, Container } from "@chakra-ui/react";
+import { FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
 
-import BgGrey from "../../assets/background-landing-page.svg";
-import DevBack from "../../assets/luffy.jpg";
-import Logo from "../../assets/logo-dash.svg";
+import { useState } from "react";
+
+import Logo from "../../assets/imgs/logo-dash.svg";
+import DevBack from "../../assets/imgs/landLuffy.svg";
+import BgGrey from "../../assets/imgs/background-landing-page.svg";
+
 import { useNavigate } from "react-router-dom";
 import { AboutModal } from "../../components/Modal/AboutModal";
-import { useState } from "react";
-import { FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
 
 export const LandingMobile = () => {
   const nav = useNavigate();

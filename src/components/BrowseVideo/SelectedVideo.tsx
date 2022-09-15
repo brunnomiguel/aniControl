@@ -24,6 +24,13 @@ const timer = keyframes`
 	}
 `;
 
+CSS?.registerProperty({
+  name: "--percentage",
+  syntax: "<percentage>",
+  initialValue: "0%",
+  inherits: false,
+});
+
 export const SelectedVideo = ({
   indexRef,
   index,
@@ -51,7 +58,9 @@ export const SelectedVideo = ({
           ? "0.5px 0.5px rgba(0, 0, 0, 0.31),1px 1px rgba(0, 0, 0, 0.31), 1.5px 1.5px rgba(0, 0, 0, 0.31)"
           : ""
       }
-      border={indexRef === index ? "transparent" : "2px solid rgba(0, 0, 0, 0.61)"}
+      border={
+        indexRef === index ? "transparent" : "2px solid rgba(0, 0, 0, 0.61)"
+      }
       transition="all 0.3s ease;"
       _hover={
         indexRef === index
