@@ -13,6 +13,8 @@ import {
   Text,
   Flex,
   VStack,
+  useToast,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import {
   FaEnvelope,
@@ -21,13 +23,13 @@ import {
   FaTimes,
   FaUser,
 } from "react-icons/fa";
-import { theme } from "../../styles/theme";
-import { Input } from "../../components/Input";
+import { theme } from "../../../styles/theme";
+import { Input } from "../../Input";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAuth } from "../../contexts/Auth";
-import { jsonApi } from "../../services/api";
+import { useAuth } from "../../../contexts/Auth";
+import { jsonApi } from "../../../services/api";
 
 const updateSchema = yup.object().shape({
   name: yup.string().required("Nome obrigatório"),
@@ -50,14 +52,24 @@ interface ModalSucessProps {
   isOpen: boolean;
   onClose: () => void;
   onClick: () => void;
+  userId: number;
+  userName: string;
 }
 
 export const ModalSucess = ({
   isOpen,
   onClose,
   onClick,
+  userId,
+  userName,
 }: ModalSucessProps) => {
-  const { signIn } = useAuth();
+  // const {  } = useAuth();
+  // ainda falta uma função pra atualização dos dados
+  const toast = useToast();
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    md: true,
+  });
 
   const {
     formState: { errors },
@@ -69,11 +81,31 @@ export const ModalSucess = ({
 
   const handleUserUpdate = ({ name, email, password }: UpdateUserData) => {
     jsonApi
-      .post("/register", { name, email, password })
+      .patch(
+        `/users/${userId}/`,
+        { name, email, password }
+        // verficar token
+      )
       .then((response) => {
+        // add toast de sucesso
+        onClose();
+        toast({
+          title: "Success!",
+          description: "Updated data!!",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
         console.log("Dados atualizados corretamente");
       })
       .catch((err) => {
+        toast({
+          title: "Fail!",
+          description: "Error updating data!",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
         console.log("falha ao atualizar os dados");
       });
   };
@@ -86,7 +118,7 @@ export const ModalSucess = ({
           <FaUser color={theme.colors.white} />
         </Center>
         <Text fontWeight="bold" ml="2">
-          Usuário
+          {userName}
         </Text>
         <Center
           as="button"
@@ -151,7 +183,8 @@ export const ModalSucess = ({
             mt="10vh"
             w="100%"
             h="50px"
-            bg="blue.600"
+            bg="red.500"
+            _hover={isWideVersion ? { bg: "pink.100" } : { bg: "pink.800" }}
             fontWeight="700"
             color="white"
             borderRadius="10px"

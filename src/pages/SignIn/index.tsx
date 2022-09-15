@@ -35,4 +35,8 @@ export const SignIn = () => {
       )}
     </>
   );
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 31e4f662fb2a1cb6c6f83a0351e934d73af9ed74
