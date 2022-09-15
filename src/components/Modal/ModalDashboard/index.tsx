@@ -35,8 +35,14 @@ export const ModalDashboard = ({
         size="2xl"
       >
         <ModalOverlay bg="rgba(0, 0, 0, 0.8)" />
-        <ModalContent w="100vw" position="fixed" h="60vh" borderRadius={10}>
-          <ModalHeader bg="red.600" borderTopRadius={10}>
+        <ModalContent
+          w="100vw"
+          position="fixed"
+          h="60vh"
+          borderRadius={10}
+          overflow="hidden"
+        >
+          <ModalHeader bg="red.600">
             <Image src={Logo} h="5vh" />
             <ModalCloseButton size="lg" />
           </ModalHeader>
