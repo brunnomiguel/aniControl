@@ -31,8 +31,7 @@ export const ModalDashboardForm = ({ anime, id }: IModalDashboardFormProps) => {
 
   const onSubmit = (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault();
-    getUserAnimes();
-    updateAnime(data, id).then((_) => console.log("Funcionou!"));
+    updateAnime(data, id).then((_) => getUserAnimes());
   };
 
   return (
