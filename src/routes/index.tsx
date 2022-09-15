@@ -10,18 +10,18 @@ import { LandingPage } from "../pages/LandingPage";
 import ProtectedRoute from "./protectedRoute";
 
 export const MainRoutes = () => {
-	return (
-		<Routes>
-			<Route path="/" element={<LandingPage />} />
-			<Route path="/signin" element={<SignIn />} />
-			<Route path="/signup" element={<SignUp />} />
-			<Route element={<ProtectedRoute />}>
-				<Route path="/dashboard" element={<Dashboard />} />
-			</Route>
-			<Route element={<ProtectedRoute />}>
-				<Route path="/browse" element={<Browse />} />
-			</Route>
-			<Route path="/404" element={<NotFound />} />
-		</Routes>
-	);
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
+      <Route element={<ProtectedRoute />}>
+        <Route path="/browse" element={<Browse />} />
+      </Route>
+      <Route path="/*" element={<NotFound />} />
+    </Routes>
+  );
 };
