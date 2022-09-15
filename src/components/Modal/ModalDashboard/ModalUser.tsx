@@ -23,13 +23,13 @@ import {
   FaTimes,
   FaUser,
 } from "react-icons/fa";
-import { theme } from "../../styles/theme";
-import { Input } from "../../components/Input";
+import { theme } from "../../../styles/theme";
+import { Input } from "../../Input";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAuth } from "../../contexts/Auth";
-import { jsonApi } from "../../services/api";
+import { useAuth } from "../../../contexts/Auth";
+import { jsonApi } from "../../../services/api";
 
 const updateSchema = yup.object().shape({
   name: yup.string().required("Nome obrigatório"),

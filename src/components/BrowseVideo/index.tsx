@@ -1,16 +1,8 @@
-import {
-  Box,
-  Text,
-  Flex,
-  Heading,
-  keyframes,
-  Button,
-  HStack,
-} from "@chakra-ui/react";
+import { Box, Flex, keyframes } from "@chakra-ui/react";
 
-import { FaStar } from "react-icons/fa";
 import { useState, useRef } from "react";
 import { SelectedVideo } from "./SelectedVideo";
+import { VideoContent } from "./VideoContent";
 
 interface videoItem {
   name: string;
@@ -34,13 +26,6 @@ const videoframe = keyframes`
 		background: black;
 	}
 `;
-
-CSS?.registerProperty({
-  name: "--percentage",
-  syntax: "<percentage>",
-  initialValue: "0%",
-  inherits: false,
-});
 
 export const BrowseVideos = ({ arrayVideo }: videoData) => {
   const refVideo: any = useRef(null);
@@ -75,8 +60,6 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
     setIndexRef(indexRef);
     refVideo.current?.load();
     refVideo.current?.play();
-    setDuration(refVideo.current.duration);
-    setDuration(refVideo.current.duration);
   };
 
   const verifyAndPlay = () => {
@@ -93,87 +76,30 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
         {randomArray.map((_, index: number) => {
           return (
             <>
-              {indexRef === index ||
-                (indexRef !== index && (
-                  <SelectedVideo
-                    indexRef={indexRef}
-                    index={index}
-                    key={index}
-                    duration={duration}
-                    ended={ended}
-                    randomArray={randomArray}
-                  />
-                ))}
+              {indexRef === index ? (
+                <SelectedVideo
+                  indexRef={indexRef}
+                  index={index}
+                  key={index}
+                  duration={duration}
+                  ended={ended}
+                  randomArray={randomArray}
+                />
+              ) : (
+                <SelectedVideo
+                  indexRef={indexRef}
+                  index={index}
+                  key={index}
+                  duration={duration}
+                  ended={ended}
+                  randomArray={randomArray}
+                />
+              )}
             </>
           );
         })}
       </Box>
-      <Box
-        p="10"
-        w="800px"
-        top="27.5%"
-        left="15%"
-        position="absolute"
-        bg="rgba(0, 0, 0, 0.61)"
-        borderRadius="16px"
-        shadow="0 4px 5px rgba(0, 0, 0, 0.9)"
-        zIndex="3"
-      >
-        {/* Transformar em um componente */}
-        <Heading fontWeight="semibold" as="h1">
-          {videoObject.name}
-        </Heading>
-        <Text
-          fontWeight="light"
-          color="grey.0"
-          overflowX="hidden"
-          overflowY="auto"
-          h="10rem"
-          w="700px"
-          mt="4"
-          css={{
-            "&::-webkit-scrollbar": {
-              width: "4px",
-            },
-            "&::-webkit-scrollbar-track": {
-              width: "6px",
-            },
-            "&::-webkit-scrollbar-thumb": {
-              background: "blue.50",
-              borderRadius: "24px",
-            },
-          }}
-        >
-          {videoObject.synopsis}
-        </Text>
-        <Button
-          fontWeight="semibold"
-          w="200px"
-          bg="red.600"
-          mt="6"
-          _hover={{ bg: "pink.800" }}
-        >
-          Add
-        </Button>
-        <HStack spacing="4" mt="6" alignItems="center">
-          <FaStar fill="#EFDB73" />
-          <Text fontWeight="thin">{videoObject.rating}</Text>
-          <Text fontWeight="thin">Launching Year: {videoObject.year}</Text>
-          {videoObject.genres &&
-            videoObject.genres.map((element: string, index: number) => {
-              return (
-                <Text
-                  fontWeight="thin"
-                  key={index}
-                  color="grey.0"
-                  fontSize="sm"
-                >
-                  {element}
-                </Text>
-              );
-            })}
-        </HStack>
-      </Box>
+      <VideoContent videoObject={videoObject} />
       <Box
         position="absolute"
         w="90vw"
@@ -188,7 +114,6 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
         ref={refVideo}
         muted={true}
         onPlay={() => {
-          setDuration(refVideo.current.duration);
           setDuration(refVideo.current.duration);
         }}
         src={videoObject.video}
