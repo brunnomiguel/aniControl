@@ -6,6 +6,8 @@ import {
 	keyframes,
 	Button,
 	HStack,
+	useMergeRefs,
+	chakra,
 } from "@chakra-ui/react";
 import { arrayVideo } from "./videos";
 import { useState, useRef, useEffect } from "react";
@@ -42,6 +44,10 @@ const timer = keyframes`
 	}
 `;
 
+interface videoData {
+	arrayVideo: videoItem[];
+}
+
 CSS?.registerProperty({
 	name: "--percentage",
 	syntax: "<percentage>",
@@ -50,7 +56,8 @@ CSS?.registerProperty({
 });
 
 export const BrowseVideos = ({ arrayVideo }: videoData) => {
-	const refVideo: any = useRef();
+	const refVideo = useRef<any>(null);
+
 	const [duration, setDuration] = useState(0);
 	const [randomArray, setRandomArray] = useState<any>([
 		arrayVideo[random(arrayVideo)],
@@ -230,8 +237,7 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
 				zIndex="2"
 				shadow="rgba(0, 0, 0, 1) 0px -100px 36px -28px inset,rgba(0, 0, 0, 1) 0px 2px 4px, rgba(0, 0, 0, 0.9) 0px 7px 13px -3px, rgba(0, 0, 0, 0.8) 0px -3px 0px inset, rgba(0, 0, 0, 1) 0px 25px 30px -20px"
 			/>
-			<Box
-				as="video"
+			<chakra.video
 				autoPlay
 				ref={refVideo}
 				muted={true}
