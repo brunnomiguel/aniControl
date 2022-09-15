@@ -1,16 +1,18 @@
 import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-import { DashboardList } from "./DashboardList";
+import { DashboardList } from "./DashboardList/DashboardList";
 import { DashboardDrawer } from "../../components/Drawer";
 import { HoveringButton } from "../../components/Drawer/HoveringButton";
 import { Header } from "../../components/Header";
 import { DashboardDesktopDrawer } from "./DashboardDesktopDrawer";
-import { useAuth } from "../../contexts/Auth";
+import { useAnimeList } from "../../contexts/AnimeList";
 
 export const Dashboard = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const { getUserAnimes } = useAnimeList();
   const [smallView, setSmallView] = useState(false);
+  const [FavoritesView, setFavoritesView] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,26 +23,33 @@ export const Dashboard = () => {
       }
     };
 
-    signIn({ email: "kenzinho@mail.com", password: "123456" });
-
     window.addEventListener("resize", handleResize);
+    handleResize();
   }, []);
 
-  const { signIn } = useAuth();
+  const handleFavorites = () => {
+    getUserAnimes().then((_) => {
+      setFavoritesView(!FavoritesView);
+    });
+  };
 
   return (
-    <Box w="100vw" h="100vh" bgColor="#21212D">
+    <Box w="100vw" h="100vh" bgColor="grey.700">
       <Header />
       <Flex flexDir="row">
         {smallView ? (
           <>
-            <DashboardDrawer isOpen={isOpen} onClose={onClose} />
+            <DashboardDrawer
+              isOpen={isOpen}
+              onClose={onClose}
+              setFavoritesView={setFavoritesView}
+            />
             <HoveringButton onOpen={onOpen} />
           </>
         ) : (
-          <DashboardDesktopDrawer />
+          <DashboardDesktopDrawer setFavoritesView={handleFavorites} />
         )}
-        <DashboardList />
+        <DashboardList FavoritesView={FavoritesView} />
       </Flex>
     </Box>
   );

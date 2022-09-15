@@ -1,6 +1,8 @@
-import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 import { Box } from "@chakra-ui/react";
+
 import { TopAnimeView } from "./TopAnimeView";
+
+import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 
 interface IDashboardCardProps {
   anime: animeProps;

@@ -7,17 +7,17 @@ import { AnimeListProvider } from "./AnimeList";
 import { theme } from "../styles/theme";
 
 interface AppProviderProps {
-  children: ReactNode;
+	children: ReactNode;
 }
 
 export const AppProvider = ({ children }: AppProviderProps) => {
-  return (
-    <FullAnimesProvider>
-      <AuthProvider>
-        <AnimeListProvider>
-          <ChakraProvider theme={theme}>{children}</ChakraProvider>
-        </AnimeListProvider>
-      </AuthProvider>
-    </FullAnimesProvider>
-  );
+	return (
+		<ChakraProvider theme={theme}>
+			<FullAnimesProvider>
+				<AuthProvider>
+					<AnimeListProvider>{children}</AnimeListProvider>
+				</AuthProvider>
+			</FullAnimesProvider>
+		</ChakraProvider>
+	);
 };

@@ -27,7 +27,7 @@ export const SignUp = () => {
           </Flex>
         </Box>
       ) : (
-        <Flex bg="#21212D" flexDir="row" justifyContent="center">
+        <Flex bg="grey.700" flexDir="row" justifyContent="center">
           <SignUpForm />
         </Flex>
       )}
