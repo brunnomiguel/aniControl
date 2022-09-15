@@ -9,12 +9,11 @@ import {
   Grid,
 } from "@chakra-ui/react";
 
-import BackgroundImg from "../../assets/landLuffy.svg";
-import BgGrey from "../../assets/background-landing-page.svg";
-import Heroes from "../../assets/heroes2.svg";
-import Villains from "../../assets/villains2.svg";
-import DevBack from "../../assets/luffy.jpg";
-import Logo from "../../assets/logo-dash.svg";
+import Logo from "../../assets/imgs/logo-dash.svg";
+import Heroes from "../../assets/imgs/heroes2.svg";
+import Villains from "../../assets/imgs/villains2.svg";
+import BackgroundImg from "../../assets/imgs/landLuffy.svg";
+import BgGrey from "../../assets/imgs/background-landing-page.svg";
 
 import { useNavigate } from "react-router-dom";
 import { AboutModal } from "../../components/Modal/AboutModal";
@@ -165,7 +164,7 @@ export const LandingContent = () => {
         </Box>
 
         <Box
-          backgroundImage={DevBack}
+          backgroundImage={BackgroundImg}
           backgroundBlendMode="darken"
           backgroundPosition="center top"
           backgroundSize={"cover"}
