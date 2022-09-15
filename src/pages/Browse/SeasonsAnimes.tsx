@@ -1,14 +1,17 @@
 import { Flex, Grid, Heading } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowseCard } from "../../components/BrowseCard";
+import { CardAnimeSkeleton } from "../../components/Skeleton/CardAnimeSkeleton";
 import { useFullAnimes } from "../../contexts/FullAnimes";
 import { theme } from "../../styles/theme";
 
 export const SeasonsAnimes = () => {
+  const [loading, setLoading] = useState(true);
+
   const { seasonsAnimes, getSeasonsAnimes } = useFullAnimes();
 
   useEffect(() => {
-    getSeasonsAnimes();
+    getSeasonsAnimes().then((_) => setLoading(false));
   }, []);
 
   return (
@@ -70,9 +73,13 @@ export const SeasonsAnimes = () => {
           },
         ]}
       >
-        {seasonsAnimes.map((anime) => {
-          return <BrowseCard key={anime.mal_id} anime={anime} />;
-        })}
+        {loading ? (
+          <CardAnimeSkeleton repeatCount={10} />
+        ) : (
+          seasonsAnimes.map((anime) => {
+            return <BrowseCard key={anime.mal_id} anime={anime} />;
+          })
+        )}
       </Flex>
     </Grid>
   );

@@ -4,12 +4,14 @@ import {
   ReactNode,
   useContext,
   useState,
-  useCallback,
+  useEffect,
 } from "react";
-import { useEffect } from "react";
+
 import { animeProps } from "../FullAnimes/fullAnimes.types";
-import { jsonApi } from "../../services/api";
+
 import { useAuth } from "../Auth";
+
+import { jsonApi } from "../../services/api";
 import { useToast } from "@chakra-ui/react";
 
 interface IAnimeListProps {

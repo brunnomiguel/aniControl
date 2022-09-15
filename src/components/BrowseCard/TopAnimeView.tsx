@@ -1,7 +1,8 @@
-import { Box, Flex, Image, Link, Text, VStack, HStack } from "@chakra-ui/react";
+import { FaStar } from "react-icons/fa";
 
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
-import { FaStar } from "react-icons/fa";
+
+import { Box, Flex, Image, Link, Text, VStack, HStack } from "@chakra-ui/react";
 
 interface IDashboardCardProps {
   anime: animeProps;

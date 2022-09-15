@@ -1,26 +1,32 @@
-import { Box, Center, Flex, Image, useDisclosure } from "@chakra-ui/react";
+import { Center, Flex, Image, useDisclosure } from "@chakra-ui/react";
 
-import { Input } from "../Input";
+import { useLocation } from "react-router-dom";
+
+import { theme } from "../../styles/theme";
 import { FaSearch, FaTh } from "react-icons/fa";
 
-import Logo from "../../assets/logo-dash.svg";
+import Logo from "../../assets/imgs/logo-dash.svg";
+
 import { useForm } from "react-hook-form";
-import { useFullAnimes } from "../../contexts/FullAnimes";
-import { theme } from "../../styles/theme";
+
+import { Input } from "../Input";
 import { DrawerLogout } from "./DrawerLogout";
-import { useLocation } from "react-router-dom";
+
 import { useAnimeList } from "../../contexts/AnimeList";
+import { useFullAnimes } from "../../contexts/FullAnimes";
+import { DashboardCard } from "../DashboardCard";
 
 interface SearchData {
   animeName: string;
 }
 
 export const Header = () => {
-  const { handleSubmit, register } = useForm<SearchData>();
   const { searchAnime } = useFullAnimes();
   const { searchAnimeList } = useAnimeList();
 
   const location = useLocation();
+
+  const { handleSubmit, register } = useForm<SearchData>();
 
   const { isOpen, onClose, onToggle } = useDisclosure();
 

@@ -21,7 +21,7 @@ interface IModalDashboardFormProps {
 }
 
 export const ModalDashboardForm = ({ anime, id }: IModalDashboardFormProps) => {
-  const { updateAnime } = useAnimeList();
+  const { updateAnime, getUserAnimes } = useAnimeList();
 
   const [data, setData] = useState({
     rating: anime.rating,
@@ -31,8 +31,7 @@ export const ModalDashboardForm = ({ anime, id }: IModalDashboardFormProps) => {
 
   const onSubmit = (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log(data);
-
+    getUserAnimes();
     updateAnime(data, id).then((_) => console.log("Funcionou!"));
   };
 
@@ -82,7 +81,7 @@ export const ModalDashboardForm = ({ anime, id }: IModalDashboardFormProps) => {
       </VStack>
       <VStack align="flex-start" w="100%">
         <Text as="h2">Episodes Watched</Text>
-        <Flex align="center" gap={2} w={["50%", "35%", "25%", "25%"]}>
+        <Flex align="center" gap={2} w={["50%", "35%", "30%", "30%"]}>
           <NumberInput
             variant="filled"
             bg="grey.700"
