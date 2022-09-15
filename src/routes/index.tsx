@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router-dom";
+
 import { Browse } from "../pages/Browse";
-import { Dashboard } from "../pages/Dashboard";
-import { LandingPage } from "../pages/LandingPage";
-import { NotFound } from "../pages/NotFound";
 import { SignIn } from "../pages/SignIn";
 import { SignUp } from "../pages/SignUp";
+import { NotFound } from "../pages/NotFound";
+import { Dashboard } from "../pages/Dashboard";
+import { LandingPage } from "../pages/LandingPage";
 
 import ProtectedRoute from "./protectedRoute";
 
