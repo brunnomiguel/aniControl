@@ -1,11 +1,14 @@
-import { Avatar, Box, Flex, Text, theme, VStack } from "@chakra-ui/react";
-import { FaPencilAlt, FaStar } from "react-icons/fa";
-import { FiNavigation } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+
+import { FiNavigation } from "react-icons/fi";
+import { FaPencilAlt, FaStar } from "react-icons/fa";
+
+import { Avatar, Box, Flex, Text, theme, VStack } from "@chakra-ui/react";
+
+import { useAuth } from "../../contexts/Auth";
+import { useAnimeList } from "../../contexts/AnimeList";
 import { DrawerButton } from "../../components/Drawer/DrawerButton";
 import { DrawerStatics } from "../../components/Drawer/DrawerStatics";
-import { useAnimeList } from "../../contexts/AnimeList";
-import { useAuth } from "../../contexts/Auth";
 
 interface IDashboardDesktopProps {
   setFavoritesView: React.Dispatch<React.SetStateAction<boolean>>;

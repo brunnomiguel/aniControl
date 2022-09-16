@@ -4,7 +4,6 @@ import { ModalDashboard } from "../Modal/ModalDashboard";
 import { Box, useDisclosure } from "@chakra-ui/react";
 
 import { useAnimeList } from "../../contexts/AnimeList";
-
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 
 interface IAnimeInfo {

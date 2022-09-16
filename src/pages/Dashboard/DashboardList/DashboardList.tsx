@@ -1,5 +1,5 @@
-import { Box, Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { Flex, HStack, Text, VStack } from "@chakra-ui/react";
 
 import { IanimelistItem, useAnimeList } from "../../../contexts/AnimeList";
 
@@ -9,14 +9,14 @@ import {
   Droppable,
   DropResult,
 } from "react-beautiful-dnd";
-import { DashboardCard } from "../../../components/DashboardCard";
 
 import { DashboardListEmpty } from "./DashboardListEmpty";
+import { DashboardCard } from "../../../components/DashboardCard";
 import { DashboardListFavorites } from "./DashboardListFavorites";
 import { DashboardSkeleton } from "../../../components/Skeleton/DashboardSkeleton";
 
-import { GiPlainCircle } from "react-icons/gi";
 import { theme } from "../../../styles/theme";
+import { GiPlainCircle } from "react-icons/gi";
 
 interface IDashboardListProps {
   FavoritesView: boolean;

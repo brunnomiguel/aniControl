@@ -8,9 +8,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { ForwardRefRenderFunction, forwardRef } from "react";
-import { FieldError } from "react-hook-form";
 import { IconType } from "react-icons";
+import { FieldError } from "react-hook-form";
+import { ForwardRefRenderFunction, forwardRef } from "react";
 
 interface InputProps extends ChakraInputProps {
   label?: string;
@@ -19,10 +19,10 @@ interface InputProps extends ChakraInputProps {
   icon?: IconType;
 }
 
-const InputAni: ForwardRefRenderFunction<
-  HTMLInputElement,
-  InputProps
-> = ({ name, error = null, icon: Icon, label, ...rest }, ref) => {
+const InputAni: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+  { name, error = null, icon: Icon, label, ...rest },
+  ref
+) => {
   return (
     <FormControl w="100%">
       {label && <FormLabel>{label}</FormLabel>}

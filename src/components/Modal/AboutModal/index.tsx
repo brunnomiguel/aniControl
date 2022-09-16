@@ -28,7 +28,7 @@ export const AboutModal = ({ id }: AboultModalProps) => {
       {devsData.map((dev) => {
         return (
           <>
-            {dev.id === id ? (
+            {dev.id === id && (
               <>
                 <Flex flexDir="column" alignItems="center">
                   <Text
@@ -160,8 +160,6 @@ export const AboutModal = ({ id }: AboultModalProps) => {
                   </ModalContent>
                 </Modal>
               </>
-            ) : (
-              <></>
             )}
           </>
         );

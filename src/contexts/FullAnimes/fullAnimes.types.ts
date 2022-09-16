@@ -11,12 +11,7 @@ export interface imagesProps {
   };
 }
 
-export interface streamingProps {
-  name: string;
-  url: string;
-}
-
-export interface externalProps {
+export interface links {
   name: string;
   url: string;
 }
@@ -39,8 +34,8 @@ export interface animeProps {
   status?: string;
   duration?: string;
   rating: string;
-  streaming: streamingProps[];
-  external: externalProps[];
+  streaming: links[];
+  external: links[];
   score: number;
   rank?: number;
   favorites?: number;

@@ -1,7 +1,9 @@
-import { Grid, Image, keyframes, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
-import { ModalAnime } from "../../components/Modal/ModalAnime";
+
+import { Grid, Image, keyframes, Text, useDisclosure } from "@chakra-ui/react";
+
 import { useFullAnimes } from "../../contexts/FullAnimes";
+import { ModalAnime } from "../../components/Modal/ModalAnime";
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 
 interface ImageCardProps {

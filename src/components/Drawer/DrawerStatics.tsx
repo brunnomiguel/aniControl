@@ -1,8 +1,9 @@
-import { Box, Center, Flex, Text, VStack } from "@chakra-ui/react";
 import { theme } from "../../styles/theme";
+import { Box, Center, Flex, Text, VStack } from "@chakra-ui/react";
+
+import { useEffect } from "react";
 import { GiPlainCircle } from "react-icons/gi";
 import { useAnimeList } from "../../contexts/AnimeList";
-import { useEffect } from "react";
 
 export const DrawerStatics = () => {
   const { userAnimes } = useAnimeList();
@@ -11,6 +12,7 @@ export const DrawerStatics = () => {
     const minutes = userAnimes.map((elem) => elem.episodes * 23);
     return (minutes.reduce((a, b) => a + b, 0) / 1440).toFixed(2);
   };
+
   const meanScore = () => {
     const rating = userAnimes.map((elem) => elem.rating);
 
@@ -18,10 +20,12 @@ export const DrawerStatics = () => {
       ? "0.00"
       : (rating.reduce((a, b) => a + b, 0) / rating.length).toFixed(2);
   };
+
   const episodesCount = () => {
     const episodes = userAnimes.map((elem) => elem.episodes);
     return episodes.reduce((a, b) => a + b, 0);
   };
+
   const animeCount = userAnimes.length;
 
   const planToWatchList = userAnimes.filter(

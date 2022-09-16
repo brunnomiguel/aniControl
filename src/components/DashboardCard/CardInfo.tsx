@@ -1,5 +1,6 @@
-import { Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
+import { Flex, Text } from "@chakra-ui/react";
+import { useLocation } from "react-router-dom";
 
 interface IcardInfo {
   score: number;
@@ -7,18 +8,15 @@ interface IcardInfo {
 }
 
 export const CardInfo = ({ score, year }: IcardInfo) => {
-  const isWideVersion = useBreakpointValue({
-    base: false,
-    md: true,
-  });
+  const location = useLocation();
 
   return (
     <Flex
       color="grey.0"
       align="center"
-      justify={isWideVersion ? "flex-start" : "center"}
-      mt="5%"
-      fontSize={12}
+      justify={["center", "center", "flex-start"]}
+      mt="2"
+      fontSize={location.pathname === "/dashboard" ? "sm" : "lg"}
     >
       <FaStar fill="#EFDB73" />
       <Text fontWeight="bold">{score}</Text>

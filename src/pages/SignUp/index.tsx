@@ -1,7 +1,8 @@
 import { Box, Flex, useBreakpointValue } from "@chakra-ui/react";
-import { BackgroundAnimation } from "../../components/BackgroundAnimation";
-import { BackgroundImg } from "./BackgroundImg";
+
 import { SignUpForm } from "./SignUpForm";
+import { BackgroundImg } from "./BackgroundImg";
+import { BackgroundAnimation } from "../../components/BackgroundAnimation";
 
 export const SignUp = () => {
   const isWideVersion = useBreakpointValue({
