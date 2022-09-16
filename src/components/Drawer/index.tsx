@@ -15,7 +15,7 @@ import {
 
 import { DrawerButton } from "./DrawerButton";
 import { DrawerStatics } from "./DrawerStatics";
-
+import { useAnimeList } from "../../contexts/AnimeList";
 import { FaStar, FaPencilAlt } from "react-icons/fa";
 import { FiNavigation } from "react-icons/fi";
 import { useAuth } from "../../contexts/Auth";
@@ -34,7 +34,7 @@ export const DashboardDrawer = ({
 }: IDashboardDrawerProps) => {
   const { user } = useAuth();
   const navigate = useNavigate();
-
+  const { userAnimes } = useAnimeList();
   return (
     <>
       <Drawer
@@ -97,14 +97,16 @@ export const DashboardDrawer = ({
               w="95%"
               align="flex-start"
             >
-              <DrawerButton
-                Icon={FiNavigation}
-                Title={"Browse"}
-                onClick={() => navigate("/browse")}
-                activeColor="blue.50"
-                bgColor="blue.50"
-                hoverColor="blue.400"
-              />
+              {userAnimes.length > 0 && (
+                <DrawerButton
+                  Icon={FiNavigation}
+                  Title={"Browse"}
+                  onClick={() => navigate("/browse")}
+                  activeColor="blue.50"
+                  bgColor="blue.50"
+                  hoverColor="blue.400"
+                />
+              )}
             </VStack>
           </DrawerBody>
         </DrawerContent>

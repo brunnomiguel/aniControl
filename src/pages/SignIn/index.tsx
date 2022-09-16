@@ -23,7 +23,7 @@ export const SignIn = () => {
             flexDir="row"
             h="100vh"
             w="100vw"
-          > 
+          >
             <BackgroundImg />
             <SignInForm />
           </Flex>
@@ -35,8 +35,4 @@ export const SignIn = () => {
       )}
     </>
   );
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 31e4f662fb2a1cb6c6f83a0351e934d73af9ed74

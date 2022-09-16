@@ -1,10 +1,11 @@
-import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
-import { useEffect, useState } from "react";
-import { MobileViewCard } from "./MobileViewCard";
-import { DesktopViewCard } from "./DesktopViewCard";
-import { Box, useDisclosure } from "@chakra-ui/react";
-import { useAnimeList } from "../../contexts/AnimeList";
+import { CardContent } from "./CardContent";
 import { ModalDashboard } from "../Modal/ModalDashboard";
+
+import { Box, useDisclosure } from "@chakra-ui/react";
+
+import { useAnimeList } from "../../contexts/AnimeList";
+
+import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 
 interface IAnimeInfo {
   anime: { data: animeProps };
@@ -29,23 +30,8 @@ export const DashboardCard = ({
   favorite,
   setReswitch,
 }: IDashboardCardProps) => {
-  const [smallView, setSmallView] = useState(false);
-
   const { episodes } = anime;
   const { data } = anime.anime;
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setSmallView(true);
-      } else {
-        setSmallView(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-  }, []);
 
   const { updateAnime, removeAnime } = useAnimeList();
 
@@ -71,25 +57,14 @@ export const DashboardCard = ({
 
   return (
     <Box width={["95vw", "95vw", "95vw", "33vw"]}>
-      {smallView ? (
-        <MobileViewCard
-          anime={data}
-          episode={episodes}
-          handleFavoriteAnime={handleFavoriteAnime}
-          handleDeleteAnime={handleDeleteAnime}
-          onClick={onOpen}
-          status={anime.status}
-        />
-      ) : (
-        <DesktopViewCard
-          anime={data}
-          episode={episodes}
-          handleFavoriteAnime={handleFavoriteAnime}
-          handleDeleteAnime={handleDeleteAnime}
-          onClick={onOpen}
-          status={anime.status}
-        />
-      )}
+      <CardContent
+        anime={data}
+        episode={episodes}
+        handleFavoriteAnime={handleFavoriteAnime}
+        handleDeleteAnime={handleDeleteAnime}
+        onClick={onOpen}
+        status={anime.status}
+      />
       <ModalDashboard
         isOpen={isOpen}
         onClose={onClose}
