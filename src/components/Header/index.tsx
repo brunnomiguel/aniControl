@@ -14,7 +14,6 @@ import { DrawerLogout } from "./DrawerLogout";
 
 import { useAnimeList } from "../../contexts/AnimeList";
 import { useFullAnimes } from "../../contexts/FullAnimes";
-import { DashboardCard } from "../DashboardCard";
 
 interface SearchData {
   animeName: string;
@@ -40,7 +39,7 @@ export const Header = () => {
     <Flex
       as="header"
       w="100%"
-      h="7vh"
+      h="8vh"
       alignItems="center"
       justify="space-between"
       backgroundColor="grey.600"

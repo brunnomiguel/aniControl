@@ -1,5 +1,5 @@
-import { Center, Flex, Text } from "@chakra-ui/react";
 import { Dispatch, SetStateAction } from "react";
+import { Center, Flex, Text } from "@chakra-ui/react";
 import { BiFirstPage, BiLastPage } from "react-icons/bi";
 
 interface IpaginationProps {

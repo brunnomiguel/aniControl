@@ -1,13 +1,15 @@
+import { useState, useEffect } from "react";
 import { Center, Flex, Text, VStack } from "@chakra-ui/react";
 import { DashboardCard } from "../../../components/DashboardCard";
-import { useState, useEffect } from "react";
 import { IanimelistItem, useAnimeList } from "../../../contexts/AnimeList";
 
 interface IDashboardListFavoritesProps {
   setReswitch: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const DashboardListFavorites = ({ setReswitch }: IDashboardListFavoritesProps) => {
+export const DashboardListFavorites = ({
+  setReswitch,
+}: IDashboardListFavoritesProps) => {
   const { userAnimes } = useAnimeList();
   const [favorites, setFavorites] = useState<IanimelistItem[]>([]);
 
@@ -19,8 +21,19 @@ export const DashboardListFavorites = ({ setReswitch }: IDashboardListFavoritesP
 
   return (
     <Flex w="250vw">
-      <Center w="100%" flexDir="column" alignItems="flex-start" justifyContent="center" borderRadius="10px">
-        <Flex flexFlow="column nowrap" width={["95vw", "95vw", "95vw", "35vw"]} height="93vh" align="center">
+      <Center
+        w="100%"
+        flexDir="column"
+        alignItems="flex-start"
+        justifyContent="center"
+        borderRadius="10px"
+      >
+        <Flex
+          flexFlow="column nowrap"
+          width={["95vw", "95vw", "95vw", "35vw"]}
+          height="93vh"
+          align="center"
+        >
           <Text
             as="h2"
             bg="#5A2843"

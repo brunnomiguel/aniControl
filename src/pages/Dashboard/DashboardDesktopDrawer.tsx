@@ -1,19 +1,25 @@
-import { Avatar, Box, Flex, Text, theme, VStack } from "@chakra-ui/react";
-import { FaPencilAlt, FaStar } from "react-icons/fa";
-import { FiNavigation } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+
+import { FiNavigation } from "react-icons/fi";
+import { FaPencilAlt, FaStar } from "react-icons/fa";
+
+import { Avatar, Box, Flex, Text, theme, VStack } from "@chakra-ui/react";
+
+import { useAuth } from "../../contexts/Auth";
+import { useAnimeList } from "../../contexts/AnimeList";
 import { DrawerButton } from "../../components/Drawer/DrawerButton";
 import { DrawerStatics } from "../../components/Drawer/DrawerStatics";
-import { useAuth } from "../../contexts/Auth";
 
 interface IDashboardDesktopProps {
   setFavoritesView: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const DashboardDesktopDrawer = ({ setFavoritesView }: IDashboardDesktopProps) => {
+export const DashboardDesktopDrawer = ({
+  setFavoritesView,
+}: IDashboardDesktopProps) => {
   const { user } = useAuth();
   const navigate = useNavigate();
-
+  const { userAnimes } = useAnimeList();
   return (
     <Box
       w="50vw"
@@ -60,14 +66,16 @@ export const DashboardDesktopDrawer = ({ setFavoritesView }: IDashboardDesktopPr
       </VStack>
       <DrawerStatics />
       <VStack w="95%" align="flex-start" mt="10%">
-        <DrawerButton
-          Icon={FiNavigation}
-          Title={"Browse"}
-          activeColor="blue.50"
-          bgColor="blue.50"
-          hoverColor="blue.400"
-          onClick={() => navigate("/browse")}
-        />
+        {userAnimes.length > 0 && (
+          <DrawerButton
+            Icon={FiNavigation}
+            Title={"Browse"}
+            onClick={() => navigate("/browse")}
+            activeColor="blue.50"
+            bgColor="blue.50"
+            hoverColor="blue.400"
+          />
+        )}
       </VStack>
     </Box>
   );

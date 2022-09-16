@@ -28,13 +28,13 @@ export const AboutModal = ({ id }: AboultModalProps) => {
 		md: true,
 	});
 
-	return (
-		<>
-			{devsData.map((dev) => {
-				return (
-					<>
-						{dev.id === id ? (
-							<>
+  return (
+    <>
+      {devsData.map((dev) => {
+        return (
+          <>
+            {dev.id === id && (
+              <>
 								<Flex flexDir="column" alignItems="center" mt="50px">
 									<Text
 										color="white"
@@ -129,7 +129,6 @@ export const AboutModal = ({ id }: AboultModalProps) => {
 												>
 													{dev.name}
 												</Text>
-
 												<Text
 													m="0 25px 0 25px"
 													h="auto"
@@ -138,8 +137,7 @@ export const AboutModal = ({ id }: AboultModalProps) => {
 												>
 													{dev.info}
 												</Text>
-
-												<ModalFooter p={["5px", ""]}>
+                       <ModalFooter p={["5px", ""]}>
 													<Flex flexDir="row" gap="10px">
 														<Link target="_blank" href={dev.linkedin}>
 															<Center fontSize="3xl">
@@ -168,12 +166,10 @@ export const AboutModal = ({ id }: AboultModalProps) => {
 									</ModalContent>
 								</Modal>
 							</>
-						) : (
-							<></>
-						)}
-					</>
-				);
-			})}
-		</>
-	);
+            )}
+          </>
+        );
+      })}
+    </>
+  );
 };

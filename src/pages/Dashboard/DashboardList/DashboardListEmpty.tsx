@@ -1,5 +1,5 @@
-import { Button, Center, Flex, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { Button, Center, Flex, Text } from "@chakra-ui/react";
 
 export const DashboardListEmpty = () => {
   const navigate = useNavigate();

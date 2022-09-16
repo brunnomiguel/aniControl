@@ -1,21 +1,20 @@
 import {
   Badge,
   Box,
-  Button,
   Center,
   Flex,
-  HStack,
   Image,
   Link,
   Progress,
   Text,
   useBreakpointValue,
-  //   VStack,
 } from "@chakra-ui/react";
+import { theme } from "../../styles/theme";
+
+import { CardInfo } from "./CardInfo";
+import { CardButtons } from "./CardButtons";
 
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
-import { FaStar } from "react-icons/fa";
-import { theme } from "../../styles/theme";
 
 interface IDashboardCardProps {
   anime: animeProps;
@@ -109,19 +108,7 @@ export const CardContent = ({
             <Text as="h2" fontWeight="bold" color="grey.0">
               {title}
             </Text>
-            <Flex
-              color="grey.0"
-              align="center"
-              justify="flex-start"
-              mt="5%"
-              fontSize={12}
-            >
-              <FaStar fill="#EFDB73" />
-              <Text fontWeight="bold">{score}</Text>
-              <Text fontWeight="bold" ml="4%">
-                Launching Year: {year}
-              </Text>
-            </Flex>
+            <CardInfo score={score} year={year} />
             <Badge
               fontWeight="bold"
               fontSize="0.5rem"
@@ -183,33 +170,10 @@ export const CardContent = ({
                   );
                 })}
             </Flex>
-            <HStack w="100%" justifyContent="center" mt="1%">
-              <Button
-                justifyContent="space-evenly"
-                w="50%"
-                mr="3%"
-                bg="blue.50"
-                _hover={{ bg: "blue.400" }}
-                _active={{ bg: "blue.50" }}
-                color="grey.0"
-                fontSize="0.75rem"
-                onClick={handleFavoriteAnime}
-              >
-                <FaStar fill="#EFDB73" />
-                Favorite
-              </Button>
-              <Button
-                w="50%"
-                bg="blue.50"
-                _hover={{ bg: "blue.400" }}
-                _active={{ bg: "blue.50" }}
-                color="grey.0"
-                fontSize="0.75rem"
-                onClick={handleDeleteAnime}
-              >
-                Remove
-              </Button>
-            </HStack>
+            <CardButtons
+              handleDeleteAnime={handleDeleteAnime}
+              handleFavoriteAnime={handleFavoriteAnime}
+            />
           </Box>
         ) : (
           <Box w="40%" h="100%">
@@ -243,19 +207,7 @@ export const CardContent = ({
       </Flex>
       {!isWideVersion && (
         <>
-          <Flex
-            color="grey.0"
-            align="center"
-            justify="center"
-            mt="5%"
-            fontSize={12}
-          >
-            <FaStar fill="#EFDB73" />
-            <Text fontWeight="bold">{score}</Text>
-            <Text fontWeight="bold" ml="4%">
-              {year}
-            </Text>
-          </Flex>
+          <CardInfo score={score} year={year} />
           <Badge
             fontWeight="bold"
             fontSize="0.5rem"
@@ -294,31 +246,10 @@ export const CardContent = ({
                 );
               })}
           </Flex>
-          <HStack w="100%" justifyContent="center" mt="1%">
-            <Button
-              justifyContent="space-evenly"
-              w="35%"
-              mr="3%"
-              bg="blue.50"
-              _hover={{ bg: "blue.400" }}
-              _active={{ bg: "blue.50" }}
-              color="grey.0"
-              onClick={handleFavoriteAnime}
-            >
-              <FaStar fill="#EFDB73" />
-              Favorite
-            </Button>
-            <Button
-              w="35%"
-              bg="blue.50"
-              _hover={{ bg: "blue.400" }}
-              _active={{ bg: "blue.50" }}
-              color="grey.0"
-              onClick={handleDeleteAnime}
-            >
-              Remove
-            </Button>
-          </HStack>
+          <CardButtons
+            handleDeleteAnime={handleDeleteAnime}
+            handleFavoriteAnime={handleFavoriteAnime}
+          />
         </>
       )}
     </Flex>

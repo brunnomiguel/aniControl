@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { jikanApi } from "../../services/api";
-import { animeProps, externalProps, streamingProps } from "./fullAnimes.types";
+import { animeProps, links } from "./fullAnimes.types";
 
 interface FullAnimesProviderProps {
   children: ReactNode;
@@ -17,8 +17,8 @@ interface FullAnimesContextData {
   allAnimes: animeProps[];
   topAnimes: animeProps[];
   seasonsAnimes: animeProps[];
-  linksStreaming: streamingProps[];
-  linksExternal: externalProps[];
+  linksStreaming: links[];
+  linksExternal: links[];
   getAllAnimes: (page: number) => Promise<void>;
   getAnimeFullById: (id: number) => Promise<void>;
   getTopAnimes: () => Promise<void>;
@@ -47,8 +47,8 @@ export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
   const [topAnimes, setTopAnimes] = useState<animeProps[]>([]);
   const [seasonsAnimes, setSeasonsAnimes] = useState<animeProps[]>([]);
   const [animeById, setAnimeById] = useState<animeProps>({} as animeProps);
-  const [linksStreaming, setLinksStreaming] = useState<streamingProps[]>([]);
-  const [linksExternal, setLinksExternal] = useState<externalProps[]>([]);
+  const [linksStreaming, setLinksStreaming] = useState<links[]>([]);
+  const [linksExternal, setLinksExternal] = useState<links[]>([]);
 
   const getAllAnimes = useCallback(async (page: number) => {
     try {

@@ -10,9 +10,10 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
+
 import Logo from "../../assets/imgs/logo-form.svg";
 import LogoMobile from "../../assets/imgs/logo-dash.svg";
-import { FcGoogle } from "react-icons/fc";
+
 import {
   FaApple,
   FaEnvelope,
@@ -22,6 +23,8 @@ import {
   FaLock,
   FaUser,
 } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+
 import { Input } from "../../components/Input";
 
 import { yupResolver } from "@hookform/resolvers/yup";
