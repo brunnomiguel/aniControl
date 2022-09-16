@@ -9,9 +9,11 @@ import {
   Image,
   Center,
 } from "@chakra-ui/react";
-import { IanimelistItem } from "../../../contexts/AnimeList";
+
 import Logo from "../../../assets/imgs/logo-mini.svg";
+
 import { ModalDashboardForm } from "./ModalDashboardForm";
+import { IanimelistItem } from "../../../contexts/AnimeList";
 
 interface IModalDashboardProps {
   isOpen: boolean;

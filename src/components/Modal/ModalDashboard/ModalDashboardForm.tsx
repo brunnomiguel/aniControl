@@ -10,10 +10,10 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { IanimelistItem, useAnimeList } from "../../../contexts/AnimeList";
 import { theme } from "../../../styles/theme";
-import { jsonApi } from "../../../services/api";
+
 import { useState } from "react";
+import { IanimelistItem, useAnimeList } from "../../../contexts/AnimeList";
 
 interface IModalDashboardFormProps {
   anime: IanimelistItem;

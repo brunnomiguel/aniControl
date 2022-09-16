@@ -9,11 +9,12 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-
 import { theme } from "../../styles/theme";
-import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
-import { CardButtons } from "./CardButtons";
+
 import { CardInfo } from "./CardInfo";
+import { CardButtons } from "./CardButtons";
+
+import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
 
 interface IDashboardCardProps {
   anime: animeProps;

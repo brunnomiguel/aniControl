@@ -1,5 +1,5 @@
-import { Button, HStack } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
+import { Button, HStack } from "@chakra-ui/react";
 
 interface IcardButtons {
   handleFavoriteAnime: () => void;

@@ -1,9 +1,11 @@
-import { Flex, Grid, Heading, Skeleton, VStack } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { BrowseCard } from "../../components/BrowseCard";
-import { CardAnimeSkeleton } from "../../components/Skeleton/CardAnimeSkeleton";
-import { useFullAnimes } from "../../contexts/FullAnimes";
 import { theme } from "../../styles/theme";
+
+import { useEffect, useState } from "react";
+import { Flex, Grid, Heading } from "@chakra-ui/react";
+
+import { BrowseCard } from "../../components/BrowseCard";
+import { useFullAnimes } from "../../contexts/FullAnimes";
+import { CardAnimeSkeleton } from "../../components/Skeleton/CardAnimeSkeleton";
 
 export const TopAnimes = () => {
   const [loading, setLoading] = useState(true);

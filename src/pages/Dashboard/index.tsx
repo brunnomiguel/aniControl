@@ -1,12 +1,14 @@
-import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { Box, Flex, useDisclosure } from "@chakra-ui/react";
+
+import { useAnimeList } from "../../contexts/AnimeList";
 
 import { DashboardList } from "./DashboardList/DashboardList";
+import { DashboardDesktopDrawer } from "./DashboardDesktopDrawer";
+
+import { Header } from "../../components/Header";
 import { DashboardDrawer } from "../../components/Drawer";
 import { HoveringButton } from "../../components/Drawer/HoveringButton";
-import { Header } from "../../components/Header";
-import { DashboardDesktopDrawer } from "./DashboardDesktopDrawer";
-import { useAnimeList } from "../../contexts/AnimeList";
 
 export const Dashboard = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -34,7 +36,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <Box w="100vw" h="100vh" bgColor="grey.700">
+    <Box w="100%" h="100vh" bgColor="grey.700">
       <Header />
       <Flex flexDir="row">
         {smallView ? (

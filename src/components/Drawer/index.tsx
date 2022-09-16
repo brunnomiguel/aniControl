@@ -5,7 +5,6 @@ import {
   DrawerContent,
   DrawerCloseButton,
   DrawerHeader,
-  DrawerFooter,
   Avatar,
   Text,
   Flex,
@@ -13,12 +12,15 @@ import {
   theme,
 } from "@chakra-ui/react";
 
+import { FiNavigation } from "react-icons/fi";
+import { FaStar, FaPencilAlt } from "react-icons/fa";
+
 import { DrawerButton } from "./DrawerButton";
 import { DrawerStatics } from "./DrawerStatics";
-import { useAnimeList } from "../../contexts/AnimeList";
-import { FaStar, FaPencilAlt } from "react-icons/fa";
-import { FiNavigation } from "react-icons/fi";
+
 import { useAuth } from "../../contexts/Auth";
+import { useAnimeList } from "../../contexts/AnimeList";
+
 import { useNavigate } from "react-router-dom";
 
 interface IDashboardDrawerProps {
