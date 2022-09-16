@@ -48,7 +48,7 @@ interface UpdateUserData {
   confirm_password: string;
 }
 
-interface ModalSucessProps {
+interface ModalUpdateUserProps {
   isOpen: boolean;
   onClose: () => void;
   onClick: () => void;
@@ -56,15 +56,13 @@ interface ModalSucessProps {
   userName: string;
 }
 
-export const ModalSucess = ({
+export const ModalUpdateUser = ({
   isOpen,
   onClose,
   onClick,
   userId,
   userName,
-}: ModalSucessProps) => {
-  // const {  } = useAuth();
-  // ainda falta uma função pra atualização dos dados
+}: ModalUpdateUserProps) => {
   const toast = useToast();
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -110,9 +108,9 @@ export const ModalSucess = ({
       });
   };
 
-  <Modal isOpen={isOpen} onClose={onClose}>
+  <Modal  isOpen={isOpen} onClose={onClose}>
     <ModalOverlay />
-    <ModalContent>
+    <ModalContent bg="grey.600" >
       <ModalHeader>
         <Center bg="red.500" w="30px" h="30px" borderRadius="5px">
           <FaUser color={theme.colors.white} />
@@ -196,3 +194,4 @@ export const ModalSucess = ({
     </ModalContent>
   </Modal>;
 };
+
