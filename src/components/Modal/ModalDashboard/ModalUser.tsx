@@ -82,7 +82,6 @@ export const ModalUpdateUser = ({
       .patch(
         `/users/${userId}/`,
         { name, email, password }
-        // verficar token
       )
       .then((response) => {
         // add toast de sucesso
