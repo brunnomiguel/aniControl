@@ -84,7 +84,6 @@ export const ModalUpdateUser = ({
         { name, email, password }
       )
       .then((response) => {
-        // add toast de sucesso
         onClose();
         toast({
           title: "Success!",
