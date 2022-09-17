@@ -8,6 +8,7 @@ import {
   NumberInputStepper,
   Select,
   Text,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { theme } from "../../../styles/theme";
@@ -18,11 +19,16 @@ import { IanimelistItem, useAnimeList } from "../../../contexts/AnimeList";
 interface IModalDashboardFormProps {
   anime: IanimelistItem;
   id: number;
+  onClose: () => void;
 }
 
-export const ModalDashboardForm = ({ anime, id }: IModalDashboardFormProps) => {
+export const ModalDashboardForm = ({
+  anime,
+  id,
+  onClose,
+}: IModalDashboardFormProps) => {
   const { updateAnime, getUserAnimes } = useAnimeList();
-
+  const toast = useToast();
   const [data, setData] = useState({
     rating: anime.rating,
     status: anime.status,
@@ -31,7 +37,17 @@ export const ModalDashboardForm = ({ anime, id }: IModalDashboardFormProps) => {
 
   const onSubmit = (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault();
-    updateAnime(data, id).then((_) => getUserAnimes());
+    updateAnime(data, id).then((_) => {
+      getUserAnimes();
+      toast({
+        title: "Success",
+        description: "Anime status changed!",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+      onClose();
+    });
   };
 
   return (

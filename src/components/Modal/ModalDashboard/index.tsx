@@ -53,7 +53,11 @@ export const ModalDashboard = ({
               <Text size="xl" fontSize="3xl" mt="5%">
                 {anime.anime.data.title}
               </Text>
-              <ModalDashboardForm anime={anime} id={anime.id} />
+              <ModalDashboardForm
+                anime={anime}
+                id={anime.id}
+                onClose={onClose}
+              />
             </Center>
           </ModalBody>
         </ModalContent>

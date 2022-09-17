@@ -1,7 +1,7 @@
 import { CardContent } from "./CardContent";
 import { ModalDashboard } from "../Modal/ModalDashboard";
 
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { Box, useDisclosure, useToast } from "@chakra-ui/react";
 
 import { useAnimeList } from "../../contexts/AnimeList";
 import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
@@ -33,10 +33,29 @@ export const DashboardCard = ({
   const { data } = anime.anime;
 
   const { updateAnime, removeAnime } = useAnimeList();
+  const toast = useToast();
 
   const handleFavoriteAnime = () => {
     updateAnime({ favorite: !favorite }, id);
     setReswitch(true);
+
+    if (anime.favorite === true) {
+      toast({
+        title: "Removed",
+        description: "Anime unfavorited!",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: "Success",
+        description: "Anime Favorited!",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
 
     setTimeout(() => {
       setReswitch(false);
@@ -46,6 +65,14 @@ export const DashboardCard = ({
   const handleDeleteAnime = () => {
     removeAnime(id);
     setReswitch(true);
+
+    toast({
+      title: "Removed",
+      description: "Anime removed with sucess!",
+      status: "info",
+      duration: 2000,
+      isClosable: true,
+    });
 
     setTimeout(() => {
       setReswitch(false);
