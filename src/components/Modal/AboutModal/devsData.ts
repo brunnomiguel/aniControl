@@ -34,9 +34,9 @@ export const devsData = [
     function: "Scrum Master",
     devimg: DevWill,
     animeimg: Agata,
-    infoparagraph1: "Opa! Te aprochega cupicho!Sou um esenvolvedor jovem-adulto residente no Brasil! Esperando algum dia dominar todas as linguages existentes, desejai-me sorte! XD",
+    infoparagraph1: "Opa! Te aprochega cupicho! Sou um desenvolvedor jovem-adulto residente no Brasil! Esperando algum dia dominar todas as linguages existentes, desejai-me sorte! XD",
     infoparagraph2:
-      "Comecei por pesquisar e estudando havia começado com Python, clássico, estudando o tal junto a SQL e pouquíssimo sobre Java, os quais eram ditos os mais utilizados no momento/época, nos meados de 2016. O estudo não rendeu, por fim acabei por largar este estudo por si próprio e me focar em outras questões, como escola, família e meus próprios hobbies. Mas claro, sempre voltando e parando todos os anos, sem muito desenvolvimento do conhecimento. Quando o desejo batia novamente, como uma brasa indelével sempre querendo seguir esse caminho.",
+      "Comecei por pesquisar e estudar com Python, clássico, estudando o tal junto a SQL e pouquíssimo sobre Java, os quais eram ditos os mais utilizados no momento/época, nos meados de 2016. O estudo não rendeu, por fim acabei por largar este estudo por si próprio e me focar em outras questões, como escola, família e meus próprios hobbies. Mas claro, sempre voltando e parando todos os anos, sem muito desenvolvimento do conhecimento. Quando o desejo batia novamente, como uma brasa indelével sempre querendo seguir esse caminho.",
     phraseauthor: "Cartola",
     phrase: "Se amanhã o que eu sonhei não for bem aquilo, eu tiro um arco-íris da cartola. E refaço. Colo. Pinto e bordo.",
     linkedin: "https://www.linkedin.com/in/william-baierle-dev/",
