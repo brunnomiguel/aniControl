@@ -1,18 +1,26 @@
 import {
-	Box,
-	Button,
-	Flex,
-	Image,
-	Link,
-	Text,
-	useBreakpointValue,
-	VStack,
+  Box,
+  Button,
+  Flex,
+  Center,
+  Image,
+  Link,
+  Text,
+  useBreakpointValue,
+  VStack,
 } from "@chakra-ui/react";
 
 import Logo from "../../assets/imgs/logo-form.svg";
 import LogoMobile from "../../assets/imgs/logo-dash.svg";
 
-import { FaApple, FaEnvelope, FaFacebookF, FaLock } from "react-icons/fa";
+import {
+  FaApple,
+  FaEnvelope,
+  FaFacebookF,
+  FaLock,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 import { Input } from "../../components/Input";
@@ -21,6 +29,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useAuth } from "../../contexts/Auth";
+import { useState } from "react";
 
 import { signInSchema } from "../../schemas";
 import { useNavigate } from "react-router-dom";
@@ -55,7 +64,6 @@ export const SignInForm = () => {
 	});
 
 	return (
-		<>
 			<Flex
 				shadow="30px 0px 30px #000000, inset -100px 0px 30px rgba(255, 255, 255, 0.6);"
 				opacity="0.1"
@@ -161,6 +169,5 @@ export const SignInForm = () => {
 					</Flex>
 				</Flex>
 			</Flex>
-		</>
 	);
 };
