@@ -2,10 +2,10 @@ import { Box } from "@chakra-ui/react";
 
 import { TopAnimeView } from "./TopAnimeView";
 
-import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
+import { Ianime } from "../../@types/components/fullAnimes.types";
 
 interface IDashboardCardProps {
-  anime: animeProps;
+  anime: Ianime;
 }
 
 export const BrowseCard = ({ anime }: IDashboardCardProps) => {

@@ -7,19 +7,19 @@ import {
   useEffect,
 } from "react";
 
-import { animeProps } from "../FullAnimes/fullAnimes.types";
+import { Ianime } from "../../@types/components/fullAnimes.types";
 
 import { useAuth } from "../Auth";
 
 import { jsonApi } from "../../services/api";
 import { useToast } from "@chakra-ui/react";
 
-interface IAnimeListProps {
+interface IAnimeList {
   children: ReactNode;
 }
 
 export interface IanimelistItem {
-  anime: { data: animeProps };
+  anime: { data: Ianime };
   status: string;
   rating: number;
   episodes: number;
@@ -51,7 +51,7 @@ export const useAnimeList = () => {
   return context;
 };
 
-export const AnimeListProvider = ({ children }: IAnimeListProps) => {
+export const AnimeListProvider = ({ children }: IAnimeList) => {
   const [userAnimes, setUserAnimes] = useState<IanimelistItem[]>([]);
 
   const { accessToken, user } = useAuth();
@@ -75,8 +75,6 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
     const verifyAnime = userAnimes.findIndex(
       (anime) => anime.anime.data.mal_id === animeId
     );
-
-    console.log(userAnimes);
 
     if (verifyAnime === -1) {
       await jsonApi
@@ -147,7 +145,6 @@ export const AnimeListProvider = ({ children }: IAnimeListProps) => {
       const filteredAnimes = userAnimes.filter((anime) =>
         anime.anime.data.title.toLocaleLowerCase().includes(animeName)
       );
-      console.log(filteredAnimes);
       setUserAnimes(filteredAnimes);
     }
   };

@@ -18,8 +18,10 @@ export const DashboardDesktopDrawer = ({
   setFavoritesView,
 }: IDashboardDesktopProps) => {
   const { user } = useAuth();
-  const navigate = useNavigate();
   const { userAnimes } = useAnimeList();
+
+  const navigate = useNavigate();
+
   return (
     <Box
       w="50vw"
