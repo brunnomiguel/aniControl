@@ -4,7 +4,7 @@ import { jsonApi } from "../../services/api";
 
 import { useNavigate } from "react-router-dom";
 
-interface IauthProviderProps {
+interface IauthProvider {
   children: ReactNode;
 }
 
@@ -43,7 +43,7 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider = ({ children }: IauthProviderProps) => {
+export const AuthProvider = ({ children }: IauthProvider) => {
   const [data, setData] = useState<IauthState>(() => {
     const accessToken = localStorage.getItem("@AniControl:accessToken");
     const user = localStorage.getItem("@AniControl:user");

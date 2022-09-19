@@ -1,10 +1,10 @@
 import { Flex, HStack, Text } from "@chakra-ui/react";
 import { FiTv } from "react-icons/fi";
-import { links } from "../../../contexts/FullAnimes/fullAnimes.types";
+import { Ilinks } from "../../../@types/components/fullAnimes.types";
 import { Links } from "./Links";
 
 interface IanimeLinks {
-  refLinks: links[];
+  refLinks: Ilinks[];
 }
 
 export const AnimeLinks = ({ refLinks }: IanimeLinks) => {

@@ -1,26 +1,18 @@
-import {
-  createContext,
-  useContext,
-  useCallback,
-  ReactNode,
-  useState,
-} from "react";
 import { jikanApi } from "../../services/api";
-import { animeProps, links } from "./fullAnimes.types";
+import { Ianime, Ilinks } from "../../@types/components/fullAnimes.types";
+import { createContext, useContext, ReactNode, useState } from "react";
 
-interface FullAnimesProviderProps {
+interface IfullAnimesProvider {
   children: ReactNode;
 }
 
-interface FullAnimesContextData {
-  animeById: animeProps;
-  allAnimes: animeProps[];
-  topAnimes: animeProps[];
-  seasonsAnimes: animeProps[];
-  linksStreaming: links[];
-  linksExternal: links[];
+interface IfullAnimesContext {
+  allAnimes: Ianime[];
+  topAnimes: Ianime[];
+  seasonsAnimes: Ianime[];
+  linksStreaming: Ilinks[];
+  linksExternal: Ilinks[];
   getAllAnimes: (page: number) => Promise<void>;
-  getAnimeFullById: (id: number) => Promise<void>;
   getTopAnimes: () => Promise<void>;
   getSeasonsAnimes: () => Promise<void>;
   getLinksStreaming: (animeId: number) => Promise<void>;
@@ -28,8 +20,8 @@ interface FullAnimesContextData {
   searchAnime: (animeName: string) => Promise<void>;
 }
 
-const FullAnimesContext = createContext<FullAnimesContextData>(
-  {} as FullAnimesContextData
+const FullAnimesContext = createContext<IfullAnimesContext>(
+  {} as IfullAnimesContext
 );
 
 export const useFullAnimes = () => {
@@ -42,67 +34,57 @@ export const useFullAnimes = () => {
   return context;
 };
 
-export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
-  const [allAnimes, setAllAnimes] = useState<animeProps[]>([]);
-  const [topAnimes, setTopAnimes] = useState<animeProps[]>([]);
-  const [seasonsAnimes, setSeasonsAnimes] = useState<animeProps[]>([]);
-  const [animeById, setAnimeById] = useState<animeProps>({} as animeProps);
-  const [linksStreaming, setLinksStreaming] = useState<links[]>([]);
-  const [linksExternal, setLinksExternal] = useState<links[]>([]);
+export const FullAnimesProvider = ({ children }: IfullAnimesProvider) => {
+  const [allAnimes, setAllAnimes] = useState<Ianime[]>([]);
+  const [topAnimes, setTopAnimes] = useState<Ianime[]>([]);
+  const [seasonsAnimes, setSeasonsAnimes] = useState<Ianime[]>([]);
+  const [linksStreaming, setLinksStreaming] = useState<Ilinks[]>([]);
+  const [linksExternal, setLinksExternal] = useState<Ilinks[]>([]);
 
-  const getAllAnimes = useCallback(async (page: number) => {
+  const getAllAnimes = async (page: number) => {
     try {
       const response = await jikanApi.get(`/anime?page=${page}`);
       setAllAnimes(response.data.data);
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  };
 
-  const getAnimeFullById = useCallback(async (id: number) => {
-    try {
-      const { data } = await jikanApi.get(`anime/${id}/full`);
-      setAnimeById(data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-  const getTopAnimes = useCallback(async () => {
+  const getTopAnimes = async () => {
     try {
       const response = await jikanApi.get("/top/anime?limit=10");
       setTopAnimes(response.data.data);
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  };
 
-  const getSeasonsAnimes = useCallback(async () => {
+  const getSeasonsAnimes = async () => {
     try {
       const response = await jikanApi.get("/seasons/now?limit=10");
       setSeasonsAnimes(response.data.data);
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  };
 
-  const getLinksExternal = useCallback(async (animeId: number) => {
+  const getLinksExternal = async (animeId: number) => {
     try {
       const response = await jikanApi.get(`/anime/${animeId}/external`);
       setLinksExternal(response.data.data);
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  };
 
-  const getLinksStreaming = useCallback(async (animeId: number) => {
+  const getLinksStreaming = async (animeId: number) => {
     try {
       const response = await jikanApi.get(`/anime/${animeId}/streaming`);
       setLinksStreaming(response.data.data);
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  };
 
   const searchAnime = async (animeName: string) => {
     try {
@@ -117,7 +99,6 @@ export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
     <FullAnimesContext.Provider
       value={{
         allAnimes,
-        animeById,
         topAnimes,
         seasonsAnimes,
         linksExternal,
@@ -125,7 +106,6 @@ export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
         getAllAnimes,
         getTopAnimes,
         getSeasonsAnimes,
-        getAnimeFullById,
         getLinksExternal,
         getLinksStreaming,
         searchAnime,

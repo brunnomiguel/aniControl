@@ -3,18 +3,17 @@ import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 
 import { useAnimeList } from "../../contexts/AnimeList";
 
-import { DashboardList } from "./DashboardList/DashboardList";
-import { DashboardDesktopDrawer } from "./DashboardDesktopDrawer";
-
 import { Header } from "../../components/Header";
 import { DashboardDrawer } from "../../components/Drawer";
+import { DashboardList } from "./DashboardList/DashboardList";
+import { DashboardDesktopDrawer } from "./DashboardDesktopDrawer";
 import { HoveringButton } from "../../components/Drawer/HoveringButton";
 
 export const Dashboard = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { getUserAnimes } = useAnimeList();
   const [smallView, setSmallView] = useState(false);
   const [FavoritesView, setFavoritesView] = useState(false);
+  const { getUserAnimes } = useAnimeList();
 
   useEffect(() => {
     const handleResize = () => {

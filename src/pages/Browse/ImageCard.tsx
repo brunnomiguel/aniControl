@@ -4,10 +4,10 @@ import { Grid, Image, keyframes, Text, useDisclosure } from "@chakra-ui/react";
 
 import { useFullAnimes } from "../../contexts/FullAnimes";
 import { ModalAnime } from "../../components/Modal/ModalAnime";
-import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
+import { Ianime } from "../../@types/components/fullAnimes.types";
 
 interface ImageCardProps {
-  anime: animeProps;
+  anime: Ianime;
 }
 
 const animate = keyframes`

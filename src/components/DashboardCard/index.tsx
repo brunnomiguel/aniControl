@@ -4,10 +4,10 @@ import { ModalDashboard } from "../Modal/ModalDashboard";
 import { Box, useDisclosure } from "@chakra-ui/react";
 
 import { useAnimeList } from "../../contexts/AnimeList";
-import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
+import { Ianime } from "../../@types/components/fullAnimes.types";
 
 interface IAnimeInfo {
-  anime: { data: animeProps };
+  anime: { data: Ianime };
   status: string;
   rating: number;
   episodes: number;

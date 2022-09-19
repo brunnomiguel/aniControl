@@ -1,4 +1,4 @@
-export interface imagesProps {
+export interface Iimages {
   jpg: {
     image_url: string;
     small_image_url: string;
@@ -11,21 +11,21 @@ export interface imagesProps {
   };
 }
 
-export interface links {
+export interface Ilinks {
   name: string;
   url: string;
 }
 
-export interface genreProps {
+export interface Igenre {
   mal_id: number;
   type: string;
   name: string;
   url: string;
 }
 
-export interface animeProps {
+export interface Ianime {
   mal_id: number;
-  images: imagesProps;
+  images: Iimages;
   trailer: {
     url: string;
   };
@@ -34,13 +34,13 @@ export interface animeProps {
   status?: string;
   duration?: string;
   rating: string;
-  streaming: links[];
-  external: links[];
+  streaming: Ilinks[];
+  external: Ilinks[];
   score: number;
   rank?: number;
   favorites?: number;
   synopsis: string;
   season?: string;
   year: number;
-  genres: genreProps[];
+  genres: Igenre[];
 }
