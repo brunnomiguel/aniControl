@@ -57,11 +57,6 @@ export const SignInForm = () => {
   };
   
 
-  const isWideVersion = useBreakpointValue({
-    base: false,
-    md: true,
-  });
-
   return (
     <>
       <Flex
@@ -90,19 +85,9 @@ export const SignInForm = () => {
           alignItems="center"
           justifyContent="center"
         >
-          {isWideVersion ? (
-            <Image w={["200px", "200px", "320px"]} h="110px" src={Logo} />
-          ) : (
-            <Image w={["200px", "200px", "320px"]} h="110px" src={LogoMobile} />
-          )}
+          {isWideVersion ? <Image w={["200px", "200px", "320px"]} h="110px" src={Logo} /> : <Image w={["200px", "200px", "320px"]} h="110px" src={LogoMobile} />}
           <Box w="100%">
-            <Text
-              color="white"
-              fontWeight="600"
-              fontSize="2xl"
-              textAlign="center"
-              mt="30px"
-            >
+            <Text color="white" fontWeight="600" fontSize="2xl" textAlign="center" mt="30px">
               Login
             </Text>
             <VStack mt="10" spacing="6">
@@ -152,17 +137,7 @@ export const SignInForm = () => {
               </Box>
             </VStack>
           </Box>
-          <Button
-            type="submit"
-            mt="12"
-            w="100%"
-            h="50px"
-            bg={isWideVersion ? "blue.600" : "red.600"}
-            fontWeight="700"
-            color="white"
-            borderRadius="10px"
-            _hover={isWideVersion ? { bg: "pink.100" } : { bg: "pink.800" }}
-          >
+          <Button type="submit" mt="12" w="100%" h="50px" bg={isWideVersion ? "blue.600" : "red.600"} fontWeight="700" color="white" borderRadius="10px" _hover={isWideVersion ? { bg: "pink.100" } : { bg: "pink.800" }}>
             Sign In
           </Button>
           <Flex flexDir="row" gap="20px" w="100%" mt="8">
@@ -177,20 +152,9 @@ export const SignInForm = () => {
             </Button>
           </Flex>
           <Flex flexDir="column" justifyContent="center">
-            <Text
-              mt="3vh"
-              w="200px"
-              textAlign="center"
-              fontWeight="600"
-              color="white"
-            >
+            <Text mt="3vh" w="200px" textAlign="center" fontWeight="600" color="white">
               Already have an account?
-              <Link
-                color="blue.600"
-                fontWeight="extrabold"
-                _hover={{ color: "pink.100" }}
-                onClick={() => navigate("/signup", { replace: true })}
-              >
+              <Link color="blue.600" fontWeight="extrabold" _hover={{ color: "pink.100" }} onClick={() => navigate("/signup", { replace: true })}>
                 Click here.
               </Link>
             </Text>
