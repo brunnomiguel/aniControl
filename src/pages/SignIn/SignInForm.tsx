@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Flex,
+  Center,
   Image,
   Link,
   Text,
@@ -12,7 +13,14 @@ import {
 import Logo from "../../assets/imgs/logo-form.svg";
 import LogoMobile from "../../assets/imgs/logo-dash.svg";
 
-import { FaApple, FaEnvelope, FaFacebookF, FaLock } from "react-icons/fa";
+import {
+  FaApple,
+  FaEnvelope,
+  FaFacebookF,
+  FaLock,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 import { Input } from "../../components/Input";
@@ -21,6 +29,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useAuth } from "../../contexts/Auth";
+import { useState } from "react";
 
 import { signInSchema } from "../../schemas";
 import { useNavigate } from "react-router-dom";
@@ -33,6 +42,7 @@ interface SignInData {
 export const SignInForm = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     formState: { errors },
@@ -41,18 +51,11 @@ export const SignInForm = () => {
   } = useForm<SignInData>({
     resolver: yupResolver(signInSchema),
   });
-  
+
   const handleSignIn = ({ email, password }: SignInData) => {
     signIn({ email, password });
   };
-  // const teste = () => {
-  //   console.log('teste');
-  // };
-
-  const isWideVersion = useBreakpointValue({
-    base: false,
-    md: true,
-  });
+  
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -62,7 +65,7 @@ export const SignInForm = () => {
   return (
     <>
       <Flex
-        shadow="30px 0px 30px #000000, inset -100px 0px 30px rgba(255, 255, 255, 0.6);"
+        shadow="-30px 0px 30px #000000, inset 100px 0px 30px rgba(255, 255, 255, 0.6);"
         opacity="0.1"
         w="35vw"
         bg="rgba(217, 217, 217, 0.5);"
@@ -111,14 +114,42 @@ export const SignInForm = () => {
                 {...register("email")}
                 error={errors.email}
               />
-              <Input
-                label="Password"
-                icon={FaLock}
-                type="password"
-                placeholder="Your password"
-                {...register("password")}
-                error={errors.password}
-              />
+              {/* olhinho aqui */}
+              <Box position="relative" w="100%" h="100%">
+                <Input
+                  label="Password"
+                  icon={FaLock}
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Your password"
+                  {...register("password")}
+                  error={errors.password}
+                />
+               {showConfirmPassword ? (
+                  <Center
+                    top="12"
+                    right="4"
+                    as="button"
+                    onClick={() => setShowConfirmPassword(false)}
+                    position="absolute"
+                    zIndex="1"
+                    color="red.600"
+                  >
+                    <FaEye />
+                  </Center>
+                ) : (
+                  <Center
+                    top="12"
+                    right="4"
+                    as="button"
+                    position="absolute"
+                    onClick={() => setShowConfirmPassword(true)}
+                    zIndex="1"
+                    color="red.600"
+                  >
+                    <FaEyeSlash />
+                  </Center>
+                )}
+              </Box>
             </VStack>
           </Box>
           <Button
