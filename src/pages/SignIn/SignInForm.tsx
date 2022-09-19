@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Flex,
+  Center,
   Image,
   Link,
   Text,
@@ -14,6 +15,17 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/imgs/logo-form.svg";
 import LogoMobile from "../../assets/imgs/logo-dash.svg";
 
+<<<<<<< HEAD
+=======
+import {
+  FaApple,
+  FaEnvelope,
+  FaFacebookF,
+  FaLock,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
+>>>>>>> 82fa4d8dd0f8925ac61e1cfe32e5fe159ee32f2e
 import { FcGoogle } from "react-icons/fc";
 import { FaApple, FaEnvelope, FaFacebookF, FaLock } from "react-icons/fa";
 
@@ -24,6 +36,7 @@ import { signInSchema } from "../../schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useAuth } from "../../contexts/Auth";
+import { useState } from "react";
 
 interface SignInData {
   email: string;
@@ -33,6 +46,7 @@ interface SignInData {
 export const SignInForm = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     formState: { errors },
@@ -45,16 +59,20 @@ export const SignInForm = () => {
   const handleSignIn = ({ email, password }: SignInData) => {
     signIn({ email, password });
   };
+<<<<<<< HEAD
 
   const isWideVersion = useBreakpointValue({
     base: false,
     md: true,
   });
+=======
+  
+>>>>>>> 82fa4d8dd0f8925ac61e1cfe32e5fe159ee32f2e
 
   return (
     <>
       <Flex
-        shadow="30px 0px 30px #000000, inset -100px 0px 30px rgba(255, 255, 255, 0.6);"
+        shadow="-30px 0px 30px #000000, inset 100px 0px 30px rgba(255, 255, 255, 0.6);"
         opacity="0.1"
         w="35vw"
         bg="rgba(217, 217, 217, 0.5);"
@@ -79,19 +97,9 @@ export const SignInForm = () => {
           alignItems="center"
           justifyContent="center"
         >
-          {isWideVersion ? (
-            <Image w={["200px", "200px", "320px"]} h="110px" src={Logo} />
-          ) : (
-            <Image w={["200px", "200px", "320px"]} h="110px" src={LogoMobile} />
-          )}
+          {isWideVersion ? <Image w={["200px", "200px", "320px"]} h="110px" src={Logo} /> : <Image w={["200px", "200px", "320px"]} h="110px" src={LogoMobile} />}
           <Box w="100%">
-            <Text
-              color="white"
-              fontWeight="600"
-              fontSize="2xl"
-              textAlign="center"
-              mt="30px"
-            >
+            <Text color="white" fontWeight="600" fontSize="2xl" textAlign="center" mt="30px">
               Login
             </Text>
             <VStack mt="10" spacing="6">
@@ -103,27 +111,45 @@ export const SignInForm = () => {
                 {...register("email")}
                 error={errors.email}
               />
-              <Input
-                label="Password"
-                icon={FaLock}
-                type="password"
-                placeholder="Your password"
-                {...register("password")}
-                error={errors.password}
-              />
+              {/* olhinho aqui */}
+              <Box position="relative" w="100%" h="100%">
+                <Input
+                  label="Password"
+                  icon={FaLock}
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Your password"
+                  {...register("password")}
+                  error={errors.password}
+                />
+               {showConfirmPassword ? (
+                  <Center
+                    top="12"
+                    right="4"
+                    as="button"
+                    onClick={() => setShowConfirmPassword(false)}
+                    position="absolute"
+                    zIndex="1"
+                    color="red.600"
+                  >
+                    <FaEye />
+                  </Center>
+                ) : (
+                  <Center
+                    top="12"
+                    right="4"
+                    as="button"
+                    position="absolute"
+                    onClick={() => setShowConfirmPassword(true)}
+                    zIndex="1"
+                    color="red.600"
+                  >
+                    <FaEyeSlash />
+                  </Center>
+                )}
+              </Box>
             </VStack>
           </Box>
-          <Button
-            type="submit"
-            mt="12"
-            w="100%"
-            h="50px"
-            bg={isWideVersion ? "blue.600" : "red.600"}
-            fontWeight="700"
-            color="white"
-            borderRadius="10px"
-            _hover={isWideVersion ? { bg: "pink.100" } : { bg: "pink.800" }}
-          >
+          <Button type="submit" mt="12" w="100%" h="50px" bg={isWideVersion ? "blue.600" : "red.600"} fontWeight="700" color="white" borderRadius="10px" _hover={isWideVersion ? { bg: "pink.100" } : { bg: "pink.800" }}>
             Sign In
           </Button>
           <Flex flexDir="row" gap="20px" w="100%" mt="8">
@@ -138,20 +164,9 @@ export const SignInForm = () => {
             </Button>
           </Flex>
           <Flex flexDir="column" justifyContent="center">
-            <Text
-              mt="3vh"
-              w="200px"
-              textAlign="center"
-              fontWeight="600"
-              color="white"
-            >
+            <Text mt="3vh" w="200px" textAlign="center" fontWeight="600" color="white">
               Already have an account?
-              <Link
-                color="blue.600"
-                fontWeight="extrabold"
-                _hover={{ color: "pink.100" }}
-                onClick={() => navigate("/signup", { replace: true })}
-              >
+              <Link color="blue.600" fontWeight="extrabold" _hover={{ color: "pink.100" }} onClick={() => navigate("/signup", { replace: true })}>
                 Click here.
               </Link>
             </Text>
