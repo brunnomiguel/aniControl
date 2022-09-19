@@ -1,40 +1,37 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  useCallback,
-} from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
+
 import { jsonApi } from "../../services/api";
 
-interface AuthProviderProps {
+import { useNavigate } from "react-router-dom";
+
+interface IauthProviderProps {
   children: ReactNode;
 }
 
-interface User {
+interface Iuser {
   id: number;
   name: string;
   email: string;
 }
 
-interface AuthState {
+interface IauthState {
   accessToken: string;
-  user: User;
+  user: Iuser;
 }
 
-interface SignInCredentials {
+interface IsignInCredentials {
   email: string;
   password: string;
 }
 
-interface AuthContextData {
-  user: User;
+interface IauthContextData {
+  user: Iuser;
   accessToken: string;
-  signIn: (credentials: SignInCredentials) => Promise<void>;
+  signIn: (credentials: IsignInCredentials) => Promise<void>;
   signOut: () => void;
 }
 
-const AuthContext = createContext<AuthContextData>({} as AuthContextData);
+const AuthContext = createContext<IauthContextData>({} as IauthContextData);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -46,8 +43,8 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [data, setData] = useState<AuthState>(() => {
+export const AuthProvider = ({ children }: IauthProviderProps) => {
+  const [data, setData] = useState<IauthState>(() => {
     const accessToken = localStorage.getItem("@AniControl:accessToken");
     const user = localStorage.getItem("@AniControl:user");
 
@@ -55,10 +52,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       return { accessToken, user: JSON.parse(user) };
     }
 
-    return {} as AuthState;
+    return {} as IauthState;
   });
 
-  const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
+  const navigate = useNavigate();
+
+  const signIn = async ({ email, password }: IsignInCredentials) => {
     const response = await jsonApi.post("/signin/", { email, password });
 
     const { accessToken, user } = response.data;
@@ -67,14 +66,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.setItem("@AniControl:user", JSON.stringify(user));
 
     setData({ accessToken, user });
-  }, []);
 
-  const signOut = useCallback(() => {
+    navigate("/dashboard", { replace: true });
+  };
+
+  const signOut = () => {
     localStorage.removeItem("@AniControl:accessToken");
     localStorage.removeItem("@AniControl:user");
 
-    setData({} as AuthState);
-  }, []);
+    setData({} as IauthState);
+  };
 
   return (
     <AuthContext.Provider
@@ -89,5 +90,3 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     </AuthContext.Provider>
   );
 };
-
-// img 1263

@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { jikanApi } from "../../services/api";
-import { animeProps } from "./fullAnimes.types";
+import { animeProps, links } from "./fullAnimes.types";
 
 interface FullAnimesProviderProps {
   children: ReactNode;
@@ -17,10 +17,15 @@ interface FullAnimesContextData {
   allAnimes: animeProps[];
   topAnimes: animeProps[];
   seasonsAnimes: animeProps[];
+  linksStreaming: links[];
+  linksExternal: links[];
   getAllAnimes: (page: number) => Promise<void>;
   getAnimeFullById: (id: number) => Promise<void>;
   getTopAnimes: () => Promise<void>;
   getSeasonsAnimes: () => Promise<void>;
+  getLinksStreaming: (animeId: number) => Promise<void>;
+  getLinksExternal: (animeId: number) => Promise<void>;
+  searchAnime: (animeName: string) => Promise<void>;
 }
 
 const FullAnimesContext = createContext<FullAnimesContextData>(
@@ -42,6 +47,8 @@ export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
   const [topAnimes, setTopAnimes] = useState<animeProps[]>([]);
   const [seasonsAnimes, setSeasonsAnimes] = useState<animeProps[]>([]);
   const [animeById, setAnimeById] = useState<animeProps>({} as animeProps);
+  const [linksStreaming, setLinksStreaming] = useState<links[]>([]);
+  const [linksExternal, setLinksExternal] = useState<links[]>([]);
 
   const getAllAnimes = useCallback(async (page: number) => {
     try {
@@ -55,7 +62,7 @@ export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
   const getAnimeFullById = useCallback(async (id: number) => {
     try {
       const { data } = await jikanApi.get(`anime/${id}/full`);
-      setAnimeById(data);
+      setAnimeById(data.data);
     } catch (error) {
       console.log(error);
     }
@@ -79,6 +86,33 @@ export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
     }
   }, []);
 
+  const getLinksExternal = useCallback(async (animeId: number) => {
+    try {
+      const response = await jikanApi.get(`/anime/${animeId}/external`);
+      setLinksExternal(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const getLinksStreaming = useCallback(async (animeId: number) => {
+    try {
+      const response = await jikanApi.get(`/anime/${animeId}/streaming`);
+      setLinksStreaming(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const searchAnime = async (animeName: string) => {
+    try {
+      const response = await jikanApi.get(`/anime?letter=${animeName}`);
+      setAllAnimes(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <FullAnimesContext.Provider
       value={{
@@ -86,10 +120,15 @@ export const FullAnimesProvider = ({ children }: FullAnimesProviderProps) => {
         animeById,
         topAnimes,
         seasonsAnimes,
+        linksExternal,
+        linksStreaming,
         getAllAnimes,
         getTopAnimes,
         getSeasonsAnimes,
         getAnimeFullById,
+        getLinksExternal,
+        getLinksStreaming,
+        searchAnime,
       }}
     >
       {children}

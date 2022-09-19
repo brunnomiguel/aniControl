@@ -1,0 +1,23 @@
+			<svg
+				width="380px"
+				height="500px"
+				viewBox="0 0 837 1045"
+				version="1.1"
+				xmlns="http://www.w3.org/2000/svg"
+				xmlnsXlink="http://www.w3.org/1999/xlink"
+			>
+				<g
+					id="Page-1"
+					stroke="none"
+					stroke-width="1"
+					fill="none"
+					fill-rule="evenodd"
+				>
+					<path
+						d="M773,186 L827,217.538705 L827,279.636651 L773,310 L719,279.636651 L719,217.538705 L773,186 Z"
+						id="Polygon-3"
+						stroke="#B28ECF"
+						stroke-width="6"
+					></path>
+				</g>
+			</svg>

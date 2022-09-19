@@ -1,21 +1,26 @@
-import { Flex, Grid, Heading } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { BrowseCard } from "../../components/BrowseCard";
-import { useFullAnimes } from "../../contexts/FullAnimes";
 import { theme } from "../../styles/theme";
 
+import { useEffect, useState } from "react";
+import { Flex, Grid, Heading } from "@chakra-ui/react";
+
+import { BrowseCard } from "../../components/BrowseCard";
+import { useFullAnimes } from "../../contexts/FullAnimes";
+import { CardAnimeSkeleton } from "../../components/Skeleton/CardAnimeSkeleton";
+
 export const SeasonsAnimes = () => {
+  const [loading, setLoading] = useState(true);
+
   const { seasonsAnimes, getSeasonsAnimes } = useFullAnimes();
 
   useEffect(() => {
-    getSeasonsAnimes();
+    getSeasonsAnimes().then((_) => setLoading(false));
   }, []);
 
   return (
     <Grid
       bg="grey.600"
       w={["100%", "100%", "500px"]}
-      h={["370px", "370px", "600px"]}
+      h={["370px", "370px", "87%"]}
       mb="6"
     >
       <Heading
@@ -70,9 +75,13 @@ export const SeasonsAnimes = () => {
           },
         ]}
       >
-        {seasonsAnimes.map((anime) => {
-          return <BrowseCard key={anime.mal_id} anime={anime} />;
-        })}
+        {loading ? (
+          <CardAnimeSkeleton repeatCount={10} />
+        ) : (
+          seasonsAnimes.map((anime) => {
+            return <BrowseCard key={anime.mal_id} anime={anime} />;
+          })
+        )}
       </Flex>
     </Grid>
   );

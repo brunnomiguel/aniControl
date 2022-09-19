@@ -41,12 +41,18 @@ export const SignInForm = () => {
   } = useForm<SignInData>({
     resolver: yupResolver(signInSchema),
   });
+  
   const handleSignIn = ({ email, password }: SignInData) => {
     signIn({ email, password });
   };
   // const teste = () => {
   //   console.log('teste');
   // };
+
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    md: true,
+  });
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -139,7 +145,6 @@ export const SignInForm = () => {
               <FaApple fill="white" />
             </Button>
           </Flex>
-
           <Flex flexDir="column" justifyContent="center">
             <Text
               mt="3vh"

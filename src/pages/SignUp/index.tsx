@@ -1,7 +1,8 @@
 import { Box, Flex, useBreakpointValue } from "@chakra-ui/react";
-import { BackgroundAnimation } from "../../components/BackgroundAnimation";
-import { BackgroundImg } from "./BackgroundImg";
+
 import { SignUpForm } from "./SignUpForm";
+import { BackgroundImg } from "./BackgroundImg";
+import { BackgroundAnimation } from "../../components/BackgroundAnimation";
 
 export const SignUp = () => {
   const isWideVersion = useBreakpointValue({
@@ -27,7 +28,7 @@ export const SignUp = () => {
           </Flex>
         </Box>
       ) : (
-        <Flex bg="#21212D" flexDir="row" justifyContent="center">
+        <Flex bg="grey.700" flexDir="row" justifyContent="center">
           <SignUpForm />
         </Flex>
       )}
