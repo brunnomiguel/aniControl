@@ -1,6 +1,9 @@
 import { Box, Flex, Image, Text, Container, Button, useBreakpointValue, SlideFade } from "@chakra-ui/react";
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import VisibilitySensor from "react-visibility-sensor";
+import { AboutModal } from "../../components/Modal/AboutModal";
 
 import Logo from "../../assets/imgs/logo-dash.svg";
 import Heroes from "../../assets/imgs/heroes2.svg";

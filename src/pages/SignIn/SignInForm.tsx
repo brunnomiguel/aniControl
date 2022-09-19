@@ -10,6 +10,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
+import { useNavigate } from "react-router-dom";
+
 import Logo from "../../assets/imgs/logo-form.svg";
 import LogoMobile from "../../assets/imgs/logo-dash.svg";
 
@@ -21,18 +23,18 @@ import {
   FaEye,
   FaEyeSlash,
 } from "react-icons/fa";
+
 import { FcGoogle } from "react-icons/fc";
+import { FaApple, FaEnvelope, FaFacebookF, FaLock } from "react-icons/fa";
 
 import { Input } from "../../components/Input";
 
 import { useForm } from "react-hook-form";
+import { signInSchema } from "../../schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useAuth } from "../../contexts/Auth";
 import { useState } from "react";
-
-import { signInSchema } from "../../schemas";
-import { useNavigate } from "react-router-dom";
 
 interface SignInData {
 	email: string;
@@ -42,6 +44,18 @@ interface SignInData {
 export const SignInForm = () => {
 	const { signIn } = useAuth();
 	const navigate = useNavigate();
+  
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm<SignInData>({
+    resolver: yupResolver(signInSchema),
+  });
+
+  const handleSignIn = ({ email, password }: SignInData) => {
+    signIn({ email, password });
+  };
 
 	const {
 		formState: { errors },

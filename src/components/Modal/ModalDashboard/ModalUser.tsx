@@ -2,12 +2,10 @@ import {
   Box,
   Button,
   Center,
-  color,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
@@ -16,39 +14,26 @@ import {
   useToast,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import {
-  FaEnvelope,
-  FaExclamation,
-  FaKey,
-  FaTimes,
-  FaUser,
-} from "react-icons/fa";
+
 import { theme } from "../../../styles/theme";
-import { Input } from "../../Input";
+import { FaEnvelope, FaKey, FaTimes, FaUser } from "react-icons/fa";
+
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { updateSchema } from "../../../schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAuth } from "../../../contexts/Auth";
+
+import { Input } from "../../Input";
 import { jsonApi } from "../../../services/api";
+import { useAuth } from "../../../contexts/Auth";
 
-const updateSchema = yup.object().shape({
-  name: yup.string().required("Nome obrigatório"),
-  email: yup.string().required("Email obrigatório").email("Email inválido"),
-  password: yup.string().required("Senha obrigatória"),
-  confirm_password: yup
-    .string()
-    .required("Confirmação de senha obrigatória")
-    .oneOf([yup.ref("password")], "As senhas não são iguais!!"),
-});
-
-interface UpdateUserData {
+interface IupdateUser {
   name: string;
   email: string;
   password: string;
   confirm_password: string;
 }
 
-interface ModalUpdateUserProps {
+interface ImodalUpdateUser {
   isOpen: boolean;
   onClose: () => void;
   onClick: () => void;
@@ -62,28 +47,32 @@ export const ModalUpdateUser = ({
   onClick,
   userId,
   userName,
-}: ModalUpdateUserProps) => {
+}: ImodalUpdateUser) => {
   const toast = useToast();
+
   const isWideVersion = useBreakpointValue({
     base: false,
     md: true,
   });
 
+  const { accessToken } = useAuth();
+
   const {
     formState: { errors },
     register,
     handleSubmit,
-  } = useForm<UpdateUserData>({
+  } = useForm<IupdateUser>({
     resolver: yupResolver(updateSchema),
   });
 
-  const handleUserUpdate = ({ name, email, password }: UpdateUserData) => {
+  const handleUserUpdate = ({ name, email, password }: IupdateUser) => {
     jsonApi
       .patch(
         `/users/${userId}/`,
-        { name, email, password }
+        { name, email, password },
+        { headers: { Authorization: `Bearer ${accessToken}` } }
       )
-      .then((response) => {
+      .then((_) => {
         onClose();
         toast({
           title: "Success!",
@@ -92,9 +81,8 @@ export const ModalUpdateUser = ({
           duration: 2000,
           isClosable: true,
         });
-        console.log("Dados atualizados corretamente");
       })
-      .catch((err) => {
+      .catch((_) => {
         toast({
           title: "Fail!",
           description: "Error updating data!",
@@ -102,13 +90,12 @@ export const ModalUpdateUser = ({
           duration: 2000,
           isClosable: true,
         });
-        console.log("falha ao atualizar os dados");
       });
   };
 
-  <Modal  isOpen={isOpen} onClose={onClose}>
+  <Modal isOpen={isOpen} onClose={onClose}>
     <ModalOverlay />
-    <ModalContent bg="grey.600" >
+    <ModalContent bg="grey.600">
       <ModalHeader>
         <Center bg="red.500" w="30px" h="30px" borderRadius="5px">
           <FaUser color={theme.colors.white} />
@@ -149,6 +136,7 @@ export const ModalUpdateUser = ({
                   icon={FaUser}
                   placeholder="Your name"
                   {...register("name")}
+                  error={errors.name}
                 ></Input>
                 <Input
                   label="Email"
@@ -156,6 +144,7 @@ export const ModalUpdateUser = ({
                   type="email"
                   placeholder="Your email"
                   {...register("email")}
+                  error={errors.email}
                 ></Input>
                 <Input
                   label="Password"
@@ -163,6 +152,7 @@ export const ModalUpdateUser = ({
                   type="password"
                   placeholder="Your password"
                   {...register("password")}
+                  error={errors.password}
                 ></Input>
                 <Input
                   label="Confirm password"
@@ -170,6 +160,7 @@ export const ModalUpdateUser = ({
                   type="password"
                   placeholder="Confirm_password"
                   {...register("confirm_password")}
+                  error={errors.confirm_password}
                 ></Input>
               </Box>
             </VStack>
@@ -192,4 +183,3 @@ export const ModalUpdateUser = ({
     </ModalContent>
   </Modal>;
 };
-
