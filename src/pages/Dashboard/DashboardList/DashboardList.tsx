@@ -147,7 +147,7 @@ export const DashboardList = ({ FavoritesView }: IDashboardListProps) => {
       spacing={10}
       overflowX="scroll"
       w="250vw"
-      h="93vh"
+      h="92vh"
       css={{
         "&::-webkit-scrollbar": {
           width: "6px",

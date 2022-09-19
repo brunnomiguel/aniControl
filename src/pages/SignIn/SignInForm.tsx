@@ -41,10 +41,18 @@ export const SignInForm = () => {
   } = useForm<SignInData>({
     resolver: yupResolver(signInSchema),
   });
-
+  
   const handleSignIn = ({ email, password }: SignInData) => {
     signIn({ email, password });
   };
+  // const teste = () => {
+  //   console.log('teste');
+  // };
+
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    md: true,
+  });
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -54,7 +62,7 @@ export const SignInForm = () => {
   return (
     <>
       <Flex
-        shadow="30px 0px 30px grey.900, inset -100px 0px 30px rgba(255, 255, 255, 0.6);"
+        shadow="30px 0px 30px #000000, inset -100px 0px 30px rgba(255, 255, 255, 0.6);"
         opacity="0.1"
         w="35vw"
         bg="rgba(217, 217, 217, 0.5);"
@@ -64,7 +72,7 @@ export const SignInForm = () => {
         position="fixed"
         right={["none", "none", "0", "0"]}
         h="100vh"
-        w={["80vw", "60vw", "35vw", "35vw"]}
+        w={["80vw", "60vw", "37vw", "37vw"]}
       >
         <Flex
           as="form"
@@ -115,7 +123,7 @@ export const SignInForm = () => {
           </Box>
           <Button
             type="submit"
-            mt="10vh"
+            mt="12"
             w="100%"
             h="50px"
             bg={isWideVersion ? "blue.600" : "red.600"}
@@ -127,16 +135,16 @@ export const SignInForm = () => {
             Sign In
           </Button>
           <Flex flexDir="row" gap="20px" w="100%" mt="8">
-										<Button w="30%" h="25px" bg="white">
-											<FcGoogle />
-										</Button>
-										<Button h="25px" w="30%" bg="#155BCB">
-											<FaFacebookF fill="white" />
-										</Button>
-										<Button h="25px" w="30%" bg="black">
-											<FaApple fill="white" />
-										</Button>
-									</Flex>
+            <Button w="30%" h="25px" bg="white">
+              <FcGoogle />
+            </Button>
+            <Button h="25px" w="30%" bg="#155BCB">
+              <FaFacebookF fill="white" />
+            </Button>
+            <Button h="25px" w="30%" bg="black">
+              <FaApple fill="white" />
+            </Button>
+          </Flex>
           <Flex flexDir="column" justifyContent="center">
             <Text
               mt="3vh"

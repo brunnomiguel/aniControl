@@ -27,7 +27,7 @@ export const DashboardDesktopDrawer = ({
       w="50vw"
       overflowY="scroll"
       overflowX="hidden"
-      h="93vh"
+      h="92vh"
       borderRadius="20px"
       css={{
         "&::-webkit-scrollbar": {
