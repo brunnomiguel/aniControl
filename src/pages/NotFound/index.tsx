@@ -29,14 +29,20 @@ export const animation = keyframes`
 export const NotFound = () => {
 	const wordsArray = [
 		"Refresh Page",
-		"NOOPS!!",
-		"NOOPS...",
-		"Nooooo!!",
-		`Don't touch...`,
+		"NOOPS!! /o/",
+		"NOOPS... :>",
+		"Nooooo!! >w<",
+		"Don't touch... \\o\\",
 		"Oh god..., please...",
-		"Leave me alone!",
-		`Try again '-'`,
+		"Leave me alone!>.<",
+		"Try again '-'",
 		"Refresh is bad =(",
+		"Whoopsies! :C",
+		"Groovey :3",
+		"Try me wench >:/",
+		"Noo, don't go! :P",
+		"nhehehehe... uwu",
+		"Not today :v",
 	];
 	const polygonArray = [
 		PolygonOne,
@@ -50,13 +56,19 @@ export const NotFound = () => {
 	const [wordChosed, setWordChosed] = useState(wordsArray[0]);
 	const [positionXY, setPositionXY] = useState({ x: 0, y: 0 });
 	const [componentPosition, setComponentPosition] = useState<any>("inherit");
+	const [width, setWidth] = useState("150px");
 
 	const randomPosition = () => {
 		const randomX = Math.floor(Math.random() * 100);
 		const randomWord = Math.floor(Math.random() * wordsArray.length);
+
 		const randomY = Math.floor(Math.random() * 100);
 		setPositionXY({ x: randomX, y: randomY });
 		setComponentPosition("fixed");
+		setWidth("auto");
+		if (randomWord === 0) {
+			return setWordChosed(wordsArray[randomWord + 1]);
+		}
 		setWordChosed(wordsArray[randomWord]);
 	};
 
@@ -126,7 +138,7 @@ export const NotFound = () => {
 						</Button>
 						{isWideVersion && (
 							<Button
-								w="150px"
+								w={width}
 								bg="red.600"
 								mt="10px"
 								_hover={{ bg: "pink.900" }}

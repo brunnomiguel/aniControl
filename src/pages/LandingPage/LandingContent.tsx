@@ -1,6 +1,9 @@
 import { Box, Flex, Image, Text, Container, Button, useBreakpointValue, SlideFade } from "@chakra-ui/react";
 
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import VisibilitySensor from "react-visibility-sensor";
+import { AboutModal } from "../../components/Modal/AboutModal";
 
 import Logo from "../../assets/imgs/logo-dash.svg";
 import Heroes from "../../assets/imgs/heroes2.svg";
@@ -8,10 +11,6 @@ import Villains from "../../assets/imgs/villains2.svg";
 import BackgroundImg from "../../assets/imgs/landLuffy.svg";
 import BgGrey from "../../assets/imgs/background-landing-page.svg";
 import { FaChevronLeft, FaChevronRight, FaChevronUp } from "react-icons/fa";
-
-import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AboutModal } from "../../components/Modal/AboutModal";
 
 export const LandingContent = () => {
   const nav = useNavigate();
