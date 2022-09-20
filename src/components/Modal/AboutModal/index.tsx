@@ -34,7 +34,7 @@ export const AboutModal = ({ id }: AboultModalProps) => {
     <>
       {devsData.map((dev) => {
         return (
-          <>
+          <Box key={dev.id}>
             {dev.id === id && (
               <>
                 <VisibilitySensor
@@ -240,7 +240,7 @@ export const AboutModal = ({ id }: AboultModalProps) => {
                 </Modal>
               </>
             )}
-          </>
+          </Box>
         );
       })}
     </>
