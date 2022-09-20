@@ -150,7 +150,6 @@ export const SignUpForm = () => {
                   <Center
                     top="12"
                     right="4"
-                    as="button"
                     onClick={() => setShowPassword(false)}
                     position="absolute"
                     zIndex="1"
@@ -162,7 +161,6 @@ export const SignUpForm = () => {
                   <Center
                     top="12"
                     right="4"
-                    as="button"
                     position="absolute"
                     onClick={() => setShowPassword(true)}
                     zIndex="1"
@@ -184,7 +182,6 @@ export const SignUpForm = () => {
                   <Center
                     top="12"
                     right="4"
-                    as="button"
                     onClick={() => setShowConfirmPassword(false)}
                     position="absolute"
                     zIndex="1"
@@ -196,7 +193,6 @@ export const SignUpForm = () => {
                   <Center
                     top="12"
                     right="4"
-                    as="button"
                     position="absolute"
                     onClick={() => setShowConfirmPassword(true)}
                     zIndex="1"
