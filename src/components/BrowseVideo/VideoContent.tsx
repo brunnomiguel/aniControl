@@ -26,42 +26,17 @@ export const VideoContent = ({
 }: IvideoContent) => {
   return (
     <Modal isOpen={!isOpen} onClose={onClose}>
-    <Box
-      p="10"
-      w="800px"
-      top="27.5%"
-      left="15%"
-      position="absolute"
-      bg="rgba(0, 0, 0, 0.61)"
-      borderRadius="16px"
-      shadow="0 4px 5px rgba(0, 0, 0, 0.9)"
-      zIndex="3"
-    >
-      <Heading fontWeight="semibold" as="h1">
-        {videoObject.name}
-      </Heading>
-      <Text
-        fontWeight="light"
-        color="grey.0"
-        overflowX="hidden"
-        overflowY="auto"
-        h="10rem"
-        w="700px"
-        mt="4"
-        css={{
-          "&::-webkit-scrollbar": {
-            width: "4px",
-          },
-          "&::-webkit-scrollbar-track": {
-            width: "6px",
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: "blue.50",
-            borderRadius: "24px",
-          },
-        }}
+      <Box
+        p="10"
+        w="800px"
+        top="27.5%"
+        left="15%"
+        position="absolute"
+        bg="rgba(0, 0, 0, 0.61)"
+        borderRadius="16px"
+        shadow="0 4px 5px rgba(0, 0, 0, 0.9)"
+        zIndex="3"
       >
-        {/* Transformar em um componente */}
         <Heading fontWeight="semibold" as="h1">
           {videoObject.name}
         </Heading>
