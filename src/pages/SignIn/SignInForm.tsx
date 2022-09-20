@@ -114,7 +114,6 @@ export const SignInForm = () => {
                 {...register("email")}
                 error={errors.email}
               />
-              {/* olhinho aqui */}
               <Box position="relative" w="100%" h="100%">
                 <Input
                   label="Password"
@@ -128,7 +127,6 @@ export const SignInForm = () => {
                   <Center
                     top="12"
                     right="4"
-                    as="button"
                     onClick={() => setShowConfirmPassword(false)}
                     position="absolute"
                     zIndex="1"
@@ -140,7 +138,6 @@ export const SignInForm = () => {
                   <Center
                     top="12"
                     right="4"
-                    as="button"
                     position="absolute"
                     onClick={() => setShowConfirmPassword(true)}
                     zIndex="1"
