@@ -3,12 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { FiNavigation } from "react-icons/fi";
 import { FaPencilAlt, FaStar } from "react-icons/fa";
 
-import { Avatar, Box, Flex, Text, theme, VStack } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Text,
+  theme,
+  VStack,
+  useDisclosure,
+} from "@chakra-ui/react";
 
 import { useAuth } from "../../contexts/Auth";
 import { useAnimeList } from "../../contexts/AnimeList";
 import { DrawerButton } from "../../components/Drawer/DrawerButton";
 import { DrawerStatics } from "../../components/Drawer/DrawerStatics";
+import { ModalUpdateUser } from "../../components/Modal/ModalDashboard/ModalUser";
 
 interface IDashboardDesktopProps {
   setFavoritesView: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,9 +26,11 @@ interface IDashboardDesktopProps {
 export const DashboardDesktopDrawer = ({
   setFavoritesView,
 }: IDashboardDesktopProps) => {
-  const { user } = useAuth();
+  const { user, accessToken } = useAuth();
   const navigate = useNavigate();
   const { userAnimes } = useAnimeList();
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   return (
     <Box
       w="50vw"
@@ -56,9 +67,12 @@ export const DashboardDesktopDrawer = ({
           hoverColor="pink.800"
           onClick={() => setFavoritesView((oldState) => !oldState)}
         />
+        <ModalUpdateUser accessToken={accessToken} isOpen={isOpen} onClose={onClose} userId={user.id} userName={user.name}  />
+
         <DrawerButton
           Icon={FaPencilAlt}
           Title={"Edit Profile"}
+          onClick={onOpen}
           activeColor="red.600"
           bgColor="red.600"
           hoverColor="pink.800"

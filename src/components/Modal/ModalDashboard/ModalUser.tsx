@@ -51,9 +51,10 @@ interface UpdateUserData {
 interface ModalUpdateUserProps {
   isOpen: boolean;
   onClose: () => void;
-  onClick: () => void;
+  onClick?: () => void;
   userId: number;
   userName: string;
+  accessToken: string;
 }
 
 export const ModalUpdateUser = ({
@@ -62,6 +63,7 @@ export const ModalUpdateUser = ({
   onClick,
   userId,
   userName,
+  accessToken,
 }: ModalUpdateUserProps) => {
   const toast = useToast();
   const isWideVersion = useBreakpointValue({
@@ -79,10 +81,9 @@ export const ModalUpdateUser = ({
 
   const handleUserUpdate = ({ name, email, password }: UpdateUserData) => {
     jsonApi
-      .patch(
-        `/users/${userId}/`,
-        { name, email, password }
-      )
+      .patch(`/users/${userId}/`, { name, email, password }, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
       .then((response) => {
         onClose();
         toast({
@@ -105,91 +106,91 @@ export const ModalUpdateUser = ({
         console.log("falha ao atualizar os dados");
       });
   };
-
-  <Modal  isOpen={isOpen} onClose={onClose}>
-    <ModalOverlay />
-    <ModalContent bg="grey.600" >
-      <ModalHeader>
-        <Center bg="red.500" w="30px" h="30px" borderRadius="5px">
-          <FaUser color={theme.colors.white} />
-        </Center>
-        <Text fontWeight="bold" ml="2">
-          {userName}
-        </Text>
-        <Center
-          as="button"
-          onClick={onClose}
-          ml="auto"
-          w="32px"
-          h="32px"
-          bg="red.500"
-          fontSize="lg"
-          borderRadius="5px"
-        >
-          <FaTimes color={theme.colors.white}></FaTimes>
-        </Center>
-      </ModalHeader>
-      <ModalCloseButton />
-      <ModalBody textAlign="center">
-        <Flex
-          as="form"
-          onSubmit={handleSubmit(handleUserUpdate)}
-          h="100vh"
-          w="100%"
-          flexDir="column"
-          padding="50px"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Box w="100%">
-            <VStack mt="10" spacing="10">
-              <Box w="100%">
-                <Input
-                  label="Name"
-                  icon={FaUser}
-                  placeholder="Your name"
-                  {...register("name")}
-                ></Input>
-                <Input
-                  label="Email"
-                  icon={FaEnvelope}
-                  type="email"
-                  placeholder="Your email"
-                  {...register("email")}
-                ></Input>
-                <Input
-                  label="Password"
-                  icon={FaKey}
-                  type="password"
-                  placeholder="Your password"
-                  {...register("password")}
-                ></Input>
-                <Input
-                  label="Confirm password"
-                  icon={FaKey}
-                  type="password"
-                  placeholder="Confirm_password"
-                  {...register("confirm_password")}
-                ></Input>
-              </Box>
-            </VStack>
-          </Box>
-          <Button
-            type="submit"
-            mt="10vh"
-            w="100%"
-            h="50px"
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent bg="grey.600">
+        <ModalHeader>
+          <Center bg="red.500" w="30px" h="30px" borderRadius="5px">
+            <FaUser color={theme.colors.white} />
+          </Center>
+          <Text fontWeight="bold" ml="2">
+            {userName}
+          </Text>
+          <Center
+            as="button"
+            onClick={onClose}
+            ml="auto"
+            w="32px"
+            h="32px"
             bg="red.500"
-            _hover={isWideVersion ? { bg: "pink.100" } : { bg: "pink.800" }}
-            fontWeight="700"
-            color="white"
-            borderRadius="10px"
+            fontSize="lg"
+            borderRadius="5px"
           >
-            Alterar dados
-          </Button>
-        </Flex>
-      </ModalBody>
-    </ModalContent>
-  </Modal>;
+            <FaTimes color={theme.colors.white}></FaTimes>
+          </Center>
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody textAlign="center">
+          <Flex
+            as="form"
+            onSubmit={handleSubmit(handleUserUpdate)}
+            h="100vh"
+            w="100%"
+            flexDir="column"
+            padding="50px"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Box w="100%">
+              <VStack mt="10" spacing="10">
+                <Box w="100%">
+                  <Input
+                    label="Name"
+                    icon={FaUser}
+                    placeholder="Your name"
+                    {...register("name")}
+                  ></Input>
+                  <Input
+                    label="Email"
+                    icon={FaEnvelope}
+                    type="email"
+                    placeholder="Your email"
+                    {...register("email")}
+                  ></Input>
+                  <Input
+                    label="Password"
+                    icon={FaKey}
+                    type="password"
+                    placeholder="Your password"
+                    {...register("password")}
+                  ></Input>
+                  <Input
+                    label="Confirm password"
+                    icon={FaKey}
+                    type="password"
+                    placeholder="Confirm_password"
+                    {...register("confirm_password")}
+                  ></Input>
+                </Box>
+              </VStack>
+            </Box>
+            <Button
+              type="submit"
+              mt="10vh"
+              w="100%"
+              h="50px"
+              bg="red.500"
+              _hover={isWideVersion ? { bg: "pink.100" } : { bg: "pink.800" }}
+              fontWeight="700"
+              color="white"
+              borderRadius="10px"
+            >
+              Alterar dados
+            </Button>
+          </Flex>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
 };
-
