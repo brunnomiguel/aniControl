@@ -28,7 +28,6 @@ export const VideoContent = ({ videoObject }: IvideoContent) => {
       shadow="0 4px 5px rgba(0, 0, 0, 0.9)"
       zIndex="3"
     >
-      {/* Transformar em um componente */}
       <Heading fontWeight="semibold" as="h1">
         {videoObject.name}
       </Heading>
