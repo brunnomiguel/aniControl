@@ -1,4 +1,4 @@
-import { Box, Flex, keyframes } from "@chakra-ui/react";
+import { Box, Flex, keyframes, useDisclosure } from "@chakra-ui/react";
 
 import { useState, useRef } from "react";
 import { SelectedVideo } from "./SelectedVideo";
@@ -70,6 +70,8 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
     }
   };
 
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   return (
     <Flex position="relative" justifyContent="center" pb="0" pt="50px" w="100%">
       <Box zIndex="3">
@@ -97,13 +99,19 @@ export const BrowseVideos = ({ arrayVideo }: videoData) => {
           );
         })}
       </Box>
-      <VideoContent videoObject={videoObject} />
+      <VideoContent
+        onOpen={onOpen}
+        onClose={onClose}
+        isOpen={isOpen}
+        videoObject={videoObject}
+      />
       <Box
         position="absolute"
         w="90vw"
         h="80vh"
         borderRadius="10px"
         zIndex="2"
+        onClick={() => onClose()}
         shadow="rgba(0, 0, 0, 1) 0px -100px 36px -28px inset,rgba(0, 0, 0, 1) 0px 2px 4px, rgba(0, 0, 0, 0.9) 0px 7px 13px -3px, rgba(0, 0, 0, 0.8) 0px -3px 0px inset, rgba(0, 0, 0, 1) 0px 25px 30px -20px"
       />
       <Box
