@@ -39,13 +39,11 @@ interface ImodalUpdateUser {
   onClick?: () => void;
   userId: number;
   userName: string;
-  accessToken: string;
 }
 
 export const ModalUpdateUser = ({
   isOpen,
   onClose,
-  onClick,
   userId,
   userName,
 }: ImodalUpdateUser) => {
