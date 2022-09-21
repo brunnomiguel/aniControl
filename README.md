@@ -72,8 +72,6 @@ List the ready features here:
 
 ## Acknowledgements
 
-Give credit here.
-
 - This project was inspired by my anime list and many other anime websites which definitely need an UI/UX upgrade...
 - Many thanks aswell to Kenzie Academy and our facilitators Guilherme Gonçalves and Paulo Mello! 💖
 
