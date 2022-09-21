@@ -45,8 +45,6 @@ It can be observed that there are not so many accessible sites for users to be a
 
 ## Features
 
-List the ready features here:
-
 - User Authentication;
 - Sign up;
 - Sign in;
