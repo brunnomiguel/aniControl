@@ -81,9 +81,13 @@ export const ModalUpdateUser = ({
 
   const handleUserUpdate = ({ name, email, password }: UpdateUserData) => {
     jsonApi
-      .patch(`/users/${userId}/`, { name, email, password }, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
+      .patch(
+        `/users/${userId}/`,
+        { name, email, password },
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      )
       .then((response) => {
         onClose();
         toast({
@@ -109,41 +113,43 @@ export const ModalUpdateUser = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent bg="grey.600">
+      <ModalContent  w={["300px", "300px", "400px"]} h={["680px", "680px", "680px"]} bg="grey.600">
         <ModalHeader>
-          <Center bg="red.500" w="30px" h="30px" borderRadius="5px">
-            <FaUser color={theme.colors.white} />
-          </Center>
-          <Text fontWeight="bold" ml="2">
-            {userName}
-          </Text>
-          <Center
-            as="button"
-            onClick={onClose}
-            ml="auto"
-            w="32px"
-            h="32px"
-            bg="red.500"
-            fontSize="lg"
-            borderRadius="5px"
-          >
-            <FaTimes color={theme.colors.white}></FaTimes>
-          </Center>
+          <Flex flexDir="row" padding="5">
+            <Flex flexDir="column">
+              <Center mb="5" bg="red.500" w="70px" h="70px" borderRadius="50%">
+                <FaUser color={theme.colors.white} />
+              </Center>
+              <Center fontWeight="bold">{userName}</Center>
+            </Flex>
+            <Center
+              as="button"
+              onClick={onClose}
+              ml="auto"
+              w="40px"
+              h="40px"
+              bg="red.500"
+              fontSize="lg"
+              borderRadius="5px"
+            >
+              <FaTimes color={theme.colors.white}></FaTimes>
+            </Center>
+          </Flex>
         </ModalHeader>
-        <ModalCloseButton />
+        {/* <ModalCloseButton /> */}
         <ModalBody textAlign="center">
           <Flex
             as="form"
             onSubmit={handleSubmit(handleUserUpdate)}
-            h="100vh"
+            h="100%"
             w="100%"
             flexDir="column"
-            padding="50px"
+            padding="20px"
             alignItems="center"
             justifyContent="center"
           >
             <Box w="100%">
-              <VStack mt="10" spacing="10">
+              <VStack>
                 <Box w="100%">
                   <Input
                     label="Name"
@@ -169,7 +175,7 @@ export const ModalUpdateUser = ({
                     label="Confirm password"
                     icon={FaKey}
                     type="password"
-                    placeholder="Confirm_password"
+                    placeholder="Confirm password"
                     {...register("confirm_password")}
                   ></Input>
                 </Box>
@@ -177,7 +183,8 @@ export const ModalUpdateUser = ({
             </Box>
             <Button
               type="submit"
-              mt="10vh"
+              mt="14"
+              mb="5"
               w="100%"
               h="50px"
               bg="red.500"

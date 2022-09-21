@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
-
 import { FiNavigation } from "react-icons/fi";
 import { FaPencilAlt, FaStar } from "react-icons/fa";
-
 import {
   Avatar,
   Box,
@@ -12,7 +10,6 @@ import {
   VStack,
   useDisclosure,
 } from "@chakra-ui/react";
-
 import { useAuth } from "../../contexts/Auth";
 import { useAnimeList } from "../../contexts/AnimeList";
 import { DrawerButton } from "../../components/Drawer/DrawerButton";
@@ -67,7 +64,13 @@ export const DashboardDesktopDrawer = ({
           hoverColor="pink.800"
           onClick={() => setFavoritesView((oldState) => !oldState)}
         />
-        <ModalUpdateUser accessToken={accessToken} isOpen={isOpen} onClose={onClose} userId={user.id} userName={user.name}  />
+        <ModalUpdateUser
+          accessToken={accessToken}
+          isOpen={isOpen}
+          onClose={onClose}
+          userId={user.id}
+          userName={user.name}
+        />
 
         <DrawerButton
           Icon={FaPencilAlt}
