@@ -34,11 +34,13 @@ export const devsData = [
     function: "Scrum Master",
     devimg: DevWill,
     animeimg: Agata,
-    infoparagraph1: "Opa! Te aprochega cupicho! Sou um desenvolvedor jovem-adulto residente no Brasil! Esperando algum dia dominar todas as linguages existentes, desejai-me sorte! XD",
+    infoparagraph1:
+      "Opa! Te aprochega cupicho! Sou um desenvolvedor jovem-adulto residente no Brasil! Esperando algum dia dominar todas as linguages existentes, desejai-me sorte! XD",
     infoparagraph2:
       "Comecei por pesquisar e estudar com Python, clássico, estudando o tal junto a SQL e pouquíssimo sobre Java, os quais eram ditos os mais utilizados no momento/época, nos meados de 2016. O estudo não rendeu, por fim acabei por largar este estudo por si próprio e me focar em outras questões, como escola, família e meus próprios hobbies. Mas claro, sempre voltando e parando todos os anos, sem muito desenvolvimento do conhecimento. Quando o desejo batia novamente, como uma brasa indelével sempre querendo seguir esse caminho.",
     phraseauthor: "Cartola",
-    phrase: "Se amanhã o que eu sonhei não for bem aquilo, eu tiro um arco-íris da cartola. E refaço. Colo. Pinto e bordo.",
+    phrase:
+      "Se amanhã o que eu sonhei não for bem aquilo, eu tiro um arco-íris da cartola. E refaço. Colo. Pinto e bordo.",
     linkedin: "https://www.linkedin.com/in/william-baierle-dev/",
     github: "https://github.com/nittts",
     position: "29vw",
@@ -52,10 +54,13 @@ export const devsData = [
     function: "Tech Leader",
     devimg: DevBrunno,
     animeimg: Naruto,
-    infoparagraph1: "",
-    infoparagraph2: "",
-    phraseauthor: "",
-    phrase: "",
+    infoparagraph1:
+      "Olá, tudo certo? Sou um desenvolvedor web, mas trilhei por caminhos diferentes antes de encontrar o que me faz brilhar os olhos, a programação.",
+    infoparagraph2:
+      "Fui pra área do atendimento ao cliente como operador de telemarketing e depois servidor público na área da saúde. Nesse período cursei análise e desenvolvimento de sistemas, onde descobri o mundo da programação, daí um mundo novo de possibilidades surgiu e decidi que me tornaria um desenvolvedor web para assim resolver problemas e ajudar pessoas através de linhas de código.",
+    phraseauthor: "A Procura da Felicidade",
+    phrase:
+      "Nunca deixe ninguém te dizer que não pode fazer alguma coisa. Se você tem um sonho tem que correr atrás dele. As pessoas não conseguem vencer e dizem que você também não vai vencer. Se você quer uma coisa corre atrás.",
     linkedin: "https://www.linkedin.com/in/brunno-miguel/",
     github: "https://github.com/brunnomiguel",
     position: "49vw",
@@ -87,7 +92,8 @@ export const devsData = [
     function: "Quality Assurance",
     devimg: DevEdson,
     animeimg: Vegeta,
-    infoparagraph1: "Estudante e Dev front-end desde 2021, apaixonado por aprender novas tecnologias. Atualmente cursa segundo semestre de segurança da informação e está no segundo módulo na Kenzie Academy.",
+    infoparagraph1:
+      "Estudante e Dev front-end desde 2021, apaixonado por aprender novas tecnologias. Atualmente cursa segundo semestre de segurança da informação e está no segundo módulo na Kenzie Academy.",
     infoparagraph2: "",
     phraseauthor: "",
     phrase: "",
