@@ -1,82 +1,85 @@
-# Project Name
-> Outline a brief description of your project.
-> Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
+# **AniControl**
+
+> Dinamic, user-friendly and modern anime management system.
+> Live demo [_here_](https://ani-control.vercel.app).
+
 ## Table of Contents
-- [Project Name](#project-name)
+
+- [**AniControl**](#anicontrol)
   - [Table of Contents](#table-of-contents)
-  - [General Information](#general-information)
+  - [About the Project](#about-the-project)
   - [Technologies Used](#technologies-used)
   - [Features](#features)
   - [Screenshots](#screenshots)
-  - [Setup](#setup)
-  - [Usage](#usage)
   - [Project Status](#project-status)
-  - [Room for Improvement](#room-for-improvement)
   - [Acknowledgements](#acknowledgements)
   - [Contact](#contact)
-<!-- * [License](#license) -->
 
-## General Information
-- Provide general information about your project here.
-- What problem does it (intend to) solve?
-- What is the purpose of your project?
-- Why did you undertake it?
-<!-- You don't have to answer all the questions - just the ones relevant to your project. -->
+<hr/>
+
+## About the Project
+
+Considering the high number of people who watch anime throughout Brazil, above 55% of the population according to the article on the website <br/>
+`https://pt.epicdope.com/10-principais-países-onde-o-anime-é-mais-popular-and-why/.` <br/>
+It can be observed that there are not so many accessible sites for users to be able to control what they watch and how Thinking about the problem in question, the idea of creating aniControl arose, a site for the various anime fans to be able to view the best animes of the moment, add animes to their list, change their category, control which episode it is in, update their list istelf aswell bring a more intuitively the animes which the user has on their list.
 
 ## Technologies Used
-- Tech 1 - version 1.0
-- Tech 2 - version 2.0
-- Tech 3 - version 3.0
+
+- React - V18;
+- React Router Dom - V6;
+- React Route Dom - types;
+- Axios - V0.27;
+- React Hook Form - V7;
+- @hookform/resolvers - V2.9;
+- Yup - V0.32;
+- jwt-decode - V3.1;
+- chakraUI - V2.3;
+- Emotion - V11;
+- Framer Motion - V7.2;
+- React Beautiful DnD - V13;
+- React Icons - V4;
+- Typescript - V4.4;
+- Cypress - V10;
+- Styled Components - V5;
+- React Visibility Sensor - V5;
 
 ## Features
+
 List the ready features here:
-- Awesome feature 1
-- Awesome feature 2
-- Awesome feature 3
+
+- User Authentication;
+- Sign up;
+- Sign in;
+- Dinamic rendered lists;
+- Hundreds of animes to be scrolled;
+- Top and Season animes;
+- Fully dinamic dashboard;
+- Live stats update;
+- User animes kanban manage system;
+- Favorites System;
+- Rating;
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
 
-## Setup
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
-
-Proceed to describe how to install / setup one's local environment / get started with the project.
-
-## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
-
-`write-your-code-here`
+![Landing Page](https://i.ibb.co/QjjpP2s/imagem-2022-09-21-193421146.png)
+![Browse](https://i.ibb.co/qpPhpFy/imagem-2022-09-21-193805922.png)
+![Dashboard](https://i.ibb.co/8jBq9b6/imagem-2022-09-21-194054003.png)
+![creators](https://i.ibb.co/k663pT4/imagem-2022-09-21-194814994.png)
 
 ## Project Status
-Project is: _in progress_ / _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.
 
-## Room for Improvement
-Include areas you believe need improvement / could be improved. Also add TODOs for future development.
-
-Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
-
-To do:
-- Feature to be added 1
-- Feature to be added 2
+**completed!** 🥳
 
 ## Acknowledgements
+
 Give credit here.
-- This project was inspired by...
-- This project was based on [this tutorial](https://www.example.com).
-- Many thanks to...
+
+- This project was inspired by my anime list and many other anime websites which definitely need an UI/UX upgrade...
+- Many thanks aswell to Kenzie Academy and our facilitators Guilherme Gonçalves and Paulo Mello! 💖
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
 
-<!-- Optional -->
-<!-- ## License -->
-<!-- This project is open source and available under the [... License](). -->
-
-<!-- You don't have to include all sections - just the one's relevant to your project -->
+Created with ❤️ by this amazing group - feel free to contact us! 👋
 
 <ul>
   <li>Tech Leader: <a href="http://github.com/brunnomiguel">Brunno Miguel</a></li>
