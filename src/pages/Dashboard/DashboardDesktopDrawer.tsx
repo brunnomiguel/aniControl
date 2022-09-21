@@ -20,7 +20,9 @@ interface IDashboardDesktopProps {
   setFavoritesView: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const DashboardDesktopDrawer = ({ setFavoritesView }: IDashboardDesktopProps) => {
+export const DashboardDesktopDrawer = ({
+  setFavoritesView,
+}: IDashboardDesktopProps) => {
   const { user } = useAuth();
   const { userAnimes } = useAnimeList();
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -64,7 +66,6 @@ export const DashboardDesktopDrawer = ({ setFavoritesView }: IDashboardDesktopPr
           onClick={() => setFavoritesView((oldState) => !oldState)}
         />
         <ModalUpdateUser
-          accessToken={accessToken}
           isOpen={isOpen}
           onClose={onClose}
           userId={user.id}
@@ -82,7 +83,16 @@ export const DashboardDesktopDrawer = ({ setFavoritesView }: IDashboardDesktopPr
       </VStack>
       <DrawerStatics />
       <VStack w="95%" align="flex-start" mt="10%">
-        {userAnimes.length > 0 && <DrawerButton Icon={FiNavigation} Title={"Browse"} onClick={() => navigate("/browse")} activeColor="blue.50" bgColor="blue.50" hoverColor="blue.400" />}
+        {userAnimes.length > 0 && (
+          <DrawerButton
+            Icon={FiNavigation}
+            Title={"Browse"}
+            onClick={() => navigate("/browse")}
+            activeColor="blue.50"
+            bgColor="blue.50"
+            hoverColor="blue.400"
+          />
+        )}
       </VStack>
     </Box>
   );
