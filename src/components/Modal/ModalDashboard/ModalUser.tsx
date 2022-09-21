@@ -36,7 +36,7 @@ interface IupdateUser {
 interface ImodalUpdateUser {
   isOpen: boolean;
   onClose: () => void;
-  onClick: () => void;
+  onClick?: () => void;
   userId: number;
   userName: string;
 }
@@ -44,7 +44,6 @@ interface ImodalUpdateUser {
 export const ModalUpdateUser = ({
   isOpen,
   onClose,
-  onClick,
   userId,
   userName,
 }: ImodalUpdateUser) => {
@@ -93,35 +92,38 @@ export const ModalUpdateUser = ({
       });
   };
 
-  <Modal isOpen={isOpen} onClose={onClose}>
-    <ModalOverlay />
-    <ModalContent bg="grey.600">
-      <ModalHeader>
-        <Center bg="red.500" w="30px" h="30px" borderRadius="5px">
-          <FaUser color={theme.colors.white} />
-        </Center>
-        <Text fontWeight="bold" ml="2">
-          {userName}
-        </Text>
-        <Center
-          as="button"
-          onClick={onClose}
-          ml="auto"
-          w="32px"
-          h="32px"
-          bg="red.500"
-          fontSize="lg"
-          borderRadius="5px"
-        >
-          <FaTimes color={theme.colors.white}></FaTimes>
-        </Center>
-      </ModalHeader>
-      <ModalCloseButton />
-      <ModalBody textAlign="center">
-        <Flex
-          as="form"
-          onSubmit={handleSubmit(handleUserUpdate)}
-          h="100vh"
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent  w={["300px", "300px", "400px"]} h={["680px", "680px", "680px"]} bg="grey.600">
+        <ModalHeader>
+          <Flex flexDir="row" padding="5">
+            <Flex flexDir="column">
+              <Center mb="5" bg="red.500" w="70px" h="70px" borderRadius="50%">
+                <FaUser color={theme.colors.white} />
+              </Center>
+              <Center fontWeight="bold">{userName}</Center>
+            </Flex>
+            <Center
+              as="button"
+              onClick={onClose}
+              ml="auto"
+              w="40px"
+              h="40px"
+              bg="red.500"
+              fontSize="lg"
+              borderRadius="5px"
+            >
+              <FaTimes color={theme.colors.white}></FaTimes>
+            </Center>
+          </Flex>
+        </ModalHeader>
+        {/* <ModalCloseButton /> */}
+        <ModalBody textAlign="center">
+          <Flex
+            as="form"
+            onSubmit={handleSubmit(handleUserUpdate)}
+            h="100%"
           w="100%"
           flexDir="column"
           padding="50px"
@@ -165,21 +167,23 @@ export const ModalUpdateUser = ({
               </Box>
             </VStack>
           </Box>
-          <Button
-            type="submit"
-            mt="10vh"
-            w="100%"
-            h="50px"
-            bg="red.500"
-            _hover={isWideVersion ? { bg: "pink.100" } : { bg: "pink.800" }}
-            fontWeight="700"
-            color="white"
-            borderRadius="10px"
-          >
-            Alterar dados
-          </Button>
-        </Flex>
-      </ModalBody>
-    </ModalContent>
-  </Modal>;
+            <Button
+              type="submit"
+              mt="14"
+              mb="5"
+              w="100%"
+              h="50px"
+              bg="red.500"
+              _hover={isWideVersion ? { bg: "pink.100" } : { bg: "pink.800" }}
+              fontWeight="700"
+              color="white"
+              borderRadius="10px"
+            >
+              Alterar dados
+            </Button>
+          </Flex>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
 };

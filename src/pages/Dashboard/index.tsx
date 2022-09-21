@@ -8,12 +8,21 @@ import { DashboardDrawer } from "../../components/Drawer";
 import { DashboardList } from "./DashboardList/DashboardList";
 import { DashboardDesktopDrawer } from "./DashboardDesktopDrawer";
 import { HoveringButton } from "../../components/Drawer/HoveringButton";
+import { ModalUpdateUser } from "../../components/Modal/ModalDashboard/ModalUser";
+import { useAuth } from "../../contexts/Auth";
 
 export const Dashboard = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [smallView, setSmallView] = useState(false);
   const [FavoritesView, setFavoritesView] = useState(false);
   const { getUserAnimes } = useAnimeList();
+  const { user } = useAuth();
+
+  const {
+    isOpen: isOpenModalUser,
+    onClose: onCloseModalUser,
+    onOpen: onOpenModalUser,
+  } = useDisclosure();
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,6 +53,7 @@ export const Dashboard = () => {
               isOpen={isOpen}
               onClose={onClose}
               setFavoritesView={setFavoritesView}
+              onOpenModalUser={onOpenModalUser}
             />
             <HoveringButton onOpen={onOpen} />
           </>
@@ -52,6 +62,12 @@ export const Dashboard = () => {
         )}
         <DashboardList FavoritesView={FavoritesView} />
       </Flex>
+      <ModalUpdateUser
+        isOpen={isOpenModalUser}
+        onClose={onCloseModalUser}
+        userId={user.id}
+        userName={user.name}
+      />
     </Box>
   );
 };
