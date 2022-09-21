@@ -377,31 +377,27 @@ export const LandingContent = () => {
                   })}
                 </>
               ) : (
-                <>
-                  <Box marginTop="13vh">
-                    <FaChevronLeft
-                      onClick={() => {
-                        if (devIdMobile > 1) {
-                          setDevIdMobile(devIdMobile - 1);
-                        }
-                      }}
-                      fontSize="4vh"
-                      color="white"
-                    />
-                  </Box>
+                <Flex w="100%" justifyContent="space-evenly" alignItems="center">
+                  <FaChevronLeft
+                    onClick={() => {
+                      if (devIdMobile > 1) {
+                        setDevIdMobile(devIdMobile - 1);
+                      }
+                    }}
+                    fontSize="4vh"
+                    color="white"
+                  />
                   <AboutModal id={devIdMobile} />
-                  <Box marginTop="13vh">
-                    <FaChevronRight
-                      onClick={() => {
-                        if (devIdMobile < 5) {
-                          setDevIdMobile(devIdMobile + 1);
-                        }
-                      }}
-                      fontSize="4vh"
-                      color="white"
-                    />
-                  </Box>
-                </>
+                  <FaChevronRight
+                    onClick={() => {
+                      if (devIdMobile < 5) {
+                        setDevIdMobile(devIdMobile + 1);
+                      }
+                    }}
+                    fontSize="4vh"
+                    color="white"
+                  />
+                </Flex>
               )}
             </Flex>
             <Flex
