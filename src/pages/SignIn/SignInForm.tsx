@@ -45,7 +45,6 @@ export const SignInForm = () => {
 	const { signIn } = useAuth();
 	const navigate = useNavigate();
 	const toast = useToast();
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 	const {
 		formState: { errors },
