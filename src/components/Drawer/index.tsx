@@ -1,4 +1,16 @@
-import { Drawer, DrawerBody, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, Avatar, Text, Flex, VStack, theme } from "@chakra-ui/react";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  Avatar,
+  Text,
+  Flex,
+  VStack,
+  theme,
+} from "@chakra-ui/react";
 
 import { FiNavigation } from "react-icons/fi";
 import { FaStar, FaPencilAlt } from "react-icons/fa";
@@ -15,15 +27,26 @@ interface IDashboardDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   setFavoritesView: React.Dispatch<React.SetStateAction<boolean>>;
+  onOpenModalUser: () => void;
 }
 
-export const DashboardDrawer = ({ isOpen, onClose, setFavoritesView }: IDashboardDrawerProps) => {
+export const DashboardDrawer = ({
+  isOpen,
+  onClose,
+  setFavoritesView,
+  onOpenModalUser,
+}: IDashboardDrawerProps) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { userAnimes } = useAnimeList();
   return (
     <>
-      <Drawer isOpen={isOpen} onClose={onClose} placement="left" onEsc={onClose}>
+      <Drawer
+        isOpen={isOpen}
+        onClose={onClose}
+        placement="left"
+        onEsc={onClose}
+      >
         <DrawerOverlay />
         <DrawerContent bg="grey.600" border="1px solid black">
           <DrawerCloseButton color="grey.0" />
@@ -62,11 +85,33 @@ export const DashboardDrawer = ({ isOpen, onClose, setFavoritesView }: IDashboar
                   setFavoritesView((oldState) => !oldState);
                 }}
               />
-              <DrawerButton Icon={FaPencilAlt} Title={"Edit Profile"} activeColor="red.600" bgColor="red.600" hoverColor="pink.800" />
+              <DrawerButton
+                Icon={FaPencilAlt}
+                Title={"Edit Profile"}
+                activeColor="red.600"
+                bgColor="red.600"
+                hoverColor="pink.800"
+                onClick={onOpenModalUser}
+              />
             </VStack>
             <DrawerStatics />
-            <VStack spacing="8%" marginTop="10%" marginBottom="10%" w="95%" align="flex-start">
-              {userAnimes.length > 0 && <DrawerButton Icon={FiNavigation} Title={"Browse"} onClick={() => navigate("/browse")} activeColor="blue.50" bgColor="blue.50" hoverColor="blue.400" />}
+            <VStack
+              spacing="8%"
+              marginTop="10%"
+              marginBottom="10%"
+              w="95%"
+              align="flex-start"
+            >
+              {userAnimes.length > 0 && (
+                <DrawerButton
+                  Icon={FiNavigation}
+                  Title={"Browse"}
+                  onClick={() => navigate("/browse")}
+                  activeColor="blue.50"
+                  bgColor="blue.50"
+                  hoverColor="blue.400"
+                />
+              )}
             </VStack>
           </DrawerBody>
         </DrawerContent>
