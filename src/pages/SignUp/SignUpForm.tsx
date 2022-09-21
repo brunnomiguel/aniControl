@@ -1,27 +1,27 @@
 import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Image,
-  Link,
-  Text,
-  useBreakpointValue,
-  useToast,
-  VStack,
+	Box,
+	Button,
+	Center,
+	Flex,
+	Image,
+	Link,
+	Text,
+	useBreakpointValue,
+	useToast,
+	VStack,
 } from "@chakra-ui/react";
 
 import Logo from "../../assets/imgs/logo-form.svg";
 import LogoMobile from "../../assets/imgs/logo-dash.svg";
 
 import {
-  FaApple,
-  FaEnvelope,
-  FaEye,
-  FaEyeSlash,
-  FaFacebookF,
-  FaLock,
-  FaUser,
+	FaApple,
+	FaEnvelope,
+	FaEye,
+	FaEyeSlash,
+	FaFacebookF,
+	FaLock,
+	FaUser,
 } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
@@ -36,56 +36,56 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 interface SignUpData {
-  email: string;
-  password: string;
-  name: string;
-  confirm_password: string;
+	email: string;
+	password: string;
+	name: string;
+	confirm_password: string;
 }
 
 export const SignUpForm = () => {
-  const toast = useToast();
-  const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+	const toast = useToast();
+	const navigate = useNavigate();
+	const [showPassword, setShowPassword] = useState(false);
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const {
-    formState: { errors },
-    register,
-    handleSubmit,
-  } = useForm<SignUpData>({
-    resolver: yupResolver(signUpSchema),
-  });
+	const {
+		formState: { errors },
+		register,
+		handleSubmit,
+	} = useForm<SignUpData>({
+		resolver: yupResolver(signUpSchema),
+	});
 
-  const handleSignUp = ({ name, email, password }: SignUpData) => {
-    api
-      .post("/register", { name, email, password })
-      .then((_) => {
-        toast({
-          title: "Success!",
-          description: "Registration created successfully!",
-          status: "success",
-          duration: 2000,
-          isClosable: true,
-        });
-        return navigate("../signin", { replace: true });
-      })
-      .catch((err) => {
-        toast({
-          title: "Error...",
-          description: "Something went wrong...",
-          status: "error",
-          duration: 2000,
-          isClosable: true,
-        });
-        console.log(err);
-      });
-  };
+	const handleSignUp = ({ name, email, password }: SignUpData) => {
+		api
+			.post("/register", { name, email, password })
+			.then((_) => {
+				toast({
+					title: "Success!",
+					description: "Registration created successfully!",
+					status: "success",
+					duration: 2000,
+					isClosable: true,
+				});
+				return navigate("../signin", { replace: true });
+			})
+			.catch((err) => {
+				toast({
+					title: "Error...",
+					description: "Something went wrong...",
+					status: "error",
+					duration: 2000,
+					isClosable: true,
+				});
+				console.log(err);
+			});
+	};
 
-  const isWideVersion = useBreakpointValue({
-    base: false,
-    md: true,
-  });
-
+	const isWideVersion = useBreakpointValue({
+		base: false,
+		md: true,
+	});
+  
   return (
     <>
       <Flex
@@ -150,7 +150,6 @@ export const SignUpForm = () => {
                   <Center
                     top="12"
                     right="4"
-                    as="button"
                     onClick={() => setShowPassword(false)}
                     position="absolute"
                     zIndex="1"
@@ -162,7 +161,6 @@ export const SignUpForm = () => {
                   <Center
                     top="12"
                     right="4"
-                    as="button"
                     position="absolute"
                     onClick={() => setShowPassword(true)}
                     zIndex="1"
@@ -184,7 +182,6 @@ export const SignUpForm = () => {
                   <Center
                     top="12"
                     right="4"
-                    as="button"
                     onClick={() => setShowConfirmPassword(false)}
                     position="absolute"
                     zIndex="1"
@@ -196,7 +193,6 @@ export const SignUpForm = () => {
                   <Center
                     top="12"
                     right="4"
-                    as="button"
                     position="absolute"
                     onClick={() => setShowConfirmPassword(true)}
                     zIndex="1"

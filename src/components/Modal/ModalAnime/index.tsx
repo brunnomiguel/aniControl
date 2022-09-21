@@ -21,12 +21,12 @@ import { CardInfo } from "../../DashboardCard/CardInfo";
 
 import { useAnimeList } from "../../../contexts/AnimeList";
 import { useFullAnimes } from "../../../contexts/FullAnimes";
-import { animeProps } from "../../../contexts/FullAnimes/fullAnimes.types";
+import { Ianime } from "../../../@types/components/fullAnimes.types";
 
 interface ModalTaskDetailProps {
   isOpen: boolean;
   onClose: () => void;
-  anime: animeProps;
+  anime: Ianime;
 }
 
 export const ModalAnime = ({

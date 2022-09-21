@@ -2,12 +2,10 @@ import {
   Box,
   Button,
   Center,
-  color,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
@@ -16,39 +14,26 @@ import {
   useToast,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import {
-  FaEnvelope,
-  FaExclamation,
-  FaKey,
-  FaTimes,
-  FaUser,
-} from "react-icons/fa";
+
 import { theme } from "../../../styles/theme";
-import { Input } from "../../Input";
+import { FaEnvelope, FaKey, FaTimes, FaUser } from "react-icons/fa";
+
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { updateSchema } from "../../../schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAuth } from "../../../contexts/Auth";
+
+import { Input } from "../../Input";
 import { jsonApi } from "../../../services/api";
+import { useAuth } from "../../../contexts/Auth";
 
-const updateSchema = yup.object().shape({
-  name: yup.string().required("Nome obrigatório"),
-  email: yup.string().required("Email obrigatório").email("Email inválido"),
-  password: yup.string().required("Senha obrigatória"),
-  confirm_password: yup
-    .string()
-    .required("Confirmação de senha obrigatória")
-    .oneOf([yup.ref("password")], "As senhas não são iguais!!"),
-});
-
-interface UpdateUserData {
+interface IupdateUser {
   name: string;
   email: string;
   password: string;
   confirm_password: string;
 }
 
-interface ModalUpdateUserProps {
+interface ImodalUpdateUser {
   isOpen: boolean;
   onClose: () => void;
   onClick?: () => void;
@@ -63,32 +48,32 @@ export const ModalUpdateUser = ({
   onClick,
   userId,
   userName,
-  accessToken,
-}: ModalUpdateUserProps) => {
+}: ImodalUpdateUser) => {
   const toast = useToast();
+
   const isWideVersion = useBreakpointValue({
     base: false,
     md: true,
   });
 
+  const { accessToken } = useAuth();
+
   const {
     formState: { errors },
     register,
     handleSubmit,
-  } = useForm<UpdateUserData>({
+  } = useForm<IupdateUser>({
     resolver: yupResolver(updateSchema),
   });
 
-  const handleUserUpdate = ({ name, email, password }: UpdateUserData) => {
+  const handleUserUpdate = ({ name, email, password }: IupdateUser) => {
     jsonApi
       .patch(
         `/users/${userId}/`,
         { name, email, password },
-        {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }
+        { headers: { Authorization: `Bearer ${accessToken}` } }
       )
-      .then((response) => {
+      .then((_) => {
         onClose();
         toast({
           title: "Success!",
@@ -97,9 +82,8 @@ export const ModalUpdateUser = ({
           duration: 2000,
           isClosable: true,
         });
-        console.log("Dados atualizados corretamente");
       })
-      .catch((err) => {
+      .catch((_) => {
         toast({
           title: "Fail!",
           description: "Error updating data!",
@@ -107,9 +91,9 @@ export const ModalUpdateUser = ({
           duration: 2000,
           isClosable: true,
         });
-        console.log("falha ao atualizar os dados");
       });
   };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -142,45 +126,49 @@ export const ModalUpdateUser = ({
             as="form"
             onSubmit={handleSubmit(handleUserUpdate)}
             h="100%"
-            w="100%"
-            flexDir="column"
-            padding="20px"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Box w="100%">
-              <VStack>
-                <Box w="100%">
-                  <Input
-                    label="Name"
-                    icon={FaUser}
-                    placeholder="Your name"
-                    {...register("name")}
-                  ></Input>
-                  <Input
-                    label="Email"
-                    icon={FaEnvelope}
-                    type="email"
-                    placeholder="Your email"
-                    {...register("email")}
-                  ></Input>
-                  <Input
-                    label="Password"
-                    icon={FaKey}
-                    type="password"
-                    placeholder="Your password"
-                    {...register("password")}
-                  ></Input>
-                  <Input
-                    label="Confirm password"
-                    icon={FaKey}
-                    type="password"
-                    placeholder="Confirm password"
-                    {...register("confirm_password")}
-                  ></Input>
-                </Box>
-              </VStack>
-            </Box>
+          w="100%"
+          flexDir="column"
+          padding="50px"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box w="100%">
+            <VStack mt="10" spacing="10">
+              <Box w="100%">
+                <Input
+                  label="Name"
+                  icon={FaUser}
+                  placeholder="Your name"
+                  {...register("name")}
+                  error={errors.name}
+                ></Input>
+                <Input
+                  label="Email"
+                  icon={FaEnvelope}
+                  type="email"
+                  placeholder="Your email"
+                  {...register("email")}
+                  error={errors.email}
+                ></Input>
+                <Input
+                  label="Password"
+                  icon={FaKey}
+                  type="password"
+                  placeholder="Your password"
+                  {...register("password")}
+                  error={errors.password}
+                ></Input>
+                <Input
+                  label="Confirm password"
+                  icon={FaKey}
+                  type="password"
+                  placeholder="Confirm_password"
+                  {...register("confirm_password")}
+                  error={errors.confirm_password}
+                ></Input>
+              </Box>
+            </VStack>
+          </Box>
             <Button
               type="submit"
               mt="14"

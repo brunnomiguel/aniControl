@@ -14,10 +14,10 @@ import { theme } from "../../styles/theme";
 import { CardInfo } from "./CardInfo";
 import { CardButtons } from "./CardButtons";
 
-import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
+import { Ianime } from "../../@types/components/fullAnimes.types";
 
 interface IDashboardCardProps {
-  anime: animeProps;
+  anime: Ianime;
   episode: number;
   handleFavoriteAnime: () => void;
   handleDeleteAnime: () => void;

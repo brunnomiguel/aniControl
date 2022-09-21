@@ -23,3 +23,13 @@ export const editAnimeSchema = yup.object().shape({
   episodes: yup.number(),
   rating: yup.number(),
 });
+
+export const updateSchema = yup.object().shape({
+  name: yup.string().required("Nome obrigatório"),
+  email: yup.string().required("Email obrigatório").email("Email inválido"),
+  password: yup.string().required("Senha obrigatória"),
+  confirm_password: yup
+    .string()
+    .required("Confirmação de senha obrigatória")
+    .oneOf([yup.ref("password")], "As senhas não são iguais!!"),
+});

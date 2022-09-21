@@ -1,11 +1,11 @@
 import { FaStar } from "react-icons/fa";
 
-import { animeProps } from "../../contexts/FullAnimes/fullAnimes.types";
+import { Ianime } from "../../@types/components/fullAnimes.types";
 
 import { Box, Flex, Image, Link, Text, VStack, HStack } from "@chakra-ui/react";
 
 interface IDashboardCardProps {
-  anime: animeProps;
+  anime: Ianime;
 }
 
 export const TopAnimeView = ({ anime }: IDashboardCardProps) => {

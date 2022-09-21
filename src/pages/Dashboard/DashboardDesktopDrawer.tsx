@@ -20,13 +20,12 @@ interface IDashboardDesktopProps {
   setFavoritesView: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const DashboardDesktopDrawer = ({
-  setFavoritesView,
-}: IDashboardDesktopProps) => {
-  const { user, accessToken } = useAuth();
-  const navigate = useNavigate();
+export const DashboardDesktopDrawer = ({ setFavoritesView }: IDashboardDesktopProps) => {
+  const { user } = useAuth();
   const { userAnimes } = useAnimeList();
   const { isOpen, onClose, onOpen } = useDisclosure();
+
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -50,7 +49,7 @@ export const DashboardDesktopDrawer = ({
       bg="grey.600"
     >
       <Flex flexDir="row" align="center" justify="center" marginTop="5%">
-        <Avatar bgColor="red.600" />
+        <Avatar bgColor="red.600" src={user.image} />
         <Text ml="1vw" fontSize="1.8rem" color="#fff">
           {user && user.name}
         </Text>
@@ -83,16 +82,7 @@ export const DashboardDesktopDrawer = ({
       </VStack>
       <DrawerStatics />
       <VStack w="95%" align="flex-start" mt="10%">
-        {userAnimes.length > 0 && (
-          <DrawerButton
-            Icon={FiNavigation}
-            Title={"Browse"}
-            onClick={() => navigate("/browse")}
-            activeColor="blue.50"
-            bgColor="blue.50"
-            hoverColor="blue.400"
-          />
-        )}
+        {userAnimes.length > 0 && <DrawerButton Icon={FiNavigation} Title={"Browse"} onClick={() => navigate("/browse")} activeColor="blue.50" bgColor="blue.50" hoverColor="blue.400" />}
       </VStack>
     </Box>
   );

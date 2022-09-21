@@ -1,60 +1,72 @@
 import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  Link,
-  Text,
-  useBreakpointValue,
-  VStack,
+	Box,
+	Button,
+	Flex,
+	Center,
+	Image,
+	Link,
+	Text,
+	useBreakpointValue,
+	useToast,
+	VStack,
 } from "@chakra-ui/react";
+
+import { useNavigate } from "react-router-dom";
 
 import Logo from "../../assets/imgs/logo-form.svg";
 import LogoMobile from "../../assets/imgs/logo-dash.svg";
 
-import { FaApple, FaEnvelope, FaFacebookF, FaLock } from "react-icons/fa";
+import {
+	FaApple,
+	FaEnvelope,
+	FaFacebookF,
+	FaLock,
+	FaEye,
+	FaEyeSlash,
+} from "react-icons/fa";
+
 import { FcGoogle } from "react-icons/fc";
 
 import { Input } from "../../components/Input";
 
 import { useForm } from "react-hook-form";
+import { signInSchema } from "../../schemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useAuth } from "../../contexts/Auth";
-
-import { signInSchema } from "../../schemas";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface SignInData {
-  email: string;
-  password: string;
+	email: string;
+	password: string;
 }
 
 export const SignInForm = () => {
-  const { signIn } = useAuth();
-  const navigate = useNavigate();
+	const { signIn } = useAuth();
+	const navigate = useNavigate();
+	const toast = useToast();
 
-  const {
-    formState: { errors },
-    register,
-    handleSubmit,
-  } = useForm<SignInData>({
-    resolver: yupResolver(signInSchema),
-  });
+	const {
+		formState: { errors },
+		register,
+		handleSubmit,
+	} = useForm<SignInData>({
+		resolver: yupResolver(signInSchema),
+	});
 
-  const handleSignIn = ({ email, password }: SignInData) => {
-    signIn({ email, password });
-  };
+	const handleSignIn = ({ email, password }: SignInData) => {
+		signIn({ email, password });
+	};
 
-  const isWideVersion = useBreakpointValue({
-    base: false,
-    md: true,
-  });
-
+	const isWideVersion = useBreakpointValue({
+		base: false,
+		md: true,
+	});
+  
   return (
     <>
       <Flex
-        shadow="30px 0px 30px grey.900, inset -100px 0px 30px rgba(255, 255, 255, 0.6);"
+        shadow="-30px 0px 30px #000000, inset 100px 0px 30px rgba(255, 255, 255, 0.6);"
         opacity="0.1"
         w="35vw"
         bg="rgba(217, 217, 217, 0.5);"
@@ -64,7 +76,7 @@ export const SignInForm = () => {
         position="fixed"
         right={["none", "none", "0", "0"]}
         h="100vh"
-        w={["80vw", "60vw", "35vw", "35vw"]}
+        w={["80vw", "60vw", "37vw", "37vw"]}
       >
         <Flex
           as="form"
@@ -103,19 +115,44 @@ export const SignInForm = () => {
                 {...register("email")}
                 error={errors.email}
               />
-              <Input
-                label="Password"
-                icon={FaLock}
-                type="password"
-                placeholder="Your password"
-                {...register("password")}
-                error={errors.password}
-              />
+              <Box position="relative" w="100%" h="100%">
+                <Input
+                  label="Password"
+                  icon={FaLock}
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Your password"
+                  {...register("password")}
+                  error={errors.password}
+                />
+               {showConfirmPassword ? (
+                  <Center
+                    top="12"
+                    right="4"
+                    onClick={() => setShowConfirmPassword(false)}
+                    position="absolute"
+                    zIndex="1"
+                    color="red.600"
+                  >
+                    <FaEye />
+                  </Center>
+                ) : (
+                  <Center
+                    top="12"
+                    right="4"
+                    position="absolute"
+                    onClick={() => setShowConfirmPassword(true)}
+                    zIndex="1"
+                    color="red.600"
+                  >
+                    <FaEyeSlash />
+                  </Center>
+                )}
+              </Box>
             </VStack>
           </Box>
           <Button
             type="submit"
-            mt="10vh"
+            mt="12"
             w="100%"
             h="50px"
             bg={isWideVersion ? "blue.600" : "red.600"}
@@ -127,16 +164,16 @@ export const SignInForm = () => {
             Sign In
           </Button>
           <Flex flexDir="row" gap="20px" w="100%" mt="8">
-										<Button w="30%" h="25px" bg="white">
-											<FcGoogle />
-										</Button>
-										<Button h="25px" w="30%" bg="#155BCB">
-											<FaFacebookF fill="white" />
-										</Button>
-										<Button h="25px" w="30%" bg="black">
-											<FaApple fill="white" />
-										</Button>
-									</Flex>
+            <Button w="30%" h="25px" bg="white">
+              <FcGoogle />
+            </Button>
+            <Button h="25px" w="30%" bg="#155BCB">
+              <FaFacebookF fill="white" />
+            </Button>
+            <Button h="25px" w="30%" bg="black">
+              <FaApple fill="white" />
+            </Button>
+          </Flex>
           <Flex flexDir="column" justifyContent="center">
             <Text
               mt="3vh"
