@@ -1,14 +1,20 @@
 import { useNavigate } from "react-router-dom";
-
 import { FiNavigation } from "react-icons/fi";
 import { FaPencilAlt, FaStar } from "react-icons/fa";
-
-import { Avatar, Box, Flex, Text, theme, VStack } from "@chakra-ui/react";
-
+import {
+  Avatar,
+  Box,
+  Flex,
+  Text,
+  theme,
+  VStack,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useAuth } from "../../contexts/Auth";
 import { useAnimeList } from "../../contexts/AnimeList";
 import { DrawerButton } from "../../components/Drawer/DrawerButton";
 import { DrawerStatics } from "../../components/Drawer/DrawerStatics";
+import { ModalUpdateUser } from "../../components/Modal/ModalDashboard/ModalUser";
 
 interface IDashboardDesktopProps {
   setFavoritesView: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,6 +23,7 @@ interface IDashboardDesktopProps {
 export const DashboardDesktopDrawer = ({ setFavoritesView }: IDashboardDesktopProps) => {
   const { user } = useAuth();
   const { userAnimes } = useAnimeList();
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   const navigate = useNavigate();
 
@@ -48,8 +55,30 @@ export const DashboardDesktopDrawer = ({ setFavoritesView }: IDashboardDesktopPr
         </Text>
       </Flex>
       <VStack spacing="8%" marginTop="5%" w="95%" align="flex-start">
-        <DrawerButton Icon={FaStar} Title={"Favorites"} activeColor="red.600" bgColor="red.600" hoverColor="pink.800" onClick={() => setFavoritesView((oldState) => !oldState)} />
-        <DrawerButton Icon={FaPencilAlt} Title={"Edit Profile"} activeColor="red.600" bgColor="red.600" hoverColor="pink.800" />
+        <DrawerButton
+          Icon={FaStar}
+          Title={"Favorites"}
+          activeColor="red.600"
+          bgColor="red.600"
+          hoverColor="pink.800"
+          onClick={() => setFavoritesView((oldState) => !oldState)}
+        />
+        <ModalUpdateUser
+          accessToken={accessToken}
+          isOpen={isOpen}
+          onClose={onClose}
+          userId={user.id}
+          userName={user.name}
+        />
+
+        <DrawerButton
+          Icon={FaPencilAlt}
+          Title={"Edit Profile"}
+          onClick={onOpen}
+          activeColor="red.600"
+          bgColor="red.600"
+          hoverColor="pink.800"
+        />
       </VStack>
       <DrawerStatics />
       <VStack w="95%" align="flex-start" mt="10%">
