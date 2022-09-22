@@ -1,6 +1,6 @@
 # **AniControl**
 
-> Dinamic, user-friendly and modern anime management system.
+> Dynamic, user-friendly and modern anime management system.
 > Live demo [_here_](https://ani-control.vercel.app).
 
 ## Table of Contents
@@ -48,10 +48,10 @@ It can be observed that there are not so many accessible sites for users to be a
 - User Authentication;
 - Sign up;
 - Sign in;
-- Dinamic rendered lists;
+- Dynamic rendered lists;
 - Hundreds of animes to be scrolled;
 - Top and Season animes;
-- Fully dinamic dashboard;
+- Fully dynamic dashboard;
 - Live stats update;
 - User animes kanban manage system;
 - Favorites System;
