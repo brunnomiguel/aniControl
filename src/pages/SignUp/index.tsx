@@ -16,12 +16,12 @@ export const SignUp = () => {
         <Box>
           <BackgroundAnimation />
           <Flex
-            position={["static", "static", "fixed"]}
+            position="fixed"
             top="0"
             left="0"
             flexDir="row"
-            minH="100vh"
             w="100vw"
+            h="100vh"
           >
             <SignUpForm />
             <BackgroundImg />

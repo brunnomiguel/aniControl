@@ -46,7 +46,8 @@ export const ModalAnime = ({
         w="100%"
         m="2"
         p={["2", "2", "4"]}
-        h={["80%", "80%", "500px", "500px"]}
+        h={["100%", "100%", "500px", "500px"]}
+        overflowY={["scroll", "scroll", "auto"]}
       >
         {anime && (
           <Flex

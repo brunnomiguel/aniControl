@@ -25,11 +25,11 @@ export const editAnimeSchema = yup.object().shape({
 });
 
 export const updateSchema = yup.object().shape({
-  name: yup.string().required("Nome obrigatório"),
-  email: yup.string().required("Email obrigatório").email("Email inválido"),
-  password: yup.string().required("Senha obrigatória"),
+  name: yup.string().required("Name is required"),
+  email: yup.string().required("E-mail is required").email("Invalid e-mail"),
+  password: yup.string().required("Password is required"),
   confirm_password: yup
     .string()
-    .required("Confirmação de senha obrigatória")
-    .oneOf([yup.ref("password")], "As senhas não são iguais!!"),
+    .required("Confirm password required")
+    .oneOf([yup.ref("password")], "Password don't match!!"),
 });
