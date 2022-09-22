@@ -239,7 +239,7 @@ export const SignInForm = () => {
               fontWeight="600"
               color="white"
             >
-              Already have an account?
+              Does not have an account?
               <Link
                 color="blue.600"
                 fontWeight="extrabold"
