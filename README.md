@@ -1,46 +1,86 @@
-# Getting Started with Create React App
+# **AniControl**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Dynamic, user-friendly and modern anime management system.
+> Live demo [_here_](https://ani-control.vercel.app).
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [**AniControl**](#anicontrol)
+  - [Table of Contents](#table-of-contents)
+  - [About the Project](#about-the-project)
+  - [Technologies Used](#technologies-used)
+  - [Features](#features)
+  - [Screenshots](#screenshots)
+  - [Project Status](#project-status)
+  - [Acknowledgements](#acknowledgements)
+  - [Contact](#contact)
 
-### `yarn start`
+<hr/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## About the Project
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Considering the high number of people who watch anime throughout Brazil, above 55% of the population according to the article on the website <br/>
+`https://pt.epicdope.com/10-principais-países-onde-o-anime-é-mais-popular-and-why/.` <br/>
+It can be observed that there are not so many accessible sites for users to be able to control what they watch and how Thinking about the problem in question, the idea of creating aniControl arose, a site for the various anime fans to be able to view the best animes of the moment, add animes to their list, change their category, control which episode it is in, update their list istelf aswell bring a more intuitively the animes which the user has on their list.
 
-### `yarn test`
+## Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React - V18;
+- React Router Dom - V6;
+- React Route Dom - types;
+- Axios - V0.27;
+- React Hook Form - V7;
+- @hookform/resolvers - V2.9;
+- Yup - V0.32;
+- jwt-decode - V3.1;
+- chakraUI - V2.3;
+- Emotion - V11;
+- Framer Motion - V7.2;
+- React Beautiful DnD - V13;
+- React Icons - V4;
+- Typescript - V4.4;
+- Cypress - V10;
+- Styled Components - V5;
+- React Visibility Sensor - V5;
 
-### `yarn build`
+## Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- User Authentication;
+- Sign up;
+- Sign in;
+- Dynamic rendered lists;
+- Hundreds of animes to be scrolled;
+- Top and Season animes;
+- Fully dynamic dashboard;
+- Live stats update;
+- User animes kanban manage system;
+- Favorites System;
+- Rating;
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Screenshots
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Landing Page](https://i.ibb.co/QjjpP2s/imagem-2022-09-21-193421146.png)
+![Browse](https://i.ibb.co/qpPhpFy/imagem-2022-09-21-193805922.png)
+![Dashboard](https://i.ibb.co/8jBq9b6/imagem-2022-09-21-194054003.png)
+![creators](https://i.ibb.co/k663pT4/imagem-2022-09-21-194814994.png)
 
-### `yarn eject`
+## Project Status
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**completed!** 🥳
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Acknowledgements
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- This project was inspired by my anime list and many other anime websites which definitely need an UI/UX upgrade...
+- Many thanks aswell to Kenzie Academy and our facilitators Guilherme Gonçalves and Paulo Mello! 💖
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Contact
 
-## Learn More
+Created with ❤️ by this amazing group - feel free to contact us! 👋
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<ul>
+  <li>Tech Leader: <a href="http://github.com/brunnomiguel">Brunno Miguel</a></li>
+  <li>Scrum Master: <a href="https://github.com/nittts">William Baierle</a></li>
+  <li>Product Owner: <a href="https://github.com/devbraz">Charles Braz</a></li>
+  <li>Quality Assurance: <a href="https://github.com/edsonvin">Edson Vinicius</a></li>
+  <li>Quality Assurance: <a href="https://github.com/Ericjcf">Eric James</a></li>
+</ul>

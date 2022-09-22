@@ -1,5 +1,5 @@
-import { Heading } from "@chakra-ui/react";
+import { MainRoutes } from "./routes";
 
 export const App = () => {
-  return <Heading>App</Heading>;
+  return <MainRoutes />;
 };
