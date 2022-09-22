@@ -40,7 +40,6 @@ export const ModalDashboard = ({
         <ModalContent
           w="100vw"
           position="fixed"
-          h="60vh"
           borderRadius={10}
           overflow="hidden"
         >
