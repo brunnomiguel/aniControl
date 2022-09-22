@@ -95,7 +95,7 @@ export const ModalUpdateUser = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent  w={["300px", "300px", "400px"]} h={["680px", "680px", "680px"]} bg="grey.600">
+      <ModalContent  w={["300px", "300px", "400px"]}  bg="grey.600">
         <ModalHeader>
           <Flex flexDir="row" padding="5">
             <Flex flexDir="column">
