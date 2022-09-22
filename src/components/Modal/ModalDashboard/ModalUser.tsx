@@ -95,7 +95,7 @@ export const ModalUpdateUser = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent  w={["300px", "300px", "400px"]}  bg="grey.600">
+      <ModalContent w={["300px", "300px", "400px"]} bg="grey.600">
         <ModalHeader>
           <Flex flexDir="row" padding="5">
             <Flex flexDir="column">
@@ -123,49 +123,49 @@ export const ModalUpdateUser = ({
             as="form"
             onSubmit={handleSubmit(handleUserUpdate)}
             h="100%"
-          w="100%"
-          flexDir="column"
-          padding="10px"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Box w="100%">
-            <VStack spacing="10">
-              <Box w="100%">
-                <Input
-                  label="Name"
-                  icon={FaUser}
-                  placeholder="Your name"
-                  {...register("name")}
-                  error={errors.name}
-                ></Input>
-                <Input
-                  label="Email"
-                  icon={FaEnvelope}
-                  type="email"
-                  placeholder="Your email"
-                  {...register("email")}
-                  error={errors.email}
-                ></Input>
-                <Input
-                  label="Password"
-                  icon={FaKey}
-                  type="password"
-                  placeholder="Your password"
-                  {...register("password")}
-                  error={errors.password}
-                ></Input>
-                <Input
-                  label="Confirm password"
-                  icon={FaKey}
-                  type="password"
-                  placeholder="Confirm password"
-                  {...register("confirm_password")}
-                  error={errors.confirm_password}
-                ></Input>
-              </Box>
-            </VStack>
-          </Box>
+            w="100%"
+            flexDir="column"
+            padding="10px"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Box w="100%">
+              <VStack spacing="10">
+                <Box w="100%">
+                  <Input
+                    label="Name"
+                    icon={FaUser}
+                    placeholder="Your name"
+                    {...register("name")}
+                    error={errors.name}
+                  ></Input>
+                  <Input
+                    label="Email"
+                    icon={FaEnvelope}
+                    type="email"
+                    placeholder="Your email"
+                    {...register("email")}
+                    error={errors.email}
+                  ></Input>
+                  <Input
+                    label="Password"
+                    icon={FaKey}
+                    type="password"
+                    placeholder="Your password"
+                    {...register("password")}
+                    error={errors.password}
+                  ></Input>
+                  <Input
+                    label="Confirm password"
+                    icon={FaKey}
+                    type="password"
+                    placeholder="Confirm password"
+                    {...register("confirm_password")}
+                    error={errors.confirm_password}
+                  ></Input>
+                </Box>
+              </VStack>
+            </Box>
             <Button
               type="submit"
               mt="14"
@@ -178,7 +178,7 @@ export const ModalUpdateUser = ({
               color="white"
               borderRadius="10px"
             >
-              Alterar dados
+              Change data
             </Button>
           </Flex>
         </ModalBody>

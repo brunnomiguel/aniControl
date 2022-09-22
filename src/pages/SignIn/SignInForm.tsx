@@ -77,15 +77,17 @@ export const SignInForm = () => {
       <Flex
         shadow="-30px 0px 30px #000000, inset 100px 0px 30px rgba(255, 255, 255, 0.6);"
         opacity="0.1"
-        w="35vw"
+        w={["auto", "auto", "35vw"]}
         bg="rgba(217, 217, 217, 0.5);"
         filter="blur(2px)"
       />
       <Flex
-        position="fixed"
+        position={["static", "static", "fixed"]}
         right={["none", "none", "0", "0"]}
         h="100vh"
-        w={["80vw", "60vw", "37vw", "37vw"]}
+        maxW="500px"
+        w={["100%", "100%", "35vw", "35vw"]}
+        p={["6", "6", "0"]}
       >
         <Flex
           as="form"
@@ -161,9 +163,10 @@ export const SignInForm = () => {
           </Box>
           <Button
             type="submit"
-            mt="12"
+            mt="10"
             w="100%"
             h="50px"
+            p="6"
             bg={isWideVersion ? "blue.600" : "red.600"}
             fontWeight="700"
             color="white"
@@ -245,6 +248,7 @@ export const SignInForm = () => {
                 fontWeight="extrabold"
                 _hover={{ color: "pink.100" }}
                 onClick={() => navigate("/signup", { replace: true })}
+                ml="2"
               >
                 Click here.
               </Link>

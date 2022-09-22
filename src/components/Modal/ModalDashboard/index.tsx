@@ -30,19 +30,9 @@ export const ModalDashboard = ({
 }: IModalDashboardProps) => {
   return (
     <>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        closeOnOverlayClick={true}
-        size="2xl"
-      >
+      <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={true}>
         <ModalOverlay bg="rgba(0, 0, 0, 0.8)" />
-        <ModalContent
-          w="100vw"
-          position="fixed"
-          borderRadius={10}
-          overflow="hidden"
-        >
+        <ModalContent w="100%" borderRadius="10">
           <ModalHeader bg="red.600">
             <Image src={Logo} h="5vh" />
             <ModalCloseButton size="lg" />

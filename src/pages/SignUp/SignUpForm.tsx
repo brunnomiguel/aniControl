@@ -90,11 +90,17 @@ export const SignUpForm = () => {
       <Flex
         shadow="30px 0px 30px #000000, inset -100px 0px 30px rgba(255, 255, 255, 0.6);"
         opacity="0.1"
-        w="35vw"
         bg="rgba(217, 217, 217, 0.5);"
         filter="blur(2px)"
+        w={["auto", "auto", "35vw"]}
       />
-      <Flex position="fixed" h="100vh" w={["80vw", "60vw", "35vw", "35vw"]}>
+      <Flex
+        position={["static", "static", "fixed"]}
+        h="100vh"
+        maxW="500px"
+        w={["100%", "100%", "35vw", "35vw"]}
+        p={["6", "6", "0"]}
+      >
         <Flex
           onSubmit={handleSubmit(handleSignUp)}
           as="form"
@@ -110,7 +116,7 @@ export const SignUpForm = () => {
           {isWideVersion ? (
             <Image w="300px" h="110px" src={Logo} />
           ) : (
-            <Image w="300px" h="110px" src={LogoMobile} />
+            <Image w="200px" h="90px" src={LogoMobile} />
           )}
           <Box w="100%">
             <Text
@@ -127,6 +133,7 @@ export const SignUpForm = () => {
               <Input
                 icon={FaUser}
                 label="User name"
+                placeholder="Your username"
                 error={errors.name}
                 {...register("name")}
               />
@@ -134,6 +141,7 @@ export const SignUpForm = () => {
                 icon={FaEnvelope}
                 label="Email"
                 type="email"
+                placeholder="Your e-mail"
                 error={errors.email}
                 {...register("email")}
               />
@@ -141,6 +149,7 @@ export const SignUpForm = () => {
                 <Input
                   icon={FaLock}
                   type={showPassword ? "text" : "password"}
+                  placeholder="Your password"
                   label="Password"
                   error={errors.password}
                   {...register("password")}
@@ -173,6 +182,7 @@ export const SignUpForm = () => {
                 <Input
                   icon={FaLock}
                   type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Confirm password"
                   label="Password Confirm"
                   error={errors.confirm_password}
                   {...register("confirm_password")}
