@@ -1,27 +1,27 @@
 import {
-	Box,
-	Button,
-	Center,
-	Flex,
-	Image,
-	Link,
-	Text,
-	useBreakpointValue,
-	useToast,
-	VStack,
+  Box,
+  Button,
+  Center,
+  Flex,
+  Image,
+  Link,
+  Text,
+  useBreakpointValue,
+  useToast,
+  VStack,
 } from "@chakra-ui/react";
 
 import Logo from "../../assets/imgs/logo-form.svg";
 import LogoMobile from "../../assets/imgs/logo-dash.svg";
 
 import {
-	FaApple,
-	FaEnvelope,
-	FaEye,
-	FaEyeSlash,
-	FaFacebookF,
-	FaLock,
-	FaUser,
+  FaApple,
+  FaEnvelope,
+  FaEye,
+  FaEyeSlash,
+  FaFacebookF,
+  FaLock,
+  FaUser,
 } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
@@ -36,56 +36,55 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 interface SignUpData {
-	email: string;
-	password: string;
-	name: string;
-	confirm_password: string;
+  email: string;
+  password: string;
+  name: string;
+  confirm_password: string;
 }
 
 export const SignUpForm = () => {
-	const toast = useToast();
-	const navigate = useNavigate();
-	const [showPassword, setShowPassword] = useState(false);
-	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const toast = useToast();
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-	const {
-		formState: { errors },
-		register,
-		handleSubmit,
-	} = useForm<SignUpData>({
-		resolver: yupResolver(signUpSchema),
-	});
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm<SignUpData>({
+    resolver: yupResolver(signUpSchema),
+  });
 
-	const handleSignUp = ({ name, email, password }: SignUpData) => {
-		api
-			.post("/register", { name, email, password })
-			.then((_) => {
-				toast({
-					title: "Success!",
-					description: "Registration created successfully!",
-					status: "success",
-					duration: 2000,
-					isClosable: true,
-				});
-				return navigate("../signin", { replace: true });
-			})
-			.catch((err) => {
-				toast({
-					title: "Error...",
-					description: "Something went wrong...",
-					status: "error",
-					duration: 2000,
-					isClosable: true,
-				});
-				console.log(err);
-			});
-	};
+  const handleSignUp = ({ name, email, password }: SignUpData) => {
+    api
+      .post("/register", { name, email, password })
+      .then((_) => {
+        toast({
+          title: "Success!",
+          description: "Registration created successfully!",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+        return navigate("../signin", { replace: true });
+      })
+      .catch((err) => {
+        toast({
+          title: "Error...",
+          description: "Something went wrong...",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      });
+  };
 
-	const isWideVersion = useBreakpointValue({
-		base: false,
-		md: true,
-	});
-  
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    md: true,
+  });
+
   return (
     <>
       <Flex
@@ -206,33 +205,63 @@ export const SignUpForm = () => {
                 <Flex justifyContent="space-between">
                   <Button
                     w="30%"
-                    h="30px"
+                    h="40px"
                     bg="grey.0"
                     _hover={{
                       filter: "opacity(90%)",
                     }}
+                    onClick={() =>
+                      toast({
+                        title: "Error...",
+                        description:
+                          "this feature is currently not available...",
+                        status: "error",
+                        duration: 2000,
+                        isClosable: true,
+                      })
+                    }
                   >
-                    <FcGoogle />
+                    <FcGoogle fontSize="25px" />
                   </Button>
                   <Button
-                    h="30px"
+                    h="40px"
                     w="30%"
                     bg="blue.300"
                     _hover={{
                       filter: "opacity(90%)",
                     }}
+                    onClick={() =>
+                      toast({
+                        title: "Error...",
+                        description:
+                          "this feature is currently not available...",
+                        status: "error",
+                        duration: 2000,
+                        isClosable: true,
+                      })
+                    }
                   >
-                    <FaFacebookF fill="white" />
+                    <FaFacebookF fill="white" fontSize="25px" />
                   </Button>
                   <Button
-                    h="30px"
+                    h="40px"
                     w="30%"
                     background="grey.900"
                     _hover={{
                       filter: "opacity(90%)",
                     }}
+                    onClick={() =>
+                      toast({
+                        title: "Error...",
+                        description:
+                          "this feature is currently not available...",
+                        status: "error",
+                        duration: 2000,
+                        isClosable: true,
+                      })
+                    }
                   >
-                    <FaApple fill="white" />
+                    <FaApple fill="white" fontSize="25px" />
                   </Button>
                 </Flex>
                 <Button
