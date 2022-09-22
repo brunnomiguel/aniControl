@@ -109,7 +109,7 @@ export const ModalUpdateUser = ({
               onClick={onClose}
               ml="auto"
               w="40px"
-              h="40px"
+              h={["30px", "30px", "40px"]}
               bg="red.500"
               fontSize="lg"
               borderRadius="5px"
@@ -118,7 +118,6 @@ export const ModalUpdateUser = ({
             </Center>
           </Flex>
         </ModalHeader>
-        {/* <ModalCloseButton /> */}
         <ModalBody textAlign="center">
           <Flex
             as="form"
@@ -126,12 +125,12 @@ export const ModalUpdateUser = ({
             h="100%"
           w="100%"
           flexDir="column"
-          padding="50px"
+          padding="10px"
           alignItems="center"
           justifyContent="center"
         >
           <Box w="100%">
-            <VStack mt="10" spacing="10">
+            <VStack spacing="10">
               <Box w="100%">
                 <Input
                   label="Name"
@@ -160,7 +159,7 @@ export const ModalUpdateUser = ({
                   label="Confirm password"
                   icon={FaKey}
                   type="password"
-                  placeholder="Confirm_password"
+                  placeholder="Confirm password"
                   {...register("confirm_password")}
                   error={errors.confirm_password}
                 ></Input>

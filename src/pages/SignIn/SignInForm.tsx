@@ -1,14 +1,14 @@
 import {
-	Box,
-	Button,
-	Flex,
-	Center,
-	Image,
-	Link,
-	Text,
-	useBreakpointValue,
-	useToast,
-	VStack,
+  Box,
+  Button,
+  Flex,
+  Center,
+  Image,
+  Link,
+  Text,
+  useBreakpointValue,
+  useToast,
+  VStack,
 } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
@@ -17,12 +17,12 @@ import Logo from "../../assets/imgs/logo-form.svg";
 import LogoMobile from "../../assets/imgs/logo-dash.svg";
 
 import {
-	FaApple,
-	FaEnvelope,
-	FaFacebookF,
-	FaLock,
-	FaEye,
-	FaEyeSlash,
+  FaApple,
+  FaEnvelope,
+  FaFacebookF,
+  FaLock,
+  FaEye,
+  FaEyeSlash,
 } from "react-icons/fa";
 
 import { FcGoogle } from "react-icons/fc";
@@ -37,33 +37,41 @@ import { useAuth } from "../../contexts/Auth";
 import { useState } from "react";
 
 interface SignInData {
-	email: string;
-	password: string;
+  email: string;
+  password: string;
 }
 
 export const SignInForm = () => {
-	const { signIn } = useAuth();
-	const navigate = useNavigate();
-	const toast = useToast();
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
+  const toast = useToast();
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-	const {
-		formState: { errors },
-		register,
-		handleSubmit,
-	} = useForm<SignInData>({
-		resolver: yupResolver(signInSchema),
-	});
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm<SignInData>({
+    resolver: yupResolver(signInSchema),
+  });
 
-	const handleSignIn = ({ email, password }: SignInData) => {
-		signIn({ email, password });
-	};
+  const handleSignIn = ({ email, password }: SignInData) => {
+    signIn({ email, password }).catch((err) => {
+      toast({
+        title: "Error...",
+        description: "Something went wrong...",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    });
+  };
 
-	const isWideVersion = useBreakpointValue({
-		base: false,
-		md: true,
-	});
-  
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    md: true,
+  });
+
   return (
     <>
       <Flex
@@ -125,7 +133,7 @@ export const SignInForm = () => {
                   {...register("password")}
                   error={errors.password}
                 />
-               {showConfirmPassword ? (
+                {showConfirmPassword ? (
                   <Center
                     top="12"
                     right="4"
@@ -164,15 +172,63 @@ export const SignInForm = () => {
           >
             Sign In
           </Button>
-          <Flex flexDir="row" gap="20px" w="100%" mt="8">
-            <Button w="30%" h="25px" bg="white">
-              <FcGoogle />
+          <Flex justifyContent="space-between" w="100%" mt="8">
+            <Button
+              w="30%"
+              h="40px"
+              bg="white"
+              _hover={{
+                filter: "opacity(90%)",
+              }}
+              onClick={() =>
+                toast({
+                  title: "Error...",
+                  description: "this feature is currently not available...",
+                  status: "error",
+                  duration: 2000,
+                  isClosable: true,
+                })
+              }
+            >
+              <FcGoogle fontSize="25px" />
             </Button>
-            <Button h="25px" w="30%" bg="#155BCB">
-              <FaFacebookF fill="white" />
+            <Button
+              h="40px"
+              w="30%"
+              bg="#155BCB"
+              _hover={{
+                filter: "opacity(90%)",
+              }}
+              onClick={() =>
+                toast({
+                  title: "Error...",
+                  description: "this feature is currently not available...",
+                  status: "error",
+                  duration: 2000,
+                  isClosable: true,
+                })
+              }
+            >
+              <FaFacebookF fill="white" fontSize="25px" />
             </Button>
-            <Button h="25px" w="30%" bg="black">
-              <FaApple fill="white" />
+            <Button
+              h="40px"
+              w="30%"
+              bg="black"
+              _hover={{
+                filter: "opacity(90%)",
+              }}
+              onClick={() =>
+                toast({
+                  title: "Error...",
+                  description: "this feature is currently not available...",
+                  status: "error",
+                  duration: 2000,
+                  isClosable: true,
+                })
+              }
+            >
+              <FaApple fill="white" fontSize="25px" />
             </Button>
           </Flex>
           <Flex flexDir="column" justifyContent="center">
