@@ -39,7 +39,8 @@ export const Header = () => {
     <Flex
       as="header"
       w="100%"
-      h="8vh"
+      h="100%"
+      p="2"
       alignItems="center"
       justify="space-between"
       backgroundColor="grey.600"
