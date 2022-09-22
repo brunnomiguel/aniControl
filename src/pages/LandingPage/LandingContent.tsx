@@ -279,7 +279,7 @@ export const LandingContent = () => {
 					<Flex>
 						{isWideVersion && (
 							<VisibilitySensor
-								offset={{ bottom: 200, top: 100 }}
+								offset={{ bottom: 200, top: 50 }}
 								partialVisibility={true}
 							>
 								{({ isVisible }: any) => (
@@ -362,12 +362,14 @@ export const LandingContent = () => {
 						<Flex
 							w="100%"
 							h="58vh"
-							justifyContent="space-around"
+							justifyContent="space-between"
 							align="center"
 							position="absolute"
 							zIndex="1"
 							backgroundColor="#0000007a"
-							paddingBottom={["0", "0", "200px"]}
+							pb={["0", "0", "200px"]}
+							pl={["0", "0", "4.5vw"]}
+							pr={["0", "0", "4.5vw"]}
 						>
 							{isWideVersion ? (
 								<>
