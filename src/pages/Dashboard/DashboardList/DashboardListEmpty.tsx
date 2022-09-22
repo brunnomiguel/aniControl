@@ -21,7 +21,7 @@ export const DashboardListEmpty = () => {
         <Text as="p" align="center" paddingTop="1%">
           Use our kanban to easily manage your animes.
           <br />
-          Just click on the the link bellow to be redirected.
+          Just click on the link bellow to be redirected.
         </Text>
         <Button
           w="auto"
