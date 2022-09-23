@@ -97,8 +97,8 @@ export const SignUpForm = () => {
       <Flex
         position={["static", "static", "fixed"]}
         h="100vh"
-        maxW="500px"
-        w={["100%", "100%", "35vw", "35vw"]}
+        maxW={["500px", "500px", "32vw"]}
+        w={["100%", "100%", "100%"]}
         p={["6", "6", "0"]}
       >
         <Flex
