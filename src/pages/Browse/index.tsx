@@ -55,6 +55,7 @@ export const Browse = () => {
             w="100%"
             templateColumns="repeat(auto-fill, minmax(210px, 1fr))"
             gap="10"
+            mt={["4", "4", "0"]}
             justifyItems="center"
           >
             {loading ? (
@@ -65,7 +66,7 @@ export const Browse = () => {
               })
             )}
           </Grid>
-          <VStack h="90vh" w={["100%", "100%", "500px"]}>
+          <VStack h={["100%", "100%", "90vh"]} w={["100%", "100%", "500px"]}>
             <TopAnimes />
             <SeasonsAnimes />
           </VStack>

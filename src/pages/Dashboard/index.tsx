@@ -44,7 +44,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <Box w="100%" h="100vh" bgColor="grey.700">
+    <Box w="100%" bgColor="grey.700">
       <Header />
       <Flex flexDir="row">
         {smallView ? (
