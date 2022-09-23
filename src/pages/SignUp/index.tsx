@@ -20,7 +20,7 @@ export const SignUp = () => {
             top="0"
             left="0"
             flexDir="row"
-            h="100vh"
+            minH="100vh"
             w="100vw"
           >
             <SignUpForm />
